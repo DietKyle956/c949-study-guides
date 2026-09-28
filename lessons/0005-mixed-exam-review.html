@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mixed Exam Review - Big O for Exams</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<article class="lesson">
+
+<header>
+  <p class="course-mark">Big O for Exams &middot; Lesson 5</p>
+  <h1>Mixed exam review</h1>
+  <p class="lede">The real exam has no topic headers. It will not hand you a
+  loop question labeled &ldquo;Lesson 1&rdquo; - it mixes simplification,
+  search, recursion, space, and recurrence relations into one long list. This
+  page does the same. Answer everything below from memory and you can walk in
+  treating complexity questions as free points.</p>
+</header>
+
+<section>
+  <h2 id="why">Why this lesson</h2>
+  <p>Lessons 1 through 4 each drilled one skill in isolation, which is how
+  skills are built. The exam is the reverse: one question asks for a
+  simplification, the next for a stack depth, with no hint about which rule to
+  reach for. Recognizing <em>which</em> rule applies is itself the skill this
+  lesson drills - that is interleaving, and it is the difference between
+  knowing each rule and using the right one under exam conditions.</p>
+  <p>Your mission&rsquo;s success line is specific: answer every
+  complexity-related question in the practice exam without notes. The map
+  below lists them all; the simulation below it tests them, mixed.</p>
+</section>
+
+<section>
+  <h2 id="map">The exam map: every complexity item and its answer</h2>
+  <p>Straight from the C949 practice exam. Cover this table, then work the
+  simulation from memory.</p>
+  <table>
+    <thead>
+      <tr><th>Exam item</th><th>Correct answer</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>O(855N) simplified</td><td>O(N)</td></tr>
+      <tr><td>O(12N + 7N + 500) simplified</td><td>O(19N + 500) &rarr; O(N)</td></tr>
+      <tr><td>Linearithmic complexity</td><td>O(N log N)</td></tr>
+      <tr><td>Linear search, worst-case comparisons</td><td>N</td></tr>
+      <tr><td>Binary search, average performance</td><td>O(log N)</td></tr>
+      <tr><td>Which is a recurrence relation</td><td>f(n) = f(n - 1) + 2</td></tr>
+      <tr><td>Levels for T(N) = N + T(N - 8)</td><td>N / 8</td></tr>
+      <tr><td>get_odd_numbers() worst-case auxiliary space</td><td>O(N)</td></tr>
+      <tr><td>Why a fixed amount of work needs no precise definition</td><td>any fixed work is O(1)</td></tr>
+    </tbody>
+  </table>
+  <p>The names the exam expects you to match:</p>
+  <table>
+    <thead>
+      <tr><th>Big O</th><th>Name</th><th>Typical interpretation</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>O(1)</td><td>Constant</td><td>work does not grow with input size</td></tr>
+      <tr><td>O(log N)</td><td>Logarithmic</td><td>problem repeatedly reduced, often by half</td></tr>
+      <tr><td>O(N)</td><td>Linear</td><td>each input item may be processed once</td></tr>
+      <tr><td>O(N log N)</td><td>Linearithmic</td><td>efficient divide-and-conquer sorting</td></tr>
+      <tr><td>O(N&sup2;)</td><td>Quadratic</td><td>nested loops over the same input</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2 id="exam-day">The exam-day procedure</h2>
+  <p>Three moves, in order, straight from the practice exam&rsquo;s own
+  approach section:</p>
+  <ol>
+    <li><strong>Identify the defining property</strong> in the question -
+      recurrence? nested loops? auxiliary space? That tells you which lesson&rsquo;s
+      rule applies before you compute anything.</li>
+    <li><strong>Remove constants and lower-order terms</strong>, then choose
+      the dominant growth rate. O(855N) is O(N); O(12N + 7N + 500) is O(N).</li>
+    <li><strong>Trace the code</strong> - write the values after each
+      iteration, and watch <code>break</code>, <code>return</code>, and the
+      loop bounds. Guessing at a loop is how exams earn their wrong
+      answers.</li>
+  </ol>
+  <p>The <a href="../reference/big-o-cheat-card.html">cheat card</a> holds
+  all four lessons on one printable page - it is the memory this procedure
+  reaches for.</p>
+</section>
+
+<section class="quiz" data-quiz-title="Exam simulation">
+  <h2 id="quiz">The exam simulation</h2>
+  <p>One pass, no notes, no scrolling back to the map. Say or write each
+  answer before clicking - the struggle is what makes it stick. The questions
+  are deliberately mixed: each one is a fresh decision about which rule
+  applies.</p>
+
+  <div class="quiz-q" data-answer="O(N)" data-explanation="Drop the constant multiplier: 855 times anything is still a constant factor, so O(855N) is O(N).">
+    <p class="quiz-prompt">What does O(855N) simplify to?</p>
+    <div class="quiz-options">
+      <button data-choice="O(1)">O(1)</button>
+      <button data-choice="O(N)">O(N)</button>
+      <button data-choice="O(855N)">O(855N)</button>
+      <button data-choice="O(N log N)">O(N log N)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(n&sup2;)" data-explanation="Two nested loops over the same input multiply: n times n = O(n&sup2;). The exam's table says quadratic is often caused by exactly this.">
+    <p class="quiz-prompt">What is the time complexity?</p>
+    <pre><code>def count_pairs(a):
+    for x in a:
+        for y in a:
+            print(x, y)</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(n log n)">O(n log n)</button>
+      <button data-choice="O(n&sup2;)">O(n&sup2;)</button>
+      <button data-choice="O(log n)">O(log n)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(log N)" data-explanation="Binary search halves the remaining range each step, so it is O(log N) average performance - the exam states this directly.">
+    <p class="quiz-prompt">What is the average performance of binary search on a sorted list?</p>
+    <div class="quiz-options">
+      <button data-choice="O(1)">O(1)</button>
+      <button data-choice="O(N)">O(N)</button>
+      <button data-choice="O(N log N)">O(N log N)</button>
+      <button data-choice="O(log N)">O(log N)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(n)" data-explanation="One call per level, shrinking by 1: n levels of O(1) work each. n times O(1) = O(n).">
+    <p class="quiz-prompt">What is the time complexity?</p>
+    <pre><code>def fact(n):
+    if n &lt;= 1: return 1
+    return n * fact(n - 1)</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(n&sup2;)">O(n&sup2;)</button>
+      <button data-choice="O(log n)">O(log n)</button>
+      <button data-choice="O(1)">O(1)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="N / 8" data-explanation="Sizes: N, N - 8, N - 16, ... Subtract 8 each level, so distance N in steps of 8 gives N / 8 levels (more exactly ceil(N / 8)).">
+    <p class="quiz-prompt">How many levels does T(N) = N + T(N - 8) have?</p>
+    <div class="quiz-options">
+      <button data-choice="N / 2">N / 2</button>
+      <button data-choice="N / 4">N / 4</button>
+      <button data-choice="N / 8">N / 8</button>
+      <button data-choice="N / 16">N / 16</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Linearithmic" data-explanation="The exam's names: O(N log N) is linearithmic - the efficient divide-and-conquer sorting complexity, merge sort's own.">
+    <p class="quiz-prompt">The exam calls O(N log N) by which name?</p>
+    <div class="quiz-options">
+      <button data-choice="Logarithmic">Logarithmic</button>
+      <button data-choice="Linearithmic">Linearithmic</button>
+      <button data-choice="Linear">Linear</button>
+      <button data-choice="Quadratic">Quadratic</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="N" data-explanation="The worst case is the key being absent or last, so the function compares against all N elements: N comparisons, O(N) time.">
+    <p class="quiz-prompt">A linear search looks for a key that is not in the list. How many comparisons does it make in the worst case?</p>
+    <div class="quiz-options">
+      <button data-choice="N / 2">N / 2</button>
+      <button data-choice="log N">log N</button>
+      <button data-choice="N&sup2;">N&sup2;</button>
+      <button data-choice="N">N</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(n)" data-explanation="The odds list grows with the input. Worst case every element is odd and the new list holds all n of them: O(n) auxiliary space. A growing container, not a counter.">
+    <p class="quiz-prompt">What is the worst-case auxiliary space complexity?</p>
+    <pre><code>def get_odd_numbers(numbers):
+    odds = []
+    for n in numbers:
+        if n % 2 != 0:
+            odds.append(n)
+    return odds</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(1)">O(1)</button>
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(n&sup2;)">O(n&sup2;)</button>
+      <button data-choice="O(log n)">O(log n)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Any fixed amount of work is O(1)" data-explanation="The exam's exact reasoning: any fixed amount of work is O(1), so one constant-time operation never needs a more precise definition.">
+    <p class="quiz-prompt">Why does a single constant-time operation not need an extremely precise definition during asymptotic analysis?</p>
+    <div class="quiz-options">
+      <button data-choice="Any fixed amount of work is O(1)">Any fixed amount of work is O(1)</button>
+      <button data-choice="Precise definitions are too hard to write">Precise definitions are too hard to write</button>
+      <button data-choice="Exact step counts change the growth rate">Exact step counts change the growth rate</button>
+      <button data-choice="Constants grow faster than the input does">Constants grow faster than the input does</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(N&sup2;)" data-explanation="N / 8 levels, and each level does at most N work: N times N / 8 = O(N&sup2;). The prefix sets the work, the shrink sets the levels.">
+    <p class="quiz-prompt">What is the time complexity?</p>
+    <pre><code>T(N) = N + T(N - 8)</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(N)">O(N)</button>
+      <button data-choice="O(N log N)">O(N log N)</button>
+      <button data-choice="O(log N)">O(log N)</button>
+      <button data-choice="O(N&sup2;)">O(N&sup2;)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(n)" data-explanation="Space is the deepest chain of pending calls, one path down the tree: n frames, so O(n). Time explodes to O(2 to the n), but space does not - time and space disagree, answer separately.">
+    <p class="quiz-prompt">What is the stack space?</p>
+    <pre><code>def fib(n):
+    if n &lt;= 1: return n
+    return fib(n - 1) + fib(n - 2)</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(1)">O(1)</button>
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(n&sup2;)">O(n&sup2;)</button>
+      <button data-choice="O(2&#8319;)">O(2&#8319;)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(n)" data-explanation="The trap: calls double each level, but the work per call halves at the same rate. Total calls 1 + 2 + 4 + ... + n = 2n - 1, which is O(n). Doubling calls is not automatically exponential.">
+    <p class="quiz-prompt">What is the time complexity?</p>
+    <pre><code>def total(arr):
+    if len(arr) == 0: return 0
+    mid = len(arr) // 2
+    return total(arr[:mid]) + total(arr[mid:])</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(n log n)">O(n log n)</button>
+      <button data-choice="O(n&sup2;)">O(n&sup2;)</button>
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(2&#8319;)">O(2&#8319;)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(N)" data-explanation="Combine like terms first: O(12N + 7N + 500) = O(19N + 500). Then drop the constant 500 and the multiplier 19: the answer is O(N).">
+    <p class="quiz-prompt">What does O(12N + 7N + 500) simplify to?</p>
+    <div class="quiz-options">
+      <button data-choice="O(N)">O(N)</button>
+      <button data-choice="O(N + 500)">O(N + 500)</button>
+      <button data-choice="O(500)">O(500)</button>
+      <button data-choice="O(N&sup2;)">O(N&sup2;)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(log n)" data-explanation="The counter doubles each pass: 1, 2, 4, 8, ... It reaches n in log n passes. Doubling the counter is the mirror image of halving the input - both are O(log n).">
+    <p class="quiz-prompt">What is the time complexity?</p>
+    <pre><code>i = 1
+while i &lt; n:
+    i = i * 2</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(1)">O(1)</button>
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(n log n)">O(n log n)</button>
+      <button data-choice="O(log n)">O(log n)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="f(n) = f(n - 1) + 2" data-explanation="A recurrence relation defines a function using earlier or smaller instances of itself. f(n) = f(n - 1) + 2 defines f via f(n - 1); the others are closed forms with no self-reference.">
+    <p class="quiz-prompt">Which of these is a recurrence relation?</p>
+    <div class="quiz-options">
+      <button data-choice="f(n) = n(n + 1)">f(n) = n(n + 1)</button>
+      <button data-choice="f(n) = f(n - 1) + 2">f(n) = f(n - 1) + 2</button>
+      <button data-choice="f(n) = 2n + 2">f(n) = 2n + 2</button>
+      <button data-choice="f(n) = n&sup2; + 1">f(n) = n&sup2; + 1</button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 id="next">What&rsquo;s next: keep it stored, not just fluent</h2>
+  <p>The course is complete - every complexity question in the practice exam
+  now has a rule and a drill. What is left is spacing, the difference between
+  knowing this today and knowing it in the exam room:</p>
+  <ul>
+    <li><strong>Tomorrow:</strong> redo this simulation from memory, no
+      peeking at the map. Then again in three days, then the morning of the
+      exam. Spaced retrieval is what moves the rules into long-term
+      storage.</li>
+    <li><strong>Regenerate the drill:</strong> ask your agent for fresh
+      variants - same rules, new numbers and snippets - so the questions never
+      go stale. The agent can quiz you one-on-one, timed, any time.</li>
+    <li><strong>Keep the <a href="../reference/big-o-cheat-card.html">cheat card</a>
+      out</strong> during any real problem set until the rules are
+      automatic.</li>
+    <li>Wobbled on one question type? Its lesson is the fix:
+      <a href="0001-loop-rules.html">Lesson 1</a> for loops,
+      <a href="0002-recursion.html">Lesson 2</a> for recursion,
+      <a href="0003-space-complexity.html">Lesson 3</a> for space,
+      <a href="0004-recurrence-relations.html">Lesson 4</a> for recurrences.</li>
+  </ul>
+</section>
+
+<section>
+  <h2 id="source">Go deeper</h2>
+  <p>If any concept still feels thin, Khan Academy&rsquo;s
+  <a href="https://www.khanacademy.org/computing/computer-science/algorithms/asymptotic-notation/a/big-o-notation">Big-O notation article</a>
+  (written with Thomas Cormen) is the single best first read, and
+  <a href="https://www.bigocheatsheet.com/">bigocheatsheet.com</a> covers the
+  built-in data structures the later exam topics will lean on.</p>
+</section>
+
+<footer class="lesson-footer">
+  <p>Missed any question above? Ask your agent which rule it was testing -
+  it will point you at the exact lesson section, then generate a fresh batch
+  of that question type until it sticks.</p>
+</footer>
+
+</article>
+<script src="../assets/quiz.js"></script>
+</body>
+</html>
