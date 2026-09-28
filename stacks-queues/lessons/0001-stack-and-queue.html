@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stacks and Queues: LIFO vs FIFO - Stacks, Queues, Deques, and Priority Queues</title>
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<article class="lesson">
+
+<header>
+  <p class="course-mark">Stacks, queues, deques, and priority queues &middot; Lesson 1</p>
+  <h1>Stacks and queues: LIFO vs FIFO</h1>
+  <p class="lede">The exam gives you the principle - &ldquo;last in, first
+  out&rdquo; or &ldquo;first in, first out&rdquo; - and asks you to name the
+  structure, its operations, or the right end of it. This lesson maps the
+  principles to their answers, then drills the recognition until it is
+  instant.</p>
+</header>
+
+<section>
+  <h2 id="why">Why this lesson</h2>
+  <p>This is the same move as the
+  <a href="../../adts/lessons/0001-adts-and-records.html">ADTs course</a> and
+  the Big O course&rsquo;s
+  <a href="../../lessons/0005-mixed-exam-review.html">exam-day procedure</a>:
+  spot the defining property, then fire its answer. Two of the exam&rsquo;s
+  rows are the principles themselves - LIFO and FIFO. One more row is a tiny
+  computation: given a queue&rsquo;s front and length, name its back. All
+  three become free points once the map is automatic.</p>
+</section>
+
+<section>
+  <h2 id="stack">The stack: one open end</h2>
+  <p>A stack follows <strong>LIFO: last in, first out</strong>. It has a
+  single working end, the <strong>top</strong>, and its three operations are:</p>
+  <table>
+    <thead>
+      <tr><th>Operation</th><th>What it does</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>push(x)</td><td>add x on top of the stack</td></tr>
+      <tr><td>pop()</td><td>remove and return the top item</td></tr>
+      <tr><td>top()</td><td>read the top item without removing it</td></tr>
+    </tbody>
+  </table>
+  <div class="rule">
+    <h3>The defining property: one open end</h3>
+    <p>Everything enters and leaves through the top. The item pushed most
+    recently is the one popped first - that is the whole of LIFO. Think of a
+    stack of cafeteria trays: you take from the top of the pile, never from
+    the bottom.</p>
+  </div>
+  <p>You have already met this menu in the ADTs course - push, pop, and top
+  are the operations the exam lists for a stack. What is new here is the
+  <em>behavior</em>: the exam asks which principle a stack follows, and the
+  answer is the phrase itself, <strong>last in, first out</strong>.</p>
+</section>
+
+<section>
+  <h2 id="queue">The queue: two ends, two jobs</h2>
+  <p>A queue follows <strong>FIFO: first in, first out</strong>. It has two
+  working ends and its three operations are:</p>
+  <table>
+    <thead>
+      <tr><th>Operation</th><th>What it does</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>enqueue(x)</td><td>add x at the back</td></tr>
+      <tr><td>dequeue()</td><td>remove and return the front item</td></tr>
+      <tr><td>front()</td><td>read the front item without removing it</td></tr>
+    </tbody>
+  </table>
+  <div class="rule">
+    <h3>The defining property: two ends, two jobs</h3>
+    <p>Items enter at the <strong>back</strong> and leave at the
+    <strong>front</strong>. The item that has waited longest - the first one
+    in - is the first one out. Think of a line: you join at the back, you are
+    served at the front, and the first arrival is the first served.</p>
+  </div>
+  <p>The exam&rsquo;s favorite distractor is swapping the ends: a queue does
+  <em>not</em> add at the front or remove from the back. Spot &ldquo;add at
+  the back&rdquo; and &ldquo;remove from the front&rdquo; and the answer is
+  queue.</p>
+</section>
+
+<section>
+  <h2 id="back">The exam&rsquo;s queue computation</h2>
+  <p>The one calculation the exam asks:</p>
+  <pre><code>array       = [72, 15, 2, 14]
+front_index = 0
+length      = 4</code></pre>
+  <p>All four elements are active. The front is <code>72</code> - the
+  element at <code>front_index</code>. The back is the <em>last active
+  element</em>, not the first:</p>
+  <div class="rule">
+    <h3>Back = last active element</h3>
+    <p>Count forward from the front. The front sits at index 0 and there are
+    four active elements, so the active run is indices 0 through 3. The back
+    is index 3: <strong>14</strong>. In general the back is at index
+    <code>(front_index + length - 1)</code> - here <code>0 + 4 - 1 = 3</code>.</p>
+  </div>
+  <p>The trap is answering <code>72</code> again because &ldquo;front&rdquo;
+  appears in the question. The front and the back are opposite ends: front
+  <code>72</code>, back <code>14</code>.</p>
+</section>
+
+<section>
+  <h2 id="map">The identification map</h2>
+  <table>
+    <thead>
+      <tr><th>Exam phrase</th><th>Defining property</th><th>Answer</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>last in, first out</td><td>one open end</td><td>Stack</td></tr>
+      <tr><td>first in, first out</td><td>two ends, two jobs</td><td>Queue</td></tr>
+      <tr><td>push, pop, top</td><td>the stack&rsquo;s menu</td><td>Stack operations</td></tr>
+      <tr><td>enqueue, dequeue, front</td><td>the queue&rsquo;s menu</td><td>Queue operations</td></tr>
+      <tr><td>add at the back, remove from the front</td><td>which end does which</td><td>Queue</td></tr>
+      <tr><td>front of [72, 15, 2, 14]</td><td>element at front_index</td><td>72</td></tr>
+      <tr><td>back of [72, 15, 2, 14]</td><td>last active element</td><td>14</td></tr>
+    </tbody>
+  </table>
+  <p>Seven rows, and every stack and queue question in the practice exam is
+  answered. The
+  <a href="../reference/identification-card.html">identification card</a> is
+  the printable version.</p>
+</section>
+
+<section class="quiz" data-quiz-title="Lesson 1 quiz">
+  <h2 id="quiz">Practice: solve these from memory</h2>
+  <p>Answer from memory before clicking - say or write your answer first.
+  The struggle is what makes it stick.</p>
+
+  <div class="quiz-q" data-answer="Last in, first out" data-explanation="A stack follows LIFO: last in, first out. The last item pushed is the first item popped, like a stack of trays.">
+    <p class="quiz-prompt">Which principle does a stack follow?</p>
+    <div class="quiz-options">
+      <button data-choice="Last in, first out">Last in, first out</button>
+      <button data-choice="First in, first out">First in, first out</button>
+      <button data-choice="First in, last out">First in, last out</button>
+      <button data-choice="Last out, first in">Last out, first in</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="First in, first out" data-explanation="A queue follows FIFO: first in, first out. The first item enqueued is the first item dequeued, like a line.">
+    <p class="quiz-prompt">Which principle does a queue follow?</p>
+    <div class="quiz-options">
+      <button data-choice="Last in, first out">Last in, first out</button>
+      <button data-choice="First in, first out">First in, first out</button>
+      <button data-choice="First in, last out">First in, last out</button>
+      <button data-choice="Last out, first in">Last out, first in</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Stack" data-explanation="The exam lists push, pop, and top as the stack's operations. The queue's menu is enqueue, dequeue, and front.">
+    <p class="quiz-prompt">push, pop, and top are the operations of...</p>
+    <div class="quiz-options">
+      <button data-choice="Stack">Stack</button>
+      <button data-choice="Queue">Queue</button>
+      <button data-choice="Record">Record</button>
+      <button data-choice="Array">Array</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Queue" data-explanation="The exam lists enqueue, dequeue, and front as the queue's operations. Enqueue adds at the back, dequeue removes from the front.">
+    <p class="quiz-prompt">enqueue, dequeue, and front are the operations of...</p>
+    <div class="quiz-options">
+      <button data-choice="Stack">Stack</button>
+      <button data-choice="Queue">Queue</button>
+      <button data-choice="Record">Record</button>
+      <button data-choice="Array">Array</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="back" data-explanation="A queue adds at the back and removes from the front. Swapping the two ends is the exam's favorite distractor.">
+    <p class="quiz-prompt">A queue removes from the front and adds at the...</p>
+    <div class="quiz-options">
+      <button data-choice="front">front</button>
+      <button data-choice="back">back</button>
+      <button data-choice="top">top</button>
+      <button data-choice="middle">middle</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="14" data-explanation="All four elements are active. The front is 72 at index 0, so the active run is indices 0 through 3, and the back - the last active element - is index 3: 14.">
+    <p class="quiz-prompt">For [72, 15, 2, 14] with front 72 and length 4, the back is...</p>
+    <div class="quiz-options">
+      <button data-choice="72">72</button>
+      <button data-choice="15">15</button>
+      <button data-choice="2">2</button>
+      <button data-choice="14">14</button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 id="next">What&rsquo;s next</h2>
+  <ul>
+    <li>The <a href="../reference/identification-card.html">identification
+      card</a> carries this lesson&rsquo;s map on one printable page.</li>
+    <li>Lesson 2 (coming soon): deques, priority queues, and dynamic
+      expansion - the remaining rows of the exam&rsquo;s identification
+      block.</li>
+    <li>Back to the <a href="../../adts/index.html">ADTs course</a> if the
+      what-versus-how idea behind these menus needs a refresh.</li>
+  </ul>
+</section>
+
+<section>
+  <h2 id="source">Go deeper</h2>
+  <p>The canonical source for stacks and queues is Sedgewick and
+  Wayne&rsquo;s
+  <a href="https://algs4.cs.princeton.edu/13stacks/">algs4 Section 1.3, Bags, Queues, and Stacks</a>
+  - each structure defined entirely by its API and its principle. The exam
+  questions are restatements of that section&rsquo;s contracts.</p>
+</section>
+
+<footer class="lesson-footer">
+  <p>Stuck on anything in this lesson? Ask your agent - it can rephrase any
+  definition, generate fresh recognition drills, or quiz you one-on-one
+  until the map is automatic.</p>
+</footer>
+
+</article>
+<script src="../../assets/quiz.js"></script>
+</body>
+</html>

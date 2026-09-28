@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stack and Queue Identification Card</title>
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<article class="lesson">
+
+<header>
+  <p class="course-mark">Reference &middot; printable</p>
+  <h1>Stack and Queue Identification Card</h1>
+  <p class="lede">The compressed version of Lesson 1. Every defining property
+  the exam tests, next to its answer. Keep this next to you while drilling
+  until recognition is automatic.</p>
+</header>
+
+<section>
+  <h2 id="map">Property &rarr; answer</h2>
+  <table>
+    <thead>
+      <tr><th>Exam phrase</th><th>Answer</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>last in, first out</td><td>Stack</td></tr>
+      <tr><td>first in, first out</td><td>Queue</td></tr>
+      <tr><td>push, pop, top</td><td>the stack&rsquo;s operations</td></tr>
+      <tr><td>enqueue, dequeue, front</td><td>the queue&rsquo;s operations</td></tr>
+      <tr><td>add at the back, remove from the front</td><td>queue, two ends</td></tr>
+      <tr><td>front of [72, 15, 2, 14]</td><td>72 (index 0)</td></tr>
+      <tr><td>back of [72, 15, 2, 14]</td><td>14 (last active element)</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2 id="stack">The stack</h2>
+  <p>A stack follows <strong>LIFO: last in, first out</strong>. One open end,
+  the top; everything enters and leaves through it.</p>
+  <ul>
+    <li><code>push(x)</code> - add x on top of the stack.</li>
+    <li><code>pop()</code> - remove and return the top item.</li>
+    <li><code>top()</code> - read the top item without removing it.</li>
+  </ul>
+  <p>The last item pushed is the first item popped. Think of a stack of
+  cafeteria trays.</p>
+</section>
+
+<section>
+  <h2 id="queue">The queue</h2>
+  <p>A queue follows <strong>FIFO: first in, first out</strong>. Two ends,
+  two jobs: items enter at the back, leave at the front.</p>
+  <ul>
+    <li><code>enqueue(x)</code> - add x at the back.</li>
+    <li><code>dequeue()</code> - remove and return the front item.</li>
+    <li><code>front()</code> - read the front item without removing it.</li>
+  </ul>
+  <div class="rule">
+    <h3>The back computation</h3>
+    <p>Given <code>[72, 15, 2, 14]</code>, <code>front_index = 0</code>,
+    <code>length = 4</code>: the front is the element at
+    <code>front_index</code> (<strong>72</strong>), and the back is the last
+    active element - index <code>front_index + length - 1 = 3</code>
+    (<strong>14</strong>). The front and the back are opposite ends.</p>
+  </div>
+</section>
+
+<footer class="lesson-footer">
+  <p>Full explanations and practice: <a href="../lessons/0001-stack-and-queue.html">Lesson 1 - Stacks and queues</a>.
+  Stuck? Ask your agent for extra recognition drills on any property above.</p>
+</footer>
+
+</article>
+</body>
+</html>
