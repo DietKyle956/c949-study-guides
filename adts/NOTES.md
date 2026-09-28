@@ -8,4 +8,4 @@
 - Workspace location: ~/school/c949/study_guides/adts (inside the c949-study-guides repo, published on GitHub Pages alongside the Big O course).
 - Topic menu for all of C949: ~/school/c949/teach-topics.md (kept out of this repo - it summarizes practice exam content). This workspace is topic 3.
 - Publish flow: everything created (lessons, reference docs, index) is committed to main and pushed immediately so it goes live on Pages. No co-author lines in commit messages.
-- Lesson plan: 1 = the ADT idea + records (done 2026-09-28); 2 = arrays vs linked structures (planned).
+- Lesson plan: 1 = the ADT idea + records (done 2026-09-28); 2 = arrays vs linked structures (done 2026-09-28). Workspace complete - remaining work is spaced retrieval. Next topic is 4: stacks, queues, deques, priority queues.

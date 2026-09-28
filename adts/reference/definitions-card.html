@@ -65,8 +65,27 @@
   </ul>
 </section>
 
+<section>
+  <h2 id="arrays-linked">Arrays vs linked structures</h2>
+  <p>Arrays usually offer direct index access, but inserting or removing in
+  the middle can require shifting items. Linked structures store nodes
+  connected by references; once the target location is known, insertion or
+  removal updates references rather than shifting every later element.</p>
+  <table class="prose-table">
+    <thead>
+      <tr><th>Question</th><th>Array</th><th>Linked structure</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Reach an element</td><td>direct index access, O(1)</td><td>walk from the head, O(n)</td></tr>
+      <tr><td>Insert / remove in the middle</td><td>shift every later element</td><td>update references, no shifting</td></tr>
+      <tr><td>Exam approach phrase</td><td>indices and potential shifting</td><td>reference updates</td></tr>
+    </tbody>
+  </table>
+</section>
+
 <footer class="lesson-footer">
-  <p>Full explanations and practice: <a href="../lessons/0001-adts-and-records.html">Lesson 1 - The ADT idea and records</a>.
+  <p>Full explanations and practice: <a href="../lessons/0001-adts-and-records.html">Lesson 1 - The ADT idea and records</a> and
+  <a href="../lessons/0002-arrays-vs-linked.html">Lesson 2 - Arrays vs linked structures</a>.
   Stuck? Ask your agent for extra recognition drills on any property above.</p>
 </footer>
 
