@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recursion: Count the Levels - Big O for Exams</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<article class="lesson">
+
+<header>
+  <p class="course-mark">Big O for Exams &middot; Lesson 2</p>
+  <h1>Recursion: count the levels</h1>
+  <p class="lede">No loops to count. Instead, draw the recursion tree in your head
+  and answer two questions: how many levels does it have, and how much work
+  happens on each level? Multiply, and you are done.</p>
+</header>
+
+<section>
+  <h2 id="why">Why this lesson</h2>
+  <p>Recursion is the second thing exam writers reach for after loops, and it
+  punishes guessing: the same-looking functions can be O(n), O(log n),
+  O(n log n), or O(2&#8319;). The two questions below separate them
+  mechanically. You will use the <a href="0001-loop-rules.html">Lesson 1</a>
+  skills - multiplying work and halving to a log - the whole way through.</p>
+</section>
+
+<section>
+  <h2 id="questions">The two questions</h2>
+  <p>Every recursive call does some work, then calls itself on a smaller
+  input. Picture the whole run as a tree of calls: the root is the first call,
+  and its children are the calls it makes.</p>
+  <div class="rule">
+    <h3>Question 1 - How many levels?</h3>
+    <p>How many times can you shrink the input before the base case stops
+    everything? Shrink by a constant amount (n &minus; 1): <strong>n
+    levels</strong>. Shrink by half (n / 2): <strong>log n levels</strong>.
+    That is the same halving idea as the loops in Lesson 1.</p>
+  </div>
+  <div class="rule">
+    <h3>Question 2 - How much work per level?</h3>
+    <p>Add up the work of every call on one level. If each level does the same
+    total work, then:</p>
+    <p><strong>time = (work per level) &times; (number of levels)</strong></p>
+    <p>This formula solves the four standard shapes below.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="shapes">The four shapes that cover most exams</h2>
+
+  <div class="rule">
+    <h3>Shape 1 - One call, shrink by a constant: O(n)</h3>
+    <pre><code>def fact(n):
+    if n &lt;= 1: return 1
+    return n * fact(n - 1)</code></pre>
+    <p>n levels (n, n&minus;1, ..., 1), one call per level, O(1) work each:
+    n &times; O(1) = <strong>O(n)</strong>.</p>
+  </div>
+
+  <div class="rule">
+    <h3>Shape 2 - One call, shrink by half: O(log n)</h3>
+    <pre><code>def search(a, lo, hi, target):
+    if lo &gt; hi: return -1
+    mid = (lo + hi) // 2
+    if a[mid] == target: return mid
+    if a[mid] &lt; target: return search(a, mid+1, hi, target)
+    return search(a, lo, mid-1, target)</code></pre>
+    <p>The range halves on every call, so log n levels, one call each:
+    <strong>O(log n)</strong>. This is binary search.</p>
+  </div>
+
+  <div class="rule">
+    <h3>Shape 3 - Split in half, combine costs O(n): O(n log n)</h3>
+    <pre><code>def merge_sort(a):
+    if len(a) &lt;= 1: return a
+    mid = len(a) // 2
+    left  = merge_sort(a[:mid])
+    right = merge_sort(a[mid:])
+    return merge(left, right)   # O(n) work</code></pre>
+    <p>Two calls of half size, then O(n) work to merge. Level 1 does O(n),
+    level 2 does O(n) across its two calls, level 3 does O(n) across its four
+    calls... every level does O(n) total, and there are log n levels:
+    <strong>O(n log n)</strong>.</p>
+  </div>
+
+  <div class="rule">
+    <h3>Shape 4 - Branching calls: O(2&#8319;)</h3>
+    <pre><code>def fib(n):
+    if n &lt;= 1: return n
+    return fib(n - 1) + fib(n - 2)</code></pre>
+    <p>Each call makes two more, so the number of calls roughly doubles every
+    level, for n levels. Total calls grow like 2&#8319;: <strong>O(2&#8319;)</strong>.
+    Tower of Hanoi has the same shape.</p>
+  </div>
+
+  <div class="callout">
+    <p class="callout-title">The trap: doubling calls is not automatically exponential</p>
+    <pre><code>def total(arr):
+    if len(arr) == 0: return 0
+    mid = len(arr) // 2
+    return total(arr[:mid]) + total(arr[mid:])</code></pre>
+    <p>Calls double each level, but the work per call halves at the same rate.
+    Total calls: 1 + 2 + 4 + ... + n = 2n &minus; 1 = <strong>O(n)</strong>.
+    What matters is calls &times; work per call across the whole tree, not how
+    fast calls multiply.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="space">Space: the stack</h2>
+  <p>Every unfinished call holds a stack frame, so the space a recursion uses
+  is its <strong>deepest chain of pending calls</strong> - the number of
+  levels, not the total number of calls.</p>
+  <ul>
+    <li><strong>fact(n):</strong> O(n) stack - one chain n levels deep.</li>
+    <li><strong>search:</strong> O(log n) stack - one chain log n deep.</li>
+    <li><strong>fib(n):</strong> O(n) stack - the tree is huge, but the stack
+      only ever holds one path down it.</li>
+    <li><strong>merge_sort:</strong> O(n) - the scratch arrays it allocates,
+      not the stack.</li>
+  </ul>
+</section>
+
+<section class="quiz" data-quiz-title="Lesson 2 quiz">
+  <h2 id="quiz">Practice: solve these from memory</h2>
+  <p>Answer from memory before clicking - say or write your answer first.
+  The struggle is what makes it stick.</p>
+
+  <div class="quiz-q" data-answer="O(n)" data-explanation="One call per level, shrinking by 1: n levels, O(1) work each. n &times; O(1) = O(n).">
+    <p class="quiz-prompt">What is the time complexity?</p>
+    <pre><code>def fact(n):
+    if n &lt;= 1: return 1
+    return n * fact(n - 1)</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(1)">O(1)</button>
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(n&sup2;)">O(n&sup2;)</button>
+      <button data-choice="O(log n)">O(log n)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(log n)" data-explanation="One call per level, and the range halves each time: log n levels &times; O(1) = O(log n).">
+    <p class="quiz-prompt">What is the time complexity of this binary search?</p>
+    <pre><code>def search(a, lo, hi, target):
+    if lo &gt; hi: return -1
+    mid = (lo + hi) // 2
+    if a[mid] == target: return mid
+    if a[mid] &lt; target:
+        return search(a, mid+1, hi, target)
+    return search(a, lo, mid-1, target)</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(1)">O(1)</button>
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(log n)">O(log n)</button>
+      <button data-choice="O(n log n)">O(n log n)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(2&#8319;)" data-explanation="Each call makes two more, so calls double every level for n levels. The total number of calls grows like 2&#8319;, so the answer is O(2&#8319;).">
+    <p class="quiz-prompt">What is the time complexity?</p>
+    <pre><code>def fib(n):
+    if n &lt;= 1: return n
+    return fib(n - 1) + fib(n - 2)</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(n&sup2;)">O(n&sup2;)</button>
+      <button data-choice="O(log n)">O(log n)</button>
+      <button data-choice="O(2&#8319;)">O(2&#8319;)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(n log n)" data-explanation="Two calls of half size plus O(n) to merge. Every level of the tree does O(n) total work, and there are log n levels: O(n) &times; log n = O(n log n).">
+    <p class="quiz-prompt">What is the time complexity of this merge sort?</p>
+    <pre><code>def merge_sort(a):
+    if len(a) &lt;= 1: return a
+    mid = len(a) // 2
+    left  = merge_sort(a[:mid])
+    right = merge_sort(a[mid:])
+    return merge(left, right)   # O(n)</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(n&sup2;)">O(n&sup2;)</button>
+      <button data-choice="O(n log n)">O(n log n)</button>
+      <button data-choice="O(log n)">O(log n)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(n)" data-explanation="The trap: calls double every level, but the work per call halves at the same rate. Total calls = 1 + 2 + 4 + ... + n = 2n &minus; 1, which is O(n).">
+    <p class="quiz-prompt">What is the time complexity?</p>
+    <pre><code>def total(arr):
+    if len(arr) == 0: return 0
+    mid = len(arr) // 2
+    return total(arr[:mid]) + total(arr[mid:])</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(n log n)">O(n log n)</button>
+      <button data-choice="O(n&sup2;)">O(n&sup2;)</button>
+      <button data-choice="O(2&#8319;)">O(2&#8319;)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(n)" data-explanation="Space is the deepest chain of pending calls, not the number of calls. The stack only ever holds one path, fib(n) down to fib(0), so n frames: O(n). Time explodes to O(2&#8319;), but space does not.">
+    <p class="quiz-prompt">What is the space complexity of fib(n)?</p>
+    <pre><code>def fib(n):
+    if n &lt;= 1: return n
+    return fib(n - 1) + fib(n - 2)</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(1)">O(1)</button>
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(n&sup2;)">O(n&sup2;)</button>
+      <button data-choice="O(2&#8319;)">O(2&#8319;)</button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 id="next">What&rsquo;s next</h2>
+  <ul>
+    <li>The <a href="../reference/big-o-cheat-card.html">cheat card</a> now
+      includes the four recursion shapes - keep it out while doing problem sets.</li>
+    <li>Back to <a href="0001-loop-rules.html">Lesson 1</a> if the halving
+      idea still feels loose - recursion reuses it directly.</li>
+    <li>Lesson 3 (coming soon): space complexity in full, including loops that
+      allocate.</li>
+    <li>Lesson 4 (coming soon): tricky patterns and built-ins - O(&radic;n)
+      loops, two-input functions, and what sort really costs.</li>
+  </ul>
+</section>
+
+<section>
+  <h2 id="source">Go deeper</h2>
+  <p>For the theory behind these shapes, read Khan Academy&rsquo;s
+  <a href="https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms">Recursive algorithms unit</a>
+  (factorial, palindromes, and the properties of recursive algorithms), also
+  written with Thomas Cormen. For the formal recurrence side, the
+  <a href="https://courses.cs.washington.edu/courses/cse332/10su/lectures/lecture3.pdf">UW CSE 332 lecture notes</a>
+  walk through recurrences for exactly these algorithms.</p>
+</section>
+
+<footer class="lesson-footer">
+  <p>Stuck on anything in this lesson? Ask your agent - it can redraw any
+  recursion tree, generate extra practice problems, or quiz you one-on-one.</p>
+</footer>
+
+</article>
+<script src="../assets/quiz.js"></script>
+</body>
+</html>

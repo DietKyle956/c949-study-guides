@@ -4,6 +4,8 @@
 
 - [Khan Academy: Asymptotic notation (unit)](https://www.khanacademy.org/computing/computer-science/algorithms/asymptotic-notation)
   Written with Dartmouth's Thomas Cormen (co-author of CLRS). The primary source for lesson theory; start with the Big-O notation article.
+- [Khan Academy: Recursive algorithms (unit)](https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms)
+  Primary source for the recursion lesson. Factorial, palindromes, and the properties of recursive algorithms - same authors.
 - [Khan Academy: Big-O notation (article)](https://www.khanacademy.org/computing/computer-science/algorithms/asymptotic-notation/a/big-o-notation)
   The single best first read. Explains upper bounds, dropping constants, and why O(log n) shows up in binary search.
 - [Princeton COS 126: Performance lecture notes (PDF)](https://www.cs.princeton.edu/courses/archive/spr25/cos126/static/lectures/41Performance.pdf)

@@ -180,6 +180,11 @@ td:first-child {
   white-space: nowrap;
 }
 
+table.prose-table td:first-child {
+  font-family: inherit;
+  white-space: normal;
+}
+
 /* ---------- Callouts ---------- */
 
 .callout {

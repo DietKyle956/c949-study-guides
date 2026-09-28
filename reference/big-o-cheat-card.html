@@ -10,7 +10,7 @@
 <article class="lesson">
 
 <header>
-  <p class="course-mark">Reference &middot; prints on one page</p>
+  <p class="course-mark">Reference &middot; printable</p>
   <h1>Big O Cheat Card</h1>
   <p class="lede">The compressed version of Lesson 1. Keep this next to you
   while doing problem sets until the rules are automatic.</p>
@@ -48,6 +48,29 @@
 </section>
 
 <section>
+  <h2 id="recursion">Recursion: the four shapes</h2>
+  <p>Time = (work per level) &times; (number of levels). Shrink by a constant
+  amount: n levels. Shrink by half: log n levels.</p>
+  <table class="prose-table">
+    <thead>
+      <tr><th>Shape</th><th>Calls</th><th>Combine</th><th>Result</th><th>Example</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>shrink by 1</td><td>1</td><td>O(1)</td><td>O(n)</td><td>factorial</td></tr>
+      <tr><td>shrink by half</td><td>1</td><td>O(1)</td><td>O(log n)</td><td>binary search</td></tr>
+      <tr><td>two halves</td><td>2</td><td>O(n)</td><td>O(n log n)</td><td>merge sort</td></tr>
+      <tr><td>branch by 1</td><td>2</td><td>O(1)</td><td>O(2&#8319;)</td><td>fibonacci</td></tr>
+    </tbody>
+  </table>
+  <ul>
+    <li><strong>Recursion space = deepest stack</strong> = number of levels.
+      fib(n) is O(n) space even though its time is O(2&#8319;).</li>
+    <li><strong>Trap:</strong> calls doubling per level is not automatically
+      exponential. Two halves with O(1) combine = O(n).</li>
+  </ul>
+</section>
+
+<section>
   <h2 id="traps">Traps that show up on every exam</h2>
   <ul>
     <li><strong>Inner loop starts at i</strong> - n + (n&minus;1) + ... + 1 =
@@ -66,7 +89,8 @@
 </section>
 
 <footer class="lesson-footer">
-  <p>Full explanations and practice: <a href="../lessons/0001-loop-rules.html">Lesson 1 - The Loop Rules</a>.
+  <p>Full explanations and practice: <a href="../lessons/0001-loop-rules.html">Lesson 1 - The Loop Rules</a>
+  and <a href="../lessons/0002-recursion.html">Lesson 2 - Recursion</a>.
   Stuck? Ask your agent for extra problems on any trap above.</p>
 </footer>
 
