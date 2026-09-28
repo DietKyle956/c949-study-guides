@@ -2,6 +2,8 @@
 
 ## Knowledge
 
+- Local file: `~/school/c949/C949_Data_Structures_and_Algorithms_1_Study_Guide.md` (outside this repo)
+  The practice exam content. Ground truth for what C949 asks. Use for: scoping every lesson to exam question types.
 - [Khan Academy: Asymptotic notation (unit)](https://www.khanacademy.org/computing/computer-science/algorithms/asymptotic-notation)
   Written with Dartmouth's Thomas Cormen (co-author of CLRS). The primary source for lesson theory; start with the Big-O notation article.
 - [Khan Academy: Recursive algorithms (unit)](https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms)

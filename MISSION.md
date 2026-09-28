@@ -7,6 +7,7 @@ Pass the C949 course assessment questions on algorithm complexity. The user want
 - Given any common exam code snippet (loops, nested loops, halving, recursion), the user states its Big O correctly within a minute.
 - The user can explain why the answer is right using the counting rules, not just guess.
 - The user can state the space complexity of the same snippets.
+- The user can answer every complexity-related question in the practice exam file (simplifying O(855N) and O(12N+7N+500), linear search worst case, binary search O(log N), recurrence levels for T(N) = N + T(N-8), auxiliary space O(N)) without notes.
 - The user walks into the exam feeling that complexity questions are free points.
 
 ## Constraints
