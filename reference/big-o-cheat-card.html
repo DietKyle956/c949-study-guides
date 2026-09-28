@@ -71,6 +71,25 @@
 </section>
 
 <section>
+  <h2 id="space">Space: the two questions</h2>
+  <p>Auxiliary space = extra memory beyond the input. Ask: does it build a
+  container that grows with N? Is there recursion? Neither: O(1).</p>
+  <ul>
+    <li><strong>Fixed variables</strong> - counters, totals, indices:
+      O(1). Any fixed number of them is still O(1).</li>
+    <li><strong>Growing container</strong> - result list, copy, dictionary,
+      slice: O(N). One container per element: O(N&sup2;).</li>
+    <li><strong>Recursion</strong> - deepest pending stack = number of
+      levels. Shrink by 1: O(N). Halve: O(log N). Branch: O(N) (one path on
+      the stack at a time).</li>
+    <li><strong>Input does not count</strong> - auxiliary means extra, and
+      only memory alive at one moment counts.</li>
+    <li><strong>Time and space disagree</strong> - fib is O(2&#8319;) time but
+      O(N) space; a sum loop is O(N) time but O(1) space. Answer separately.</li>
+  </ul>
+</section>
+
+<section>
   <h2 id="traps">Traps that show up on every exam</h2>
   <ul>
     <li><strong>Inner loop starts at i</strong> - n + (n&minus;1) + ... + 1 =
@@ -89,8 +108,9 @@
 </section>
 
 <footer class="lesson-footer">
-  <p>Full explanations and practice: <a href="../lessons/0001-loop-rules.html">Lesson 1 - The Loop Rules</a>
-  and <a href="../lessons/0002-recursion.html">Lesson 2 - Recursion</a>.
+  <p>Full explanations and practice: <a href="../lessons/0001-loop-rules.html">Lesson 1 - The Loop Rules</a>,
+  <a href="../lessons/0002-recursion.html">Lesson 2 - Recursion</a>, and
+  <a href="../lessons/0003-space-complexity.html">Lesson 3 - Space complexity</a>.
   Stuck? Ask your agent for extra problems on any trap above.</p>
 </footer>
 

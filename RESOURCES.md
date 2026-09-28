@@ -10,6 +10,8 @@
   Primary source for the recursion lesson. Factorial, palindromes, and the properties of recursive algorithms - same authors.
 - [Khan Academy: Big-O notation (article)](https://www.khanacademy.org/computing/computer-science/algorithms/asymptotic-notation/a/big-o-notation)
   The single best first read. Explains upper bounds, dropping constants, and why O(log n) shows up in binary search.
+- [GeeksforGeeks: Space Complexity and Auxiliary Space (g-fact-86)](https://www.geeksforgeeks.org/g-fact-86/)
+  Primary source for the space-complexity lesson. Defines auxiliary space as the extra space beyond the input, and shows recursion-stack examples (calls alive at once, not total calls).
 - [Princeton COS 126: Performance lecture notes (PDF)](https://www.cs.princeton.edu/courses/archive/spr25/cos126/static/lectures/41Performance.pdf)
   University lecture notes on order of growth with a worked two-sum example. Use for: the formal definitions and the complexity ladder.
 - [UW CSE 332 Lecture 3: Asymptotic analysis (PDF)](https://courses.cs.washington.edu/courses/cse332/10su/lectures/lecture3.pdf)

@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Space: Count the Extra Memory - Big O for Exams</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<article class="lesson">
+
+<header>
+  <p class="course-mark">Big O for Exams &middot; Lesson 3</p>
+  <h1>Space: count the extra memory</h1>
+  <p class="lede">Time is only half the question. The exam also asks how much
+  extra memory a snippet needs - and the answer is simpler than the time
+  answer: two questions, not three.</p>
+</header>
+
+<section>
+  <h2 id="why">Why this lesson</h2>
+  <p>One of the exam items is: a function named
+  <code>get_odd_numbers()</code> has worst-case auxiliary space
+  <strong>O(N)</strong>. "Auxiliary space" is the phrase exam writers use for
+  <em>extra memory the code creates beyond the input</em>. This lesson turns
+  that phrase into two mechanical questions, then drills them until stating
+  space complexity takes seconds. You will reuse the recursion-level counting
+  from <a href="0002-recursion.html">Lesson 2</a> for half of it.</p>
+</section>
+
+<section>
+  <h2 id="questions">The two questions</h2>
+  <p>To state the space complexity of any snippet, ask in order:</p>
+  <div class="rule">
+    <h3>Question 1 - Does it create a container that grows with N?</h3>
+    <p>A new list, copy, dictionary, or set that fills up as the input grows
+    costs <strong>O(N)</strong> extra memory - and N&sup2; if it builds one
+    container per element. A fixed number of plain variables costs
+    <strong>O(1)</strong>, no matter how many there are.</p>
+  </div>
+  <div class="rule">
+    <h3>Question 2 - Is there recursion?</h3>
+    <p>Every unfinished call holds a stack frame, so recursion costs the
+    <strong>deepest chain of pending calls</strong> - the number of levels from
+    Lesson 2, not the total number of calls. Shrink by 1: O(N). Halve:
+    O(log N). Branch: still O(N), because the stack only ever holds one path
+    down the tree.</p>
+  </div>
+  <p>Neither question fires - no growing container, no recursion - and the
+  answer is <strong>O(1)</strong> auxiliary space.</p>
+</section>
+
+<section>
+  <h2 id="rules">The three rules</h2>
+
+  <div class="rule">
+    <h3>Rule 1 - Fixed variables: O(1)</h3>
+    <pre><code>def sum_numbers(numbers):
+    total = 0
+    for n in numbers:
+        total += n
+    return total</code></pre>
+    <p><code>total</code>, <code>n</code>, and the loop machinery are a fixed
+    handful of variables that do not grow with the input:
+    <strong>O(1)</strong> auxiliary space. Ten variables would still be
+    O(1) - constants drop here too.</p>
+  </div>
+
+  <div class="rule">
+    <h3>Rule 2 - A container that grows with N: O(N)</h3>
+    <pre><code>def get_odd_numbers(numbers):
+    odds = []
+    for n in numbers:
+        if n % 2 != 0:
+            odds.append(n)
+    return odds</code></pre>
+    <p><code>odds</code> grows with the input. Worst case, every element is
+    odd, and the new list holds all N of them:
+    <strong>O(N)</strong> auxiliary space. The container itself is what you
+    count - its size is set by N, not by the loop variable.</p>
+  </div>
+
+  <div class="rule">
+    <h3>Rule 3 - Recursion: O(depth)</h3>
+    <pre><code>def fact(n):
+    if n &lt;= 1: return 1
+    return n * fact(n - 1)</code></pre>
+    <p>n pending frames sit on the stack at once (fact(n), fact(n-1), ...,
+    fact(1)): <strong>O(N)</strong> space. A recursive binary search halves
+    each time, so only log n frames stack up: <strong>O(log N)</strong>. A
+    branching recursion like fib still costs O(N) - the stack holds one path
+    at a time, however many paths exist in total.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="examples">Worked examples</h2>
+
+  <div class="example">
+    <h3>Counting is not collecting</h3>
+    <pre><code>def count_odds(numbers):
+    count = 0
+    for n in numbers:
+        if n % 2 != 0:
+            count += 1
+    return count</code></pre>
+    <p class="apply">Same loop as <code>get_odd_numbers</code>, but it stores a
+    counter instead of a list. One fixed variable: <strong>O(1)</strong>.
+    The difference between the two functions is the whole lesson: a growing
+    container is O(N), a counter is O(1).</p>
+  </div>
+
+  <div class="example">
+    <h3>Fibonacci: time and space disagree</h3>
+    <pre><code>def fib(n):
+    if n &lt;= 1: return n
+    return fib(n - 1) + fib(n - 2)</code></pre>
+    <p class="apply">Time explodes to O(2&#8319;) because the number of calls
+    doubles per level. Space is only the deepest pending chain: the stack
+    holds fib(n), fib(n-1), ..., fib(1), one path - <strong>O(N)</strong>.
+    Always answer the two questions independently.</p>
+  </div>
+
+  <div class="example">
+    <h3>A container per element: O(N&sup2;)</h3>
+    <pre><code>def make_grid(n):
+    grid = []
+    for i in range(n):
+        grid.append([0] * n)
+    return grid</code></pre>
+    <p class="apply">The outer list holds n rows, and each row is itself a
+    list of n items: n &times; n = <strong>O(N&sup2;)</strong>. Same shape as
+    nested loops for time - multiply.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="traps">The traps</h2>
+  <div class="callout">
+    <p class="callout-title">Trap 1 - The input does not count</p>
+    <p>"Auxiliary" space means <em>extra</em> memory beyond the input itself.
+    Total space = input + extra, but when the question says auxiliary, count
+    only what the function creates. <code>get_odd_numbers</code> receives a
+    list of size N and builds a second list of up to size N: its auxiliary
+    space is O(N), and its total is O(N) too - but only because the extra
+    list happens to match the input. The distinction is the question's.</p>
+  </div>
+  <div class="callout">
+    <p class="callout-title">Trap 2 - Only memory alive at once counts</p>
+    <p>Space is a snapshot at the worst moment, not a sum over the run. A loop
+    that allocates one small object per iteration and drops it before the next
+    uses O(1) extra space. Two separate N-sized lists used one after the other
+    are O(N) at the worst moment, not O(2N) - and constants drop anyway.
+    Recursion obeys the same rule: the stack holds the deepest chain, not
+    every call that ever existed.</p>
+  </div>
+  <div class="callout">
+    <p class="callout-title">Trap 3 - Built-ins that hand you a new container</p>
+    <p><code>sorted(numbers)</code> returns a new list, so it spends O(N)
+    auxiliary space. <code>numbers.sort()</code> sorts in place and, at the
+    level this exam tests, counts as O(1) extra. Slicing
+    (<code>numbers[:]</code>) also builds a new list: O(N). Whenever a built-in
+    <em>returns</em> a container you did not have, that container is auxiliary
+    space.</p>
+  </div>
+</section>
+
+<section class="quiz" data-quiz-title="Lesson 3 quiz">
+  <h2 id="quiz">Practice: solve these from memory</h2>
+  <p>Answer from memory before clicking - say or write your answer first.
+  The struggle is what makes it stick.</p>
+
+  <div class="quiz-q" data-answer="O(n)" data-explanation="The odds list grows with the input. Worst case, every element is odd and the new list holds all n of them: O(n) auxiliary space.">
+    <p class="quiz-prompt">What is the worst-case auxiliary space complexity?</p>
+    <pre><code>def get_odd_numbers(numbers):
+    odds = []
+    for n in numbers:
+        if n % 2 != 0:
+            odds.append(n)
+    return odds</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(1)">O(1)</button>
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(n&sup2;)">O(n&sup2;)</button>
+      <button data-choice="O(log n)">O(log n)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(1)" data-explanation="total and n are a fixed handful of variables. Nothing grows with the input: O(1) auxiliary space.">
+    <p class="quiz-prompt">What is the auxiliary space complexity?</p>
+    <pre><code>def sum_numbers(numbers):
+    total = 0
+    for n in numbers:
+        total += n
+    return total</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(1)">O(1)</button>
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(n&sup2;)">O(n&sup2;)</button>
+      <button data-choice="O(log n)">O(log n)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(log n)" data-explanation="Recursion space is the deepest stack. The range halves on every call, so log n frames are pending at once: O(log n).">
+    <p class="quiz-prompt">What is the space complexity of this binary search?</p>
+    <pre><code>def search(a, lo, hi, target):
+    if lo &gt; hi: return -1
+    mid = (lo + hi) // 2
+    if a[mid] == target: return mid
+    if a[mid] &lt; target:
+        return search(a, mid+1, hi, target)
+    return search(a, lo, mid-1, target)</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(1)">O(1)</button>
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(n&sup2;)">O(n&sup2;)</button>
+      <button data-choice="O(log n)">O(log n)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(n)" data-explanation="The stack holds one pending chain n deep: fact(n), fact(n-1), ..., fact(1). n frames is O(n) space.">
+    <p class="quiz-prompt">What is the space complexity?</p>
+    <pre><code>def fact(n):
+    if n &lt;= 1: return 1
+    return n * fact(n - 1)</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(1)">O(1)</button>
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(n&sup2;)">O(n&sup2;)</button>
+      <button data-choice="O(log n)">O(log n)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(n)" data-explanation="The dictionary grows with the input: one entry per distinct word, up to n entries worst case. O(n) auxiliary space.">
+    <p class="quiz-prompt">What is the auxiliary space complexity?</p>
+    <pre><code>def count_words(words):
+    counts = {}
+    for w in words:
+        counts[w] = counts.get(w, 0) + 1
+    return counts</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(1)">O(1)</button>
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(n&sup2;)">O(n&sup2;)</button>
+      <button data-choice="O(log n)">O(log n)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(n&sup2;)" data-explanation="The grid holds n rows and each row is a list of n items: n times n total cells, so O(n&sup2;) space.">
+    <p class="quiz-prompt">What is the space complexity?</p>
+    <pre><code>def make_grid(n):
+    grid = []
+    for i in range(n):
+        grid.append([0] * n)
+    return grid</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(1)">O(1)</button>
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(n&sup2;)">O(n&sup2;)</button>
+      <button data-choice="O(log n)">O(log n)</button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 id="next">What&rsquo;s next</h2>
+  <ul>
+    <li>The <a href="../reference/big-o-cheat-card.html">cheat card</a> now
+      carries the space rules - keep it out while doing problem sets.</li>
+    <li><a href="0002-recursion.html">Lesson 2</a> holds the level-counting
+      this lesson leans on; return there if the stack questions felt shaky.</li>
+    <li>Lesson 4 (coming soon): recurrence relations - counting levels when
+      the input shrinks by any constant, like T(N) = N + T(N - 8).</li>
+    <li>Lesson 5 (coming soon): mixed exam review - questions drawn from every
+      lesson at once, the way the real exam mixes them.</li>
+  </ul>
+</section>
+
+<section>
+  <h2 id="source">Go deeper</h2>
+  <p>The definitions in this lesson come from GeeksforGeeks&rsquo;
+  <a href="https://www.geeksforgeeks.org/g-fact-86/">Space Complexity and Auxiliary Space</a>
+  article - the same auxiliary-vs-input split, plus recursion-stack examples
+  like the ones above. For the underlying asymptotic notation, Khan
+  Academy&rsquo;s
+  <a href="https://www.khanacademy.org/computing/computer-science/algorithms/asymptotic-notation">Asymptotic notation unit</a>
+  (written with Thomas Cormen) remains the best single source.</p>
+</section>
+
+<footer class="lesson-footer">
+  <p>Stuck on anything in this lesson? Ask your agent - it can trace any
+  snippet&rsquo;s memory use line by line, generate extra space-complexity
+  problems, or quiz you one-on-one until the two questions are automatic.</p>
+</footer>
+
+</article>
+<script src="../assets/quiz.js"></script>
+</body>
+</html>

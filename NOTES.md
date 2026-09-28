@@ -8,6 +8,7 @@
 - Workspace location: ~/school/c949/study_guides/ (moved from ~/learning/big-o/ on 2026-09-28; also published on GitHub Pages).
 - Git: repo is a public GitHub repo for Pages deployment. Lesson content is fine to publish; keep MISSION.md and NOTES.md out of nothing sensitive (nothing sensitive is in them).
 - Practice exam file exists at ~/school/c949/C949_Data_Structures_and_Algorithms_1_Study_Guide.md (2026-09-28). It is the ground truth for scope.
-- Remaining Big O exam gaps for this workspace: recurrence levels with arbitrary shrink (T(N) = N + T(N-8) has ~N/8 levels), worst-case auxiliary space (get_odd_numbers is O(N)).
+- Remaining Big O exam gap for this workspace: recurrence levels with arbitrary shrink (T(N) = N + T(N-8) has ~N/8 levels). Planned as lesson 4. Worst-case auxiliary space (get_odd_numbers is O(N)) was covered in lesson 3 (2026-09-28).
+- Course plan (index.html) now matches teach-topics.md: 4 = recurrence relations, 5 = mixed exam review.
 - Counting sort's O(N+K) and hash table's average O(1) belong to the sorting and hash-tables topics in ~/school/c949/teach-topics.md, not here.
 - Topic menu for all of C949: ~/school/c949/teach-topics.md (kept out of this repo - it summarizes practice exam content).
