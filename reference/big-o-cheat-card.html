@@ -12,8 +12,8 @@
 <header>
   <p class="course-mark">Reference &middot; printable</p>
   <h1>Big O Cheat Card</h1>
-  <p class="lede">The compressed version of Lesson 1. Keep this next to you
-  while doing problem sets until the rules are automatic.</p>
+  <p class="lede">The compressed version of the whole course. Keep this next
+  to you while doing problem sets until the rules are automatic.</p>
 </header>
 
 <section>
@@ -71,6 +71,34 @@
 </section>
 
 <section>
+  <h2 id="recurrence">Recurrence levels: the one-rule version</h2>
+  <p>A recurrence relation defines a function via a smaller instance of itself
+  (its own name appears on the right side). Read T(N) = work + T(smaller) as:
+  do the work, then call on the smaller input. Write the first three sizes;
+  equal gaps mean subtract, equal ratios mean divide.</p>
+  <ul>
+    <li><strong>Subtract a constant k:</strong> sizes N, N &minus; k,
+      N &minus; 2k, ... so levels = N / k (more exactly ceil(N / k)).</li>
+    <li><strong>Divide by a factor b:</strong> sizes N, N / b, N / b&sup2;,
+      ... so levels = log<sub>b</sub> N, which is O(log N) for any b.</li>
+    <li><strong>Time = work per level &times; levels. Space = levels</strong>
+      (the stack).</li>
+  </ul>
+  <table class="prose-table">
+    <thead>
+      <tr><th>Recurrence</th><th>Levels</th><th>Work / level</th><th>Result</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>T(N) = T(N - 1) + O(1)</td><td>N</td><td>O(1)</td><td>O(N)</td></tr>
+      <tr><td>T(N) = 1 + T(N - 8)</td><td>N / 8</td><td>O(1)</td><td>O(N)</td></tr>
+      <tr><td>T(N) = N + T(N - 8)</td><td>N / 8</td><td>N</td><td>O(N&sup2;)</td></tr>
+      <tr><td>T(N) = T(N / 2) + O(1)</td><td>log N</td><td>O(1)</td><td>O(log N)</td></tr>
+      <tr><td>T(N) = 2T(N / 2) + O(N)</td><td>log N</td><td>N</td><td>O(N log N)</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
   <h2 id="space">Space: the two questions</h2>
   <p>Auxiliary space = extra memory beyond the input. Ask: does it build a
   container that grows with N? Is there recursion? Neither: O(1).</p>
@@ -109,8 +137,9 @@
 
 <footer class="lesson-footer">
   <p>Full explanations and practice: <a href="../lessons/0001-loop-rules.html">Lesson 1 - The Loop Rules</a>,
-  <a href="../lessons/0002-recursion.html">Lesson 2 - Recursion</a>, and
-  <a href="../lessons/0003-space-complexity.html">Lesson 3 - Space complexity</a>.
+  <a href="../lessons/0002-recursion.html">Lesson 2 - Recursion</a>,
+  <a href="../lessons/0003-space-complexity.html">Lesson 3 - Space complexity</a>, and
+  <a href="../lessons/0004-recurrence-relations.html">Lesson 4 - Recurrence relations</a>.
   Stuck? Ask your agent for extra problems on any trap above.</p>
 </footer>
 

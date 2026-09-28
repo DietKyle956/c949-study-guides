@@ -15,7 +15,7 @@
 - [Princeton COS 126: Performance lecture notes (PDF)](https://www.cs.princeton.edu/courses/archive/spr25/cos126/static/lectures/41Performance.pdf)
   University lecture notes on order of growth with a worked two-sum example. Use for: the formal definitions and the complexity ladder.
 - [UW CSE 332 Lecture 3: Asymptotic analysis (PDF)](https://courses.cs.washington.edu/courses/cse332/10su/lectures/lecture3.pdf)
-  Clear formal definition of Big Oh plus recurrence relations with worked examples. Use for: the logarithms and recursion lessons.
+  Clear formal definition of Big Oh plus recurrence relations with worked examples. Use for: the logarithms, recursion, and recurrence-relations lessons.
 - [bigocheatsheet.com](https://www.bigocheatsheet.com/)
   Quick lookup for the complexity of common data structure operations. Use for: answering "what does a built-in cost" questions.
 - [Educative: Big-O Notation For Coding Interviews and Beyond](https://www.educative.io/courses/big-o-notation-for-interviews-and-beyond)

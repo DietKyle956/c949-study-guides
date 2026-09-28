@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recurrence Relations: Levels for Any Shrink - Big O for Exams</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<article class="lesson">
+
+<header>
+  <p class="course-mark">Big O for Exams &middot; Lesson 4</p>
+  <h1>Recurrence relations: levels for any shrink</h1>
+  <p class="lede">Exam writers love one question shape: given
+  T(N) = N + T(N &minus; 8), how many levels does the recursion have?
+  One division answers every version of it - and the same count feeds the
+  time and space answers you already know how to state.</p>
+</header>
+
+<section>
+  <h2 id="why">Why this lesson</h2>
+  <p>Lessons 1 and 2 taught two shrinks: minus one (n levels) and divide by
+  half (log n levels). The exam generalizes both: subtract <em>any</em>
+  constant, divide by <em>any</em> factor, and ask for the number of levels
+  directly. This lesson turns the general case into one mechanical rule, then
+  shows that everything else is the <a href="0002-recursion.html">Lesson 2</a>
+  formula, time = work per level &times; levels, wearing a new outfit.</p>
+  <p>The exam&rsquo;s own words for this family of questions, from the C949
+  practice exam: &ldquo;How many levels does T(N) = N + T(N &minus; 8)
+  have?&rdquo; and &ldquo;Which of these is a recurrence relation?&rdquo; Both
+  become free points after this lesson.</p>
+</section>
+
+<section>
+  <h2 id="recurrence">What a recurrence relation is</h2>
+  <p>The exam definition: a recurrence relation <strong>defines a function
+  using earlier or smaller instances of itself</strong>. That is the whole
+  definition - the only thing you check is whether the function&rsquo;s own
+  name appears on the right-hand side.</p>
+  <pre><code>f(n) = f(n - 1) + 2      # recurrence: f is defined via f(n - 1)
+f(n) = n * n + 2 * n     # closed form: no self-reference, just arithmetic</code></pre>
+  <p>Recognition is the exam&rsquo;s &ldquo;identify the defining
+  property&rdquo; question: if the right side calls the function itself on a
+  smaller input, it is a recurrence. If not, it is a closed form.</p>
+  <div class="callout">
+    <p class="callout-title">Read a recurrence as a two-part plan</p>
+    <p>T(N) = N + T(N &minus; 8) says: <strong>do N work, then call yourself
+    on N &minus; 8</strong>. The left part is the work per level. The right
+    part is the shrink. Keep the two numbers separate - mixing up the work and
+    the shrink is the classic wrong answer on this topic.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="rule">The one rule: divide N by the shrink</h2>
+  <p>Levels are just the list of input sizes from the first call down to the
+  base case. Write the first three sizes; the pattern between them tells you
+  which rule to use.</p>
+
+  <div class="rule">
+    <h3>Subtract a constant k: levels = N / k</h3>
+    <p>N, N &minus; k, N &minus; 2k, ... The gap between neighboring levels is
+    k, and the sizes travel distance N in steps of k: <strong>N / k
+    levels</strong> (more exactly ceil(N / k) when N is not a multiple of
+    k - the exam answers N / k).</p>
+  </div>
+
+  <div class="rule">
+    <h3>Divide by a factor b: levels = log<sub>b</sub> N</h3>
+    <p>N, N / b, N / b&sup2;, ... The size multiplies its denominator by b each
+    level, so the number of levels is <strong>log<sub>b</sub> N</strong>.
+    Since any log base differs only by a constant, this is simply O(log N).</p>
+  </div>
+
+  <p>The two shrinks you already know are special cases of these rules:
+  minus one is k = 1, giving N / 1 = N levels (factorial, Lesson 2); divide by
+  half is b = 2, giving log&#8322; N levels (binary search, Lessons 1 and
+  2).</p>
+
+  <div class="callout">
+    <p class="callout-title">The first-three-sizes trick</p>
+    <p>Never guess from the code&rsquo;s look. Write N and the next two
+    sizes:</p>
+    <pre><code>N, N - 8, N - 16    equal gaps    -&gt; subtraction -&gt; levels = N / 8
+N, N / 2, N / 4     equal ratios  -&gt; division    -&gt; levels = log N</code></pre>
+    <p>Equal gaps mean subtract; equal ratios mean divide. Then apply the
+    matching rule.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="example">Worked example: T(N) = N + T(N &minus; 8)</h2>
+  <p>The exam&rsquo;s own question. Apply the trick:</p>
+  <pre><code>T(N) = N + T(N - 8)
+sizes: N, N - 8, N - 16, ...
+gaps of 8, so levels = N / 8   (more exactly ceil(N / 8))</code></pre>
+  <p><strong>Levels: N / 8.</strong> That is the answer the exam wants. If the
+  question goes one step further and asks for the whole complexity, the same
+  count finishes the job:</p>
+  <ul>
+    <li><strong>Time:</strong> each level does at most N work, and there are
+      N / 8 levels: N &times; N / 8 = <strong>O(N&sup2;)</strong>. The exact
+      sum N + (N &minus; 8) + (N &minus; 16) + ... lands on the same
+      O(N&sup2;).</li>
+    <li><strong>Space:</strong> the stack holds one chain of pending calls,
+      and the chain is N / 8 levels deep: <strong>O(N)</strong> (the Lesson 3
+      rule: space = levels).</li>
+  </ul>
+
+  <div class="callout">
+    <p class="callout-title">The trap: the prefix sets the work, the shrink sets the levels</p>
+    <pre><code>T(N) = 1 + T(N - 8)     # levels still N / 8, but O(1) work each</code></pre>
+    <p>Same shrink, smaller prefix: N / 8 levels &times; O(1) work =
+    <strong>O(N)</strong>, not O(1) and not O(N&sup2;). The two numbers in the
+    recurrence are independent knobs - turn them one at a time.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="divide">Divide by any b: binary search and friends</h2>
+  <p>The exam states binary search&rsquo;s recurrence directly:
+  <strong>T(N) = T(N / 2) + O(1)</strong> - halve the range, O(1) work per
+  call. Log&#8322; N levels &times; O(1) = <strong>O(log N)</strong>.</p>
+  <p>Any divisor works the same way. T(N) = T(N / 3) + O(1) has
+  log&#8323; N levels, still <strong>O(log N)</strong>, because
+  log&#8323; N = log N / log 3 and the denominator is a constant. This is the
+  same reason a loop with i = i &times; 3 was O(log n) in Lesson 1: the base
+  never matters, only that the input keeps dividing.</p>
+
+  <h3>The exam recurrences in one table</h3>
+  <table>
+    <thead>
+      <tr><th>Recurrence</th><th>Shrink</th><th>Levels</th><th>Work / level</th><th>Time</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>T(N) = T(N - 1) + O(1)</td><td>minus 1</td><td>N</td><td>O(1)</td><td>O(N)</td></tr>
+      <tr><td>T(N) = 1 + T(N - 8)</td><td>minus 8</td><td>N / 8</td><td>O(1)</td><td>O(N)</td></tr>
+      <tr><td>T(N) = N + T(N - 8)</td><td>minus 8</td><td>N / 8</td><td>N</td><td>O(N&sup2;)</td></tr>
+      <tr><td>T(N) = T(N / 2) + O(1)</td><td>divide by 2</td><td>log N</td><td>O(1)</td><td>O(log N)</td></tr>
+      <tr><td>T(N) = 2T(N / 2) + O(N)</td><td>divide by 2, two calls</td><td>log N</td><td>N</td><td>O(N log N)</td></tr>
+    </tbody>
+  </table>
+  <p>Rows one and five are the factorial and merge sort shapes from
+  <a href="0002-recursion.html">Lesson 2</a>; the middle three are new. Notice
+  the pattern: the shrink column decides the levels, the work column decides
+  what those levels multiply to.</p>
+</section>
+
+<section>
+  <h2 id="procedure">The 60-second procedure</h2>
+  <ol>
+    <li><strong>Write the first three input sizes</strong> - N, then the next
+      two sizes the recurrence produces.</li>
+    <li><strong>Pick the rule.</strong> Equal gaps: subtract k, levels =
+      N / k. Equal ratios: divide by b, levels = log<sub>b</sub> N.</li>
+    <li><strong>Only if asked for more than levels:</strong> time = work per
+      level &times; levels (Lesson 2); space = levels, the stack (Lesson
+      3).</li>
+  </ol>
+  <p>The exam usually asks for levels directly - answer with the count.
+  Your mission&rsquo;s questions ask for Big O - the same three steps answer
+  both, because every answer grows out of the level count.</p>
+</section>
+
+<section class="quiz" data-quiz-title="Lesson 4 quiz">
+  <h2 id="quiz">Practice: solve these from memory</h2>
+  <p>Answer from memory before clicking - say or write your answer first.
+  The struggle is what makes it stick.</p>
+
+  <div class="quiz-q" data-answer="f(n) = f(n - 1) + 2" data-explanation="A recurrence relation defines a function using earlier or smaller instances of itself. f(n) = f(n - 1) + 2 defines f via f(n - 1). The others are closed forms - arithmetic with no self-reference.">
+    <p class="quiz-prompt">Which of these is a recurrence relation?</p>
+    <pre><code>f(n) = f(n - 1) + 2
+f(n) = 2n - 1
+f(n) = n + 2
+f(n) = n(n + 1)</code></pre>
+    <div class="quiz-options">
+      <button data-choice="f(n) = f(n - 1) + 2">f(n) = f(n - 1) + 2</button>
+      <button data-choice="f(n) = 2n - 1">f(n) = 2n - 1</button>
+      <button data-choice="f(n) = n + 2">f(n) = n + 2</button>
+      <button data-choice="f(n) = n(n + 1)">f(n) = n(n + 1)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="N / 8" data-explanation="Input sizes: N, N - 8, N - 16, ... Subtract 8 each level, so traveling distance N in steps of 8 takes N / 8 levels (more exactly ceil(N / 8) depending on the base case).">
+    <p class="quiz-prompt">How many levels does this recurrence have?</p>
+    <pre><code>T(N) = N + T(N - 8)</code></pre>
+    <div class="quiz-options">
+      <button data-choice="N / 4">N / 4</button>
+      <button data-choice="N / 2">N / 2</button>
+      <button data-choice="N / 8">N / 8</button>
+      <button data-choice="N / 16">N / 16</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="N / 2" data-explanation="Input sizes: N, N - 2, N - 4, ... Subtract 2 each level, so levels = N / 2. The shrink is the number after the minus sign; divide N by it.">
+    <p class="quiz-prompt">How many levels does this recurrence have?</p>
+    <pre><code>T(N) = 1 + T(N - 2)</code></pre>
+    <div class="quiz-options">
+      <button data-choice="N / 8">N / 8</button>
+      <button data-choice="N / 2">N / 2</button>
+      <button data-choice="N / 16">N / 16</button>
+      <button data-choice="N / 4">N / 4</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="T(N) = T(N / 2) + O(1)" data-explanation="Binary search halves the range and does O(1) work per call: T(N) = T(N / 2) + O(1). That is log N levels times O(1), giving O(log N) average performance.">
+    <p class="quiz-prompt">Which recurrence describes binary search on a sorted list?</p>
+    <div class="quiz-options">
+      <button data-choice="T(N) = T(N - 1) + O(1)">T(N) = T(N - 1) + O(1)</button>
+      <button data-choice="T(N) = T(N / 8) + O(1)">T(N) = T(N / 8) + O(1)</button>
+      <button data-choice="T(N) = T(N / 2) + O(1)">T(N) = T(N / 2) + O(1)</button>
+      <button data-choice="T(N) = 2T(N / 2) + O(1)">T(N) = 2T(N / 2) + O(1)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(log n)" data-explanation="Sizes: N, N / 3, N / 9, ... Divide by 3 each level, so log base 3 of N levels. Log base 3 of N = log N / log 3, and the base is a constant, so it is O(log n) - any divisor works.">
+    <p class="quiz-prompt">What is the time complexity?</p>
+    <pre><code>T(N) = T(N / 3) + O(1)</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(1)">O(1)</button>
+      <button data-choice="O(log n)">O(log n)</button>
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(n log n)">O(n log n)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(n&sup2;)" data-explanation="N / 8 levels, and each level does at most N work: N times N / 8 = O(n&sup2;). The prefix sets the work, the shrink sets the levels - multiply them.">
+    <p class="quiz-prompt">What is the time complexity?</p>
+    <pre><code>T(N) = N + T(N - 8)</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(n log n)">O(n log n)</button>
+      <button data-choice="O(log n)">O(log n)</button>
+      <button data-choice="O(n&sup2;)">O(n&sup2;)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(n)" data-explanation="Space is the deepest chain of pending calls, and the chain has N / 8 levels, so O(n) frames. Space = levels, not total calls - the same rule as Lesson 3.">
+    <p class="quiz-prompt">What is the stack space?</p>
+    <pre><code>T(N) = N + T(N - 8)</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(1)">O(1)</button>
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(n&sup2;)">O(n&sup2;)</button>
+      <button data-choice="O(log n)">O(log n)</button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 id="next">What&rsquo;s next</h2>
+  <ul>
+    <li>The <a href="../reference/big-o-cheat-card.html">cheat card</a> now
+      carries the recurrence-level rules - keep it out while doing problem
+      sets.</li>
+    <li><a href="0002-recursion.html">Lesson 2</a> holds the formula this
+      lesson feeds: time = work per level &times; levels.</li>
+    <li><a href="0003-space-complexity.html">Lesson 3</a> holds the space
+      side: the stack is levels deep, nothing more.</li>
+    <li>Lesson 5 (coming soon): mixed exam review - questions drawn from
+      every lesson at once, the way the real exam mixes them.</li>
+  </ul>
+</section>
+
+<section>
+  <h2 id="source">Go deeper</h2>
+  <p>For the theory behind this lesson, read the
+  <a href="https://courses.cs.washington.edu/courses/cse332/10su/lectures/lecture3.pdf">UW CSE 332 Lecture 3 notes</a>
+  - recurrence relations with worked examples, including exactly the
+  subtract-a-constant and divide-by-a-factor shapes above. For recursion in
+  general, Khan Academy&rsquo;s
+  <a href="https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms">Recursive algorithms unit</a>
+  (written with Thomas Cormen) remains the best single source.</p>
+</section>
+
+<footer class="lesson-footer">
+  <p>Stuck on anything in this lesson? Ask your agent - it can count the
+  levels of any recurrence with you, generate extra practice problems, or
+  quiz you one-on-one until the procedure is automatic.</p>
+</footer>
+
+</article>
+<script src="../assets/quiz.js"></script>
+</body>
+</html>
