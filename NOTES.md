@@ -11,4 +11,5 @@
 - Remaining Big O exam gap for this workspace: recurrence levels with arbitrary shrink (T(N) = N + T(N-8) has ~N/8 levels). Planned as lesson 4. Worst-case auxiliary space (get_odd_numbers is O(N)) was covered in lesson 3 (2026-09-28).
 - Course plan (index.html) now matches teach-topics.md: 4 = recurrence relations, 5 = mixed exam review.
 - Counting sort's O(N+K) and hash table's average O(1) belong to the sorting and hash-tables topics in ~/school/c949/teach-topics.md, not here.
+- Publish flow: everything we create (lessons, reference docs, assets) is committed to main and pushed immediately so it goes live on Pages (user confirmed 2026-09-28). No co-author lines in commit messages.
 - Topic menu for all of C949: ~/school/c949/teach-topics.md (kept out of this repo - it summarizes practice exam content).
