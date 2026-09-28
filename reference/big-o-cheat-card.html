@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Big O Cheat Card</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<article class="lesson">
+
+<header>
+  <p class="course-mark">Reference &middot; prints on one page</p>
+  <h1>Big O Cheat Card</h1>
+  <p class="lede">The compressed version of Lesson 1. Keep this next to you
+  while doing problem sets until the rules are automatic.</p>
+</header>
+
+<section>
+  <h2 id="ladder">The complexity ladder, slowest to fastest growing</h2>
+  <table>
+    <thead>
+      <tr><th>Big O</th><th>Name</th><th>Typical shape in code</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>O(1)</td><td>constant</td><td>one statement, array index, dict lookup</td></tr>
+      <tr><td>O(log n)</td><td>logarithmic</td><td>counter doubles / input halves</td></tr>
+      <tr><td>O(&radic;n)</td><td>square root</td><td>loop runs while i &times; i &lt; n</td></tr>
+      <tr><td>O(n)</td><td>linear</td><td>one loop over n items</td></tr>
+      <tr><td>O(n log n)</td><td>linearithmic</td><td>n loop with a halving loop inside</td></tr>
+      <tr><td>O(n&sup2;)</td><td>quadratic</td><td>two nested full loops</td></tr>
+      <tr><td>O(n&sup3;)</td><td>cubic</td><td>three nested full loops</td></tr>
+      <tr><td>O(2&#8319;)</td><td>exponential</td><td>naive recursion that branches twice</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2 id="rules">The procedure</h2>
+  <ol>
+    <li><strong>Count</strong> the passes of every loop.</li>
+    <li><strong>Multiply</strong> nested loops (n &times; n = n&sup2;).</li>
+    <li><strong>Add</strong> sequential blocks (n + n = 2n).</li>
+    <li><strong>Halving</strong> loop, or doubling counter = log n.</li>
+    <li><strong>Simplify:</strong> drop constants (2n &rarr; n), keep the
+      dominant term (n&sup2; + n &rarr; n&sup2;).</li>
+  </ol>
+</section>
+
+<section>
+  <h2 id="traps">Traps that show up on every exam</h2>
+  <ul>
+    <li><strong>Inner loop starts at i</strong> - n + (n&minus;1) + ... + 1 =
+      n(n+1)/2 = still O(n&sup2;).</li>
+    <li><strong>Two loops of different sizes</strong> - if the input has two
+      sizes n and m, they stay: O(n + m), or O(n &times; m) when nested.</li>
+    <li><strong>Halving by any amount</strong> - i = i * 3, or n = n / 10, is
+      still O(log n); the base is a constant.</li>
+    <li><strong>Constants hide in n</strong> - a loop that runs n/2 times is
+      still O(n).</li>
+    <li><strong>Square-root loops</strong> - while i &times; i &lt; n stops at
+      i = &radic;n, so it is O(&radic;n).</li>
+    <li><strong>Sequential vs nested</strong> - a loop after a loop adds; a
+      loop inside a loop multiplies. Check the indentation.</li>
+  </ul>
+</section>
+
+<footer class="lesson-footer">
+  <p>Full explanations and practice: <a href="../lessons/0001-loop-rules.html">Lesson 1 - The Loop Rules</a>.
+  Stuck? Ask your agent for extra problems on any trap above.</p>
+</footer>
+
+</article>
+</body>
+</html>

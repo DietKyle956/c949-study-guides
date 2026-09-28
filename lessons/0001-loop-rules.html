@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Loop Rules - Big O for Exams</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+<article class="lesson">
+
+<header>
+  <p class="course-mark">Big O for Exams &middot; Lesson 1</p>
+  <h1>The Loop Rules</h1>
+  <p class="lede">Almost every loop-based Big O question on an exam collapses into
+  three rules. Learn the rules once, and &ldquo;read this code, state its
+  complexity&rdquo; becomes mechanical arithmetic.</p>
+</header>
+
+<section>
+  <h2 id="why">Why this lesson</h2>
+  <p>On most exams, loops are the bulk of the complexity questions - single
+  loops, nested loops, and the halving loop that everyone loses points on.
+  This lesson turns all of them into a three-rule procedure, plus the two
+  simplifications you apply at the end.</p>
+</section>
+
+<section>
+  <h2 id="simplify">The two simplifications you already know</h2>
+  <p>Big O only cares about <em>how the work grows as n grows</em>. So before
+  anything else, remember the finish line:</p>
+  <div class="callout">
+    <p class="callout-title">Always end with these</p>
+    <p><strong>Drop constants.</strong> O(2n) becomes O(n). O(3) becomes O(1).</p>
+    <p><strong>Keep only the dominant term.</strong> O(n&sup2; + n) becomes O(n&sup2;).</p>
+  </div>
+  <p>Everything below produces an expression like 2n + 3 or n&sup2; + n.
+  You finish by applying these two moves. That is the whole game.</p>
+</section>
+
+<section>
+  <h2 id="rules">The three rules</h2>
+
+  <div class="rule">
+    <h3>Rule 1 - Multiply: nested loops</h3>
+    <p>A loop inside a loop multiplies. Count the passes of the outer loop,
+    multiply by the passes of the inner loop.</p>
+    <pre><code>for i in range(n):        # n passes
+    for j in range(n):    # n passes each
+        work(i, j)        # O(1)</code></pre>
+    <p>n &times; n = <strong>O(n&sup2;)</strong>. Three levels of nesting give
+    O(n&sup3;), and so on. A loop inside a loop is multiplication - that is the
+    whole rule.</p>
+  </div>
+
+  <div class="rule">
+    <h3>Rule 2 - Add: sequential blocks</h3>
+    <p>Code that runs one block <em>after</em> another adds. Then the
+    simplifications clean it up.</p>
+    <pre><code>for x in items:           # O(n)
+    sum1 += x
+for x in items:           # O(n)
+    sum2 += x</code></pre>
+    <p>O(n) + O(n) = O(2n) = <strong>O(n)</strong>. If the blocks are different
+    sizes, the biggest wins: O(n) + O(n&sup2;) = <strong>O(n&sup2;)</strong>.</p>
+  </div>
+
+  <div class="rule">
+    <h3>Rule 3 - Halve: logarithmic loops</h3>
+    <p>A loop whose counter <em>doubles</em> each pass, or whose input
+    <em>halves</em> each pass, runs log n times.</p>
+    <pre><code>i = 1
+while i &lt; n:
+    work(i)        # O(1)
+    i = i * 2      # i: 1, 2, 4, 8, ...</code></pre>
+    <pre><code>while n &gt; 1:
+    work(n)        # O(1)
+    n = n // 2     # n: 16, 8, 4, 2, 1</code></pre>
+    <p>Both loops finish in about log&#8322; n passes, so both are
+    <strong>O(log n)</strong>. The base of the log never matters, because
+    log&#8322; n and log&#8321;&#8320; n differ only by a constant factor - and
+    constants get dropped anyway.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="worked">Worked examples</h2>
+  <p>Run the procedure top to bottom: count each loop, multiply the nested
+  ones, add the sequential ones, then simplify.</p>
+
+  <div class="example">
+    <h3>One loop</h3>
+    <pre><code>total = 0
+for x in items:      # items has n elements
+    total += x</code></pre>
+    <p class="apply"><strong>Apply:</strong> n passes &times; O(1) each = <strong>O(n)</strong>.</p>
+  </div>
+
+  <div class="example">
+    <h3>Two loops, one after the other</h3>
+    <pre><code>for x in items:       # O(n)
+    print(x)
+for x in items:       # O(n)
+    print(x)</code></pre>
+    <p class="apply"><strong>Apply:</strong> sequential, so add: O(n) + O(n) =
+    O(2n). Drop the constant: <strong>O(n)</strong>.</p>
+  </div>
+
+  <div class="example">
+    <h3>Nested loops</h3>
+    <pre><code>for x in items:            # n passes
+    for y in items:        # n passes each
+        compare(x, y)</code></pre>
+    <p class="apply"><strong>Apply:</strong> nested, so multiply: n &times; n =
+    <strong>O(n&sup2;)</strong>.</p>
+  </div>
+
+  <div class="example">
+    <h3>Doubling counter</h3>
+    <pre><code>i = 1
+while i &lt; n:
+    print(i)
+    i *= 2</code></pre>
+    <p class="apply"><strong>Apply:</strong> the counter doubles each pass
+    (1, 2, 4, 8, ...), so the loop runs log n times: <strong>O(log n)</strong>.</p>
+  </div>
+
+  <div class="example">
+    <h3>Nested loop with a halving inner loop</h3>
+    <pre><code>for i in range(n):        # n passes
+    j = 1
+    while j &lt; n:          # log n passes
+        work(i, j)
+        j *= 2</code></pre>
+    <p class="apply"><strong>Apply:</strong> nested, so multiply: n &times; log n =
+    <strong>O(n log n)</strong>. This shape is how efficient sorts like merge
+    sort behave, and exams love it.</p>
+  </div>
+
+  <div class="example">
+    <h3>The classic trap: inner loop starts at i</h3>
+    <pre><code>for i in range(n):
+    for j in range(i, n):   # runs n - i times
+        work(i, j)</code></pre>
+    <p class="apply"><strong>Apply:</strong> it <em>looks</em> like less than
+    n&sup2;. Total passes = n + (n&minus;1) + (n&minus;2) + ... + 1 =
+    n(n+1)/2, and n(n+1)/2 is still n&sup2; shaped. Drop the constant:
+    <strong>O(n&sup2;)</strong>. A triangular count is not a smaller Big O.</p>
+  </div>
+</section>
+
+<section class="quiz" data-quiz-title="Lesson 1 quiz">
+  <h2 id="quiz">Practice: solve these from memory</h2>
+  <p>Answer each question from memory <em>before</em> clicking. The feedback
+  loop is where the learning happens - guessing after seeing the options is
+  fine, but write down or say your answer first.</p>
+
+  <div class="quiz-q" data-answer="O(n)" data-explanation="The loop body runs n times, and each pass is O(1) work. n &times; O(1) = O(n).">
+    <p class="quiz-prompt">What is the time complexity?</p>
+    <pre><code>total = 0
+for x in items:      # items has n elements
+    total += x</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(1)">O(1)</button>
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(n&sup2;)">O(n&sup2;)</button>
+      <button data-choice="O(log n)">O(log n)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(n&sup2;)" data-explanation="Nested loops multiply: the outer loop makes n passes and each pass runs the inner loop n times. n &times; n = O(n&sup2;).">
+    <p class="quiz-prompt">What is the time complexity?</p>
+    <pre><code>for i in range(n):
+    for j in range(n):
+        compare(i, j)</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(n&sup2;)">O(n&sup2;)</button>
+      <button data-choice="O(n&sup3;)">O(n&sup3;)</button>
+      <button data-choice="O(n log n)">O(n log n)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(log n)" data-explanation="n is cut in half on every pass (16, 8, 4, 2, 1), so the loop runs log&#8322; n times. That is O(log n).">
+    <p class="quiz-prompt">What is the time complexity?</p>
+    <pre><code>while n &gt; 1:
+    process(n)
+    n = n // 2</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(1)">O(1)</button>
+      <button data-choice="O(&radic;n)">O(&radic;n)</button>
+      <button data-choice="O(log n)">O(log n)</button>
+      <button data-choice="O(n)">O(n)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(n log n)" data-explanation="Nested loops multiply: the outer loop runs n times, and inside it j doubles until it reaches n, which takes O(log n) passes. n &times; log n = O(n log n).">
+    <p class="quiz-prompt">What is the time complexity?</p>
+    <pre><code>for i in range(n):
+    j = 1
+    while j &lt; n:
+        work(i, j)
+        j = j * 2</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(log n)">O(log n)</button>
+      <button data-choice="O(n log n)">O(n log n)</button>
+      <button data-choice="O(n&sup2;)">O(n&sup2;)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(n&sup2;)" data-explanation="Sequential blocks add: O(n) + O(n&sup2;). The n&sup2; term dominates, so the answer is O(n&sup2;) - the first loop disappears.">
+    <p class="quiz-prompt">What is the time complexity?</p>
+    <pre><code>for x in items:          # n passes
+    print(x)
+for i in range(n):       # nested
+    for j in range(n):
+        compare(i, j)</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(n&sup2;)">O(n&sup2;)</button>
+      <button data-choice="O(n&sup3;)">O(n&sup3;)</button>
+      <button data-choice="O(n log n)">O(n log n)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(n&sup2;)" data-explanation="The inner loop runs n &minus; i times: the total is n + (n&minus;1) + ... + 1 = n(n+1)/2. That is still n&sup2; shaped, so the answer is O(n&sup2;). Triangular counts do not reduce the Big O.">
+    <p class="quiz-prompt">What is the time complexity?</p>
+    <pre><code>for i in range(n):
+    for j in range(i, n):
+        work(i, j)</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(n log n)">O(n log n)</button>
+      <button data-choice="O(n&sup2;)">O(n&sup2;)</button>
+      <button data-choice="O(n&sup3;)">O(n&sup3;)</button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 id="next">What&rsquo;s next</h2>
+  <ul>
+    <li>Keep the <a href="../reference/big-o-cheat-card.html">Big O cheat card</a>
+      open while doing problem sets - it is the whole lesson on one printable page.</li>
+    <li>Lesson 2 (coming soon): the log rule up close - why halving means log,
+      and the O(&radic;n) loop most people miss.</li>
+    <li>Lesson 3 (coming soon): recursion - counting levels instead of loops.</li>
+    <li>Lesson 4 (coming soon): space complexity, and what built-ins like sort
+      and dictionary lookup really cost.</li>
+  </ul>
+</section>
+
+<section>
+  <h2 id="source">Go deeper</h2>
+  <p>For the theory behind these rules, read the Khan Academy article
+  <a href="https://www.khanacademy.org/computing/computer-science/algorithms/asymptotic-notation/a/big-o-notation">Big-O notation</a>,
+  written with Thomas Cormen (co-author of the standard algorithms textbook,
+  CLRS). It covers the same material with the formal reasoning behind it.</p>
+</section>
+
+<footer class="lesson-footer">
+  <p>Stuck on anything in this lesson? Ask your agent - the one who taught it
+  can re-explain any rule, generate extra practice problems, or walk through
+  an example step by step.</p>
+</footer>
+
+</article>
+<script src="../assets/quiz.js"></script>
+</body>
+</html>
