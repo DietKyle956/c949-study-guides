@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADT Definitions Card</title>
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<article class="lesson">
+
+<header>
+  <p class="course-mark">Reference &middot; printable</p>
+  <h1>ADT Definitions Card</h1>
+  <p class="lede">The compressed version of Lesson 1. Every defining property
+  the exam tests, next to its answer. Keep this next to you while drilling
+  until recognition is automatic.</p>
+</header>
+
+<section>
+  <h2 id="map">Property &rarr; answer</h2>
+  <table>
+    <thead>
+      <tr><th>Exam phrase</th><th>Answer</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>specifies what operations, not how they are implemented</td><td>ADT</td></tr>
+      <tr><td>benefit of using ADTs</td><td>focus on higher-level operations and algorithms</td></tr>
+      <tr><td>stores subitems with a name associated with each subitem</td><td>Record</td></tr>
+      <tr><td>a record&rsquo;s named subitems</td><td>fields</td></tr>
+      <tr><td>a record&rsquo;s items are accessed by name; an array&rsquo;s by position</td><td>record = named, array = indexed</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2 id="adt">The ADT idea</h2>
+  <p>An ADT specifies <strong>what</strong> operations a data structure
+  supports, without requiring you to know <strong>how</strong> they are
+  implemented. The operations are the contract: a stack offers push, pop,
+  top; a queue offers enqueue, dequeue, front - no matter whether the stack
+  is built with an array or a linked list.</p>
+  <ul>
+    <li><strong>Focus on higher-level operations and algorithms</strong> -
+      the exam&rsquo;s benefit answer, verbatim.</li>
+    <li>Avoid dependence on internal implementation details.</li>
+    <li>Swap an implementation without changing client code that uses the
+      ADT interface.</li>
+  </ul>
+</section>
+
+<section>
+  <h2 id="record">Records</h2>
+  <p>A record stores related subitems, called <strong>fields</strong>, each
+  with an associated name.</p>
+  <pre><code>Student record:
+  - name
+  - student_id
+  - program</code></pre>
+  <ul>
+    <li><strong>Record = items by name.</strong> Array = items by position
+      (0, 1, 2, ...). The access style is the defining property.</li>
+    <li>The exam&rsquo;s wording to spot: &ldquo;stores subitems with a name
+      associated with each subitem&rdquo;.</li>
+  </ul>
+</section>
+
+<footer class="lesson-footer">
+  <p>Full explanations and practice: <a href="../lessons/0001-adts-and-records.html">Lesson 1 - The ADT idea and records</a>.
+  Stuck? Ask your agent for extra recognition drills on any property above.</p>
+</footer>
+
+</article>
+</body>
+</html>

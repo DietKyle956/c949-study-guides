@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The ADT Idea: What, Not How - ADTs and Linear Structures</title>
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<article class="lesson">
+
+<header>
+  <p class="course-mark">ADTs and linear structures &middot; Lesson 1</p>
+  <h1>The ADT idea: what, not how</h1>
+  <p class="lede">The exam will describe a concept in one line and ask you to
+  name it. This lesson maps the two descriptions it uses most - &ldquo;what,
+  not how&rdquo; and &ldquo;named subitems&rdquo; - to their answers, then
+  drills the recognition until it is instant.</p>
+</header>
+
+<section>
+  <h2 id="why">Why this lesson</h2>
+  <p>Two rows of the practice exam&rsquo;s quick-answer table are pure
+  identification: &ldquo;Named subitems data structure&rdquo; and
+  &ldquo;ADT benefit&rdquo;. Neither needs calculation or tracing - they need
+  you to spot a defining property and fire its answer. That is the same
+  move as the Big O course&rsquo;s
+  <a href="../../lessons/0005-mixed-exam-review.html">exam-day procedure</a>:
+  identify the defining property first, then answer. This lesson gives you
+  the property-to-answer map for ADTs and records.</p>
+</section>
+
+<section>
+  <h2 id="adt">The ADT idea</h2>
+  <p>The exam&rsquo;s definition, almost word for word: an ADT specifies
+  <strong>what</strong> operations a data structure supports, without
+  requiring users to know <strong>how</strong> those operations are
+  implemented.</p>
+  <div class="rule">
+    <h3>The contract: operations, not internals</h3>
+    <p>Think of the operations as a menu. A stack&rsquo;s menu lists
+    <code>push</code>, <code>pop</code>, and <code>top</code>; a queue&rsquo;s
+    lists <code>enqueue</code>, <code>dequeue</code>, and <code>front</code>.
+    What the kitchen does behind the menu is the implementation - and the
+    customer (client code) never needs to see it.</p>
+  </div>
+  <p>The exam&rsquo;s own example: the same stack might be implemented with
+  an array or with a linked list, and client code still uses the same
+  operations. The operations are the ADT; the array or the linked list is a
+  choice made underneath it.</p>
+</section>
+
+<section>
+  <h2 id="benefit">The exam&rsquo;s benefit question</h2>
+  <p>When the exam asks why ADTs matter, the answer it wants is verbatim:</p>
+  <div class="rule">
+    <h3>Benefit of using ADTs</h3>
+    <p><strong>Focus on higher-level operations and algorithms.</strong></p>
+    <p>The other two benefits the exam lists: avoid dependence on internal
+    implementation details, and swap an implementation when necessary without
+    changing client code that uses the ADT interface.</p>
+  </div>
+  <p>All three are one idea: the what is stable, the how can change freely.
+  Memorize the first sentence - it is the exam&rsquo;s answer row.</p>
+</section>
+
+<section>
+  <h2 id="record">Records: items by name</h2>
+  <p>The exam&rsquo;s definition: a record stores related subitems, called
+  <strong>fields</strong>, each with an associated name.</p>
+  <pre><code>Student record:
+  - name
+  - student_id
+  - program</code></pre>
+  <div class="rule">
+    <h3>Record = by name, array = by position</h3>
+    <p>An array&rsquo;s items are reached by position - index 0, 1, 2, and so
+    on. A record&rsquo;s items are reached by name - <code>name</code>,
+    <code>student_id</code>, <code>program</code>. The access style is the
+    defining property, and it is the whole question.</p>
+  </div>
+  <p>The exam wording to spot for a record: &ldquo;stores subitems with a
+  name associated with each subitem&rdquo;. Nothing else in the phrase
+  matters - that pattern alone is the answer.</p>
+</section>
+
+<section>
+  <h2 id="map">The identification map</h2>
+  <table>
+    <thead>
+      <tr><th>Exam phrase</th><th>Defining property</th><th>Answer</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>specifies what operations, not how they are implemented</td><td>what vs how</td><td>ADT</td></tr>
+      <tr><td>benefit of using ADTs</td><td>higher-level focus</td><td>focus on higher-level operations and algorithms</td></tr>
+      <tr><td>stores subitems with a name associated with each subitem</td><td>named subitems</td><td>Record</td></tr>
+      <tr><td>a record&rsquo;s named subitems</td><td>named subitems</td><td>fields</td></tr>
+      <tr><td>items reached by position 0, 1, 2, ...</td><td>positional access</td><td>Array</td></tr>
+    </tbody>
+  </table>
+  <p>One table, five rows, and every ADT identification question in the
+  practice exam is answered. The
+  <a href="../reference/definitions-card.html">definitions card</a> is the
+  printable version.</p>
+</section>
+
+<section class="quiz" data-quiz-title="Lesson 1 quiz">
+  <h2 id="quiz">Practice: solve these from memory</h2>
+  <p>Answer from memory before clicking - say or write your answer first.
+  The struggle is what makes it stick.</p>
+
+  <div class="quiz-q" data-answer="how the operations are implemented" data-explanation="An ADT specifies what operations a data structure supports, without requiring users to know how those operations are implemented. The exam's exact wording.">
+    <p class="quiz-prompt">An ADT specifies what a data structure supports without requiring you to know...</p>
+    <div class="quiz-options">
+      <button data-choice="how the operations are implemented">how the operations are implemented</button>
+      <button data-choice="which names the operations use">which names the operations use</button>
+      <button data-choice="how many operations there are">how many operations there are</button>
+      <button data-choice="which language was used to write it">which language was used to write it</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="name" data-explanation="A record's subitems are accessed by name - that is its defining property. An array's items are accessed by position.">
+    <p class="quiz-prompt">An array&rsquo;s items are accessed by position. A record&rsquo;s items are accessed by...</p>
+    <div class="quiz-options">
+      <button data-choice="position">position</button>
+      <button data-choice="index">index</button>
+      <button data-choice="name">name</button>
+      <button data-choice="value">value</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Focus on higher-level operations and algorithms" data-explanation="The exam's answer, verbatim: using ADTs lets programmers focus on higher-level operations and algorithms. It also avoids dependence on internal details and lets implementations swap freely.">
+    <p class="quiz-prompt">What is the exam&rsquo;s stated benefit of using ADTs?</p>
+    <div class="quiz-options">
+      <button data-choice="Focus on lower-level memory management">Focus on lower-level memory management</button>
+      <button data-choice="Focus on higher-level operations and algorithms">Focus on higher-level operations and algorithms</button>
+      <button data-choice="Focus on faster constant-time access">Focus on faster constant-time access</button>
+      <button data-choice="Focus on smaller and simpler code">Focus on smaller and simpler code</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="fields" data-explanation="A record stores related subitems called fields, each with an associated name - name, student_id, and program in the student record.">
+    <p class="quiz-prompt">In a record, the named subitems are called...</p>
+    <div class="quiz-options">
+      <button data-choice="nodes">nodes</button>
+      <button data-choice="indices">indices</button>
+      <button data-choice="elements">elements</button>
+      <button data-choice="fields">fields</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Record" data-explanation="The exam's wording: a record stores subitems with a name associated with each subitem. Stack and queue are ADTs; an array stores items by position.">
+    <p class="quiz-prompt">Which data structure stores related subitems with a name associated with each subitem?</p>
+    <div class="quiz-options">
+      <button data-choice="Stack">Stack</button>
+      <button data-choice="Record">Record</button>
+      <button data-choice="Queue">Queue</button>
+      <button data-choice="Array">Array</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="The ADT specifies what, not how" data-explanation="The ADT specifies what operations exist - push, pop, top - not how they are implemented. So the array version and the linked-list version are interchangeable to client code.">
+    <p class="quiz-prompt">Client code calls push, pop, and top on a stack no matter whether the stack uses an array or a linked list. Which idea makes that possible?</p>
+    <div class="quiz-options">
+      <button data-choice="The stack doubles its capacity">The stack doubles its capacity</button>
+      <button data-choice="The client rewrites its code">The client rewrites its code</button>
+      <button data-choice="The ADT specifies what, not how">The ADT specifies what, not how</button>
+      <button data-choice="The operations run in parallel">The operations run in parallel</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="what operations, not how implemented" data-explanation="The defining property to spot is what-versus-how. LIFO points to stack, FIFO to queue, named subitems to record - each phrase maps to exactly one concept.">
+    <p class="quiz-prompt">Which exam phrase is the defining property of the ADT concept?</p>
+    <div class="quiz-options">
+      <button data-choice="what operations, not how implemented">what operations, not how implemented</button>
+      <button data-choice="last in, first out">last in, first out</button>
+      <button data-choice="first in, first out">first in, first out</button>
+      <button data-choice="named subitems per item">named subitems per item</button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 id="next">What&rsquo;s next</h2>
+  <ul>
+    <li>The <a href="../reference/definitions-card.html">definitions card</a>
+      carries this lesson&rsquo;s map on one printable page.</li>
+    <li>Lesson 2 (coming soon): arrays vs linked structures - the tradeoff
+      between direct indexing and reference updates that the exam compares
+      next.</li>
+    <li>Back to the <a href="../../index.html">Big O course</a> if the
+      exam-day identification procedure itself needs a refresh.</li>
+  </ul>
+</section>
+
+<section>
+  <h2 id="source">Go deeper</h2>
+  <p>The canonical source for the ADT idea is Sedgewick and Wayne&rsquo;s
+  <a href="https://algs4.cs.princeton.edu/13stacks/">algs4 Section 1.3, Bags, Queues, and Stacks</a>
+  - data types defined entirely by their API. For an exam-level restatement,
+  <a href="https://www.geeksforgeeks.org/abstract-data-types/">GeeksforGeeks: Abstract Data Types</a>
+  puts the what-versus-how split in one short page.</p>
+</section>
+
+<footer class="lesson-footer">
+  <p>Stuck on anything in this lesson? Ask your agent - it can rephrase any
+  definition, generate fresh identification drills, or quiz you one-on-one
+  until the map is automatic.</p>
+</footer>
+
+</article>
+<script src="../../assets/quiz.js"></script>
+</body>
+</html>
