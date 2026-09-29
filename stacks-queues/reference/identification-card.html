@@ -31,6 +31,11 @@
       <tr><td>add at the back, remove from the front</td><td>queue, two ends</td></tr>
       <tr><td>front of [72, 15, 2, 14]</td><td>72 (index 0)</td></tr>
       <tr><td>back of [72, 15, 2, 14]</td><td>14 (last active element)</td></tr>
+      <tr><td>insert and remove at both ends</td><td>Deque</td></tr>
+      <tr><td>add_first, add_last, remove_first, remove_last</td><td>the deque&rsquo;s operations</td></tr>
+      <tr><td>removes by priority, not arrival order</td><td>Priority queue</td></tr>
+      <tr><td>remove the highest-priority item</td><td>pq.dequeue()</td></tr>
+      <tr><td>best reason for dynamic expansion</td><td>continuous addition without a predefined limit</td></tr>
     </tbody>
   </table>
 </section>
@@ -67,8 +72,54 @@
   </div>
 </section>
 
+<section>
+  <h2 id="deque">The deque</h2>
+  <p>A deque is a <strong>double-ended queue</strong>: insertion and removal
+  at <strong>both ends</strong>. Four operations, one per end per job:</p>
+  <ul>
+    <li><code>add_first(x)</code>, <code>add_last(x)</code> - add at the
+      front or the back.</li>
+    <li><code>remove_first()</code>, <code>remove_last()</code> - remove
+      from the front or the back.</li>
+  </ul>
+  <p>Ends-rules side by side: a stack has one end (the top, in and out); a
+  queue has two ends with one job each; a deque has two ends with both jobs
+  at both ends.</p>
+</section>
+
+<section>
+  <h2 id="priority">The priority queue</h2>
+  <p>A priority queue removes items according to <strong>priority</strong>,
+  not merely arrival order. The highest-priority item leaves first.</p>
+  <ul>
+    <li><code>pq.enqueue(item, priority)</code> - add an item with its
+      priority.</li>
+    <li><code>pq.dequeue()</code> - remove and return the highest-priority
+      item.</li>
+    <li><code>pq.peek()</code> - observe the highest-priority item without
+      removing it.</li>
+    <li><code>pq.is_empty()</code> - check whether the queue has items.</li>
+  </ul>
+  <p>The contrast to spot: a plain queue removes in arrival order (FIFO); a
+  priority queue removes in priority order.</p>
+</section>
+
+<section>
+  <h2 id="expansion">Dynamic expansion</h2>
+  <p>An array-backed <strong>unbounded</strong> stack expands dynamically so
+  it keeps accepting pushed elements after its initial capacity fills.</p>
+  <div class="rule">
+    <h3>Best reason, verbatim</h3>
+    <p><strong>To support continuous addition of elements without a
+    predefined limit.</strong> Growing only as necessary can improve
+    practical memory use; capacity doubling avoids resizing on every
+    push.</p>
+  </div>
+</section>
+
 <footer class="lesson-footer">
-  <p>Full explanations and practice: <a href="../lessons/0001-stack-and-queue.html">Lesson 1 - Stacks and queues</a>.
+  <p>Full explanations and practice: <a href="../lessons/0001-stack-and-queue.html">Lesson 1 - Stacks and queues</a> and
+  <a href="../lessons/0002-deques-priority-queues.html">Lesson 2 - Deques, priority queues, and dynamic expansion</a>.
   Stuck? Ask your agent for extra recognition drills on any property above.</p>
 </footer>
 

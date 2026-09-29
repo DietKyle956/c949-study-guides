@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deques, Priority Queues, and Dynamic Expansion - Stacks, Queues, Deques, and Priority Queues</title>
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<article class="lesson">
+
+<header>
+  <p class="course-mark">Stacks, queues, deques, and priority queues &middot; Lesson 2</p>
+  <h1>Deques, priority queues, and dynamic expansion</h1>
+  <p class="lede">Three rows remain in the exam&rsquo;s identification block:
+  the both-ends structure, the by-priority structure, and the reason stacks
+  grow. This lesson maps each phrase to its answer, then drills the
+  recognition until it is instant.</p>
+</header>
+
+<section>
+  <h2 id="why">Why this lesson</h2>
+  <p><a href="0001-stack-and-queue.html">Lesson 1</a> covered the two
+  principles - LIFO and FIFO - and the queue&rsquo;s front-and-back
+  computation. The exam&rsquo;s remaining rows in this topic are pure
+  identification again: the deque&rsquo;s definition, the priority
+  queue&rsquo;s ordering rule, and the one-sentence reason an unbounded
+  stack expands. Same move as before: spot the phrase, fire the answer.</p>
+</section>
+
+<section>
+  <h2 id="deque">The deque: both ends, both jobs</h2>
+  <p>A deque is a <strong>double-ended queue</strong>. The exam&rsquo;s
+  definition, nearly word for word: a data structure that allows insertion
+  and removal of elements from <strong>both ends</strong>.</p>
+  <table>
+    <thead>
+      <tr><th>Operation</th><th>What it does</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>add_first(x)</td><td>add x at the front end</td></tr>
+      <tr><td>add_last(x)</td><td>add x at the back end</td></tr>
+      <tr><td>remove_first()</td><td>remove and return the front item</td></tr>
+      <tr><td>remove_last()</td><td>remove and return the back item</td></tr>
+    </tbody>
+  </table>
+  <div class="rule">
+    <h3>The defining property: both ends, both jobs</h3>
+    <p>Compare the three ends-rules side by side. A stack has one end and one
+    job (the top, in and out). A queue has two ends with one job each (in at
+    the back, out at the front). A deque has two ends with <em>both jobs at
+    both ends</em> - add or remove at either end. The phrase to spot is
+    &ldquo;insertion and removal from both ends&rdquo;: that phrase alone is
+    the answer.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="priority">The priority queue: priority, not arrival order</h2>
+  <p>A priority queue removes items according to <strong>priority</strong>,
+  not merely arrival order. The highest-priority item leaves first, no matter
+  when it arrived.</p>
+  <table>
+    <thead>
+      <tr><th>Operation</th><th>What it does</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>pq.enqueue(item, priority)</td><td>add an item with its priority</td></tr>
+      <tr><td>pq.dequeue()</td><td>remove and return the highest-priority item</td></tr>
+      <tr><td>pq.peek()</td><td>observe the highest-priority item without removing it</td></tr>
+      <tr><td>pq.is_empty()</td><td>check whether the queue has items</td></tr>
+    </tbody>
+  </table>
+  <div class="rule">
+    <h3>The defining property: order of removal</h3>
+    <p>A plain queue removes in arrival order - first in, first out. A
+    priority queue ignores arrival order and removes the highest-priority
+    item first. The exam&rsquo;s phrase to spot: &ldquo;removes items
+    according to priority, not merely arrival order&rdquo;. And when the
+    exam asks which call removes the highest-priority item, the answer is
+    the call itself: <code>pq.dequeue()</code>.</p>
+  </div>
+  <p>The <code>pq.</code> prefix is just a variable name, the way
+  <code>my_list.sort()</code> names the list. The exam writes the priority
+  queue as <code>pq</code> - read it as &ldquo;this priority queue&rsquo;s
+  dequeue&rdquo;.</p>
+</section>
+
+<section>
+  <h2 id="expansion">Dynamic expansion: why unbounded stacks grow</h2>
+  <p>An array-backed stack starts with an initial capacity. Once that
+  capacity fills, an <strong>unbounded</strong> stack expands dynamically so
+  it keeps accepting pushed elements.</p>
+  <div class="rule">
+    <h3>The exam&rsquo;s answer, verbatim</h3>
+    <p>The best reason for dynamic expansion: <strong>to support continuous
+    addition of elements without a predefined limit</strong>.</p>
+    <p>A predefined limit would cap the stack - expansion removes the cap.
+    The exam adds two supporting facts: growing only as necessary can improve
+    practical memory use, and capacity doubling avoids resizing on every
+    push.</p>
+  </div>
+  <p>When the exam asks &ldquo;why expand&rdquo;, the answer is never about
+  sorting or ordering - it is about the <em>cap</em>. Spot the words
+  &ldquo;continuous addition&rdquo; and &ldquo;without a predefined
+  limit&rdquo; and the sentence is already written for you.</p>
+</section>
+
+<section>
+  <h2 id="map">The identification map</h2>
+  <table>
+    <thead>
+      <tr><th>Exam phrase</th><th>Defining property</th><th>Answer</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>insert and remove at both ends</td><td>both ends, both jobs</td><td>Deque</td></tr>
+      <tr><td>add_first, add_last, remove_first, remove_last</td><td>the deque&rsquo;s menu</td><td>Deque operations</td></tr>
+      <tr><td>removes by priority, not arrival order</td><td>order of removal</td><td>Priority queue</td></tr>
+      <tr><td>remove the highest-priority item</td><td>highest-priority removal</td><td>pq.dequeue()</td></tr>
+      <tr><td>enqueue(item, priority), peek(), is_empty()</td><td>the priority queue&rsquo;s menu</td><td>Priority queue operations</td></tr>
+      <tr><td>best reason for dynamic expansion</td><td>no predefined limit</td><td>continuous addition without a predefined limit</td></tr>
+      <tr><td>capacity doubling</td><td>occasional growth</td><td>avoids resizing on every push</td></tr>
+    </tbody>
+  </table>
+  <p>Seven rows, and this topic&rsquo;s exam questions are answered. The
+  <a href="../reference/identification-card.html">identification card</a>
+  now carries both lessons on one printable page.</p>
+</section>
+
+<section class="quiz" data-quiz-title="Lesson 2 quiz">
+  <h2 id="quiz">Practice: solve these from memory</h2>
+  <p>Answer from memory before clicking - say or write your answer first.
+  The struggle is what makes it stick.</p>
+
+  <div class="quiz-q" data-answer="Deque" data-explanation="The exam's definition, nearly verbatim: a deque is a data structure that allows insertion and removal of elements from both ends. Both ends, both jobs.">
+    <p class="quiz-prompt">Which structure allows insertion and removal at both ends?</p>
+    <div class="quiz-options">
+      <button data-choice="Stack">Stack</button>
+      <button data-choice="Queue">Queue</button>
+      <button data-choice="Deque">Deque</button>
+      <button data-choice="Priority queue">Priority queue</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Deque" data-explanation="The exam lists these four as the deque's menu: add or remove at either end. The stack and the queue each have one job per end.">
+    <p class="quiz-prompt">add_first, add_last, remove_first, remove_last are the operations of...</p>
+    <div class="quiz-options">
+      <button data-choice="Stack">Stack</button>
+      <button data-choice="Queue">Queue</button>
+      <button data-choice="Deque">Deque</button>
+      <button data-choice="Priority queue">Priority queue</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="the highest-priority item" data-explanation="pq.dequeue() removes and returns the highest-priority item. Priority order, not arrival order - that is what separates a priority queue from a plain queue.">
+    <p class="quiz-prompt">A priority queue&rsquo;s dequeue() removes which item?</p>
+    <div class="quiz-options">
+      <button data-choice="the highest-priority item">the highest-priority item</button>
+      <button data-choice="the first-arriving item">the first-arriving item</button>
+      <button data-choice="the last-arriving item">the last-arriving item</button>
+      <button data-choice="the lowest-priority item">the lowest-priority item</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="observes the highest-priority item without removing it" data-explanation="peek() observes the highest-priority item without removing it. Removing it is dequeue()'s job; adding is enqueue(item, priority)'s; is_empty() checks for items.">
+    <p class="quiz-prompt">In a priority queue, peek() does what?</p>
+    <div class="quiz-options">
+      <button data-choice="observes the highest-priority item without removing it">observes the highest-priority item without removing it</button>
+      <button data-choice="removes and returns the highest-priority item">removes and returns the highest-priority item</button>
+      <button data-choice="adds an item with a given priority">adds an item with a given priority</button>
+      <button data-choice="checks whether the queue has items">checks whether the queue has items</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="support continuous addition without a predefined limit" data-explanation="The exam's answer, verbatim: dynamic expansion supports continuous addition of elements without a predefined limit. Expansion removes the cap that an initial capacity would impose.">
+    <p class="quiz-prompt">The best reason an unbounded stack expands dynamically is to...</p>
+    <div class="quiz-options">
+      <button data-choice="support continuous addition without a predefined limit">support continuous addition without a predefined limit</button>
+      <button data-choice="insert and remove elements at both of its ends">insert and remove elements at both of its ends</button>
+      <button data-choice="remove items according to their arrival order">remove items according to their arrival order</button>
+      <button data-choice="avoid storing more than a fixed maximum count">avoid storing more than a fixed maximum count</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="resizing on every push" data-explanation="The exam names capacity doubling as a resizing strategy that helps avoid resizing on every push - grow occasionally, not per operation.">
+    <p class="quiz-prompt">What does capacity doubling avoid?</p>
+    <div class="quiz-options">
+      <button data-choice="resizing on every push">resizing on every push</button>
+      <button data-choice="removing from the back">removing from the back</button>
+      <button data-choice="comparing two priorities">comparing two priorities</button>
+      <button data-choice="storing duplicate items">storing duplicate items</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Priority queue" data-explanation="A plain queue removes in arrival order (FIFO). A priority queue removes the highest-priority item first, regardless of when it arrived - the exam's own contrast phrase.">
+    <p class="quiz-prompt">Which structure removes items by priority rather than arrival order?</p>
+    <div class="quiz-options">
+      <button data-choice="Stack">Stack</button>
+      <button data-choice="Queue">Queue</button>
+      <button data-choice="Deque">Deque</button>
+      <button data-choice="Priority queue">Priority queue</button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 id="next">What&rsquo;s next</h2>
+  <ul>
+    <li>The <a href="../reference/identification-card.html">identification
+      card</a> now covers this whole topic on one printable page - both
+      lessons, one sheet.</li>
+    <li>That completes topic 4. The next topic in the menu is linked
+      lists - reference-update thinking and the four pointer updates.</li>
+    <li>Back to <a href="0001-stack-and-queue.html">Lesson 1</a> if the LIFO
+      vs FIFO map needs a refresh.</li>
+  </ul>
+</section>
+
+<section>
+  <h2 id="source">Go deeper</h2>
+  <p>The canonical source for priority queues is Sedgewick and
+  Wayne&rsquo;s
+  <a href="https://algs4.cs.princeton.edu/24pq/">algs4 Section 2.4, Priority Queues</a>
+  - removing the maximum, and the data structures that support it. For the
+  deque concept, <a href="https://en.wikipedia.org/wiki/Double-ended_queue">Wikipedia: Double-ended queue</a>
+  states the both-ends definition plainly.</p>
+</section>
+
+<footer class="lesson-footer">
+  <p>Stuck on anything in this lesson? Ask your agent - it can rephrase any
+  definition, generate fresh recognition drills, or quiz you one-on-one
+  until the map is automatic.</p>
+</footer>
+
+</article>
+<script src="../../assets/quiz.js"></script>
+</body>
+</html>
