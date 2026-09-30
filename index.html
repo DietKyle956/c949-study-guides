@@ -3,97 +3,120 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Big O for Exams - C949 Study Guide</title>
+<title>C949 Study Guides</title>
 <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
 <article class="lesson">
 
 <header>
-  <p class="course-mark">C949 &middot; Study Guides</p>
-  <h1>Big O for Exams</h1>
-  <p class="lede">A short course on stating the time and space complexity of code
-  - loops, recursion, and the traps exam writers love. Each lesson teaches one
-  idea, shows worked examples, then drills it with a quiz.</p>
+  <p class="course-mark">C949 &middot; Data Structures and Algorithms I</p>
+  <h1>C949 Study Guides</h1>
+  <p class="lede">One self-contained study site for the whole C949 course
+  assessment: nineteen lessons across nine topics, each with worked
+  examples and an instant-feedback quiz, a printable cheat card for every
+  topic, and two full 40-question practice tests at the end. Work straight
+  through from lesson 1, or open the menu (top left) and jump to any
+  lesson or topic. Every page works offline and prints cleanly for
+  revision.</p>
+  <p><a class="start-button" href="big-o/lessons/0001-loop-rules.html">Start with lesson 1 &rarr;</a></p>
 </header>
 
 <section>
-  <h2 id="lessons">Lessons</h2>
-  <table>
+  <h2 id="how">How the site works</h2>
+  <ul>
+    <li><strong>One path.</strong> The nineteen lessons form a single path,
+      starting with Big O and ending with Huffman coding. Each lesson ends
+      with <em>previous</em> and <em>next</em> buttons that name the next
+      lesson, and the last lesson hands off to practice test 1.</li>
+    <li><strong>Drill as you read.</strong> Every lesson ends in a quiz with
+      instant feedback - answer, see why, move on.</li>
+    <li><strong>Carry the cards.</strong> Each topic has a one-page cheat
+      card for the rules and definitions. Keep them open while drilling
+      until recognition is automatic.</li>
+    <li><strong>Finish with the tests.</strong> Two 40-question interleaved
+      practice tests mix every topic with no labels, exam-weighted. Test 1
+      diagnoses; test 2 proves the rules transferred.</li>
+  </ul>
+</section>
+
+<section>
+  <h2 id="courses">The course, topic by topic</h2>
+  <table class="prose-table">
     <thead>
-      <tr><th>Lesson</th><th>What you learn</th><th>Status</th></tr>
+      <tr><th>Topic</th><th>What you learn</th><th>Lessons</th></tr>
     </thead>
     <tbody>
       <tr>
-        <td><a href="lessons/0001-loop-rules.html">1 - The Loop Rules</a></td>
-        <td>Multiply, add, halve: a three-rule procedure that solves any loop-based complexity question.</td>
-        <td>Ready</td>
+        <td><a href="big-o/index.html">Big O for exams</a></td>
+        <td>Time and space complexity: loops, recursion, and the traps exam writers love.</td>
+        <td>5</td>
       </tr>
       <tr>
-        <td><a href="lessons/0002-recursion.html">2 - Recursion</a></td>
-        <td>Count the levels, count the work per level, handle branching calls.</td>
-        <td>Ready</td>
+        <td><a href="python-foundations/index.html">Python foundations</a></td>
+        <td>The Python basics block: precedence, identifiers, lists versus tuples, slicing, and the sorted() versus .sort() contrast.</td>
+        <td>3</td>
       </tr>
       <tr>
-        <td><a href="lessons/0003-space-complexity.html">3 - Space complexity</a></td>
-        <td>Auxiliary space: growing containers, the recursion stack, and the traps.</td>
-        <td>Ready</td>
+        <td><a href="adts/index.html">ADTs and linear structures</a></td>
+        <td>The identification course: the ADT idea, records, and arrays vs linked structures.</td>
+        <td>2</td>
       </tr>
       <tr>
-        <td><a href="lessons/0004-recurrence-relations.html">4 - Recurrence relations</a></td>
-        <td>Count the levels for any shrink: T(N) = N + T(N - 8) has about N / 8 levels.</td>
-        <td>Ready</td>
+        <td><a href="stacks-queues/index.html">Stacks, queues, deques, and priority queues</a></td>
+        <td>The next identification block: LIFO vs FIFO, both-ends insertion, and highest-priority removal.</td>
+        <td>2</td>
       </tr>
       <tr>
-        <td><a href="lessons/0005-mixed-exam-review.html">5 - Mixed exam review</a></td>
-        <td>Exam-style questions mixing every lesson, plus the leftover tricky patterns.</td>
-        <td>Ready</td>
+        <td><a href="linked-lists/index.html">Linked lists</a></td>
+        <td>The reference-update course: removing the first node, positional insertion, and the circular cycle.</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td><a href="hash-tables/index.html">Hash tables</a></td>
+        <td>The key-value course: what a hash table maps, the store and retrieve lines, and why average insertion is O(1).</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td><a href="sorting/index.html">Sorting and selection</a></td>
+        <td>The counting-sort and partition course: which sort needs the value range, the O(N + K), and quickselect&rsquo;s focus on the relevant section.</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td><a href="huffman/index.html">Huffman coding</a></td>
+        <td>The compression course: lossless, variable-length codes, and why shorter codes go to frequent characters.</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td><a href="final-review/index.html">Final review</a></td>
+        <td>Two 40-question interleaved practice tests mixing every topic, exam-weighted. The last stop before the exam.</td>
+        <td>2 tests</td>
       </tr>
     </tbody>
   </table>
 </section>
 
 <section>
-  <h2 id="reference">Reference</h2>
-  <p><a href="reference/big-o-cheat-card.html">The Big O cheat card</a> -
-  the whole lesson set on one printable page. Keep it open while doing problem
-  sets until the rules are automatic.</p>
-</section>
-
-<section>
-  <h2 id="resources">Outside resources</h2>
+  <h2 id="cards">Cheat cards</h2>
+  <p>One printable page per topic, written to read cleanly on paper:</p>
   <ul>
-    <li><a href="https://www.khanacademy.org/computing/computer-science/algorithms/asymptotic-notation">Khan Academy: Asymptotic notation</a> - the theory behind these lessons, written with Thomas Cormen (co-author of CLRS).</li>
-    <li><a href="https://www.bigocheatsheet.com/">bigocheatsheet.com</a> - lookup table for data structure operation costs.</li>
+    <li><a href="big-o/reference/big-o-cheat-card.html">The Big O cheat card</a> - the whole Big O lesson set on one page.</li>
+    <li><a href="python-foundations/reference/python-card.html">The Python card</a> - precedence, identifiers, lists vs tuples, slicing, sorted() vs sort().</li>
+    <li><a href="adts/reference/definitions-card.html">The definitions card</a> - every defining property and its answer.</li>
+    <li><a href="stacks-queues/reference/identification-card.html">The identification card</a> - LIFO vs FIFO, deques, and priority queues at a glance.</li>
+    <li><a href="linked-lists/reference/reference-updates-card.html">The reference-updates card</a> - the pointer moves behind insertion and removal.</li>
+    <li><a href="hash-tables/reference/hash-tables-card.html">The hash-tables card</a> - the key-value idea, collisions, and the average O(1).</li>
+    <li><a href="sorting/reference/sorting-card.html">The sorting card</a> - counting sort, the O(N + K), and the partition idea.</li>
+    <li><a href="huffman/reference/huffman-card.html">The Huffman card</a> - lossless compression and the shorter-codes rule.</li>
+    <li><a href="final-review/reference/exam-day-card.html">The exam-day card</a> - the five exam-approach strategies and the Big O names.</li>
   </ul>
 </section>
 
 <section>
-  <h2 id="more">More C949 study guides</h2>
-  <p><a href="python-foundations/index.html">Python foundations</a> - the
-  Python basics block: precedence, identifiers, lists versus tuples,
-  slicing, and the sorted() versus .sort() contrast.</p>
-  <p><a href="adts/index.html">ADTs and linear structures</a> - the
-  identification course: the ADT idea, records, and arrays vs linked
-  structures.</p>
-  <p><a href="stacks-queues/index.html">Stacks, queues, deques, and priority
-  queues</a> - the next identification block: LIFO vs FIFO, both-ends
-  insertion, and highest-priority removal.</p>
-  <p><a href="linked-lists/index.html">Linked lists</a> - the
-  reference-update course: removing the first node, positional insertion,
-  and the circular cycle.</p>
-  <p><a href="hash-tables/index.html">Hash tables</a> - the key-value
-  course: what a hash table maps, the store and retrieve lines, and why
-  average insertion is O(1).</p>
-  <p><a href="sorting/index.html">Sorting and selection</a> - the
-  counting-sort and partition course: which sort needs the value range, the
-  O(N + K), and quickselect's focus on the relevant section.</p>
-  <p><a href="huffman/index.html">Huffman coding</a> - the compression
-  course: lossless, variable-length codes, and why shorter codes go to
-  frequent characters.</p>
-  <p><a href="final-review/index.html">Final review</a> - two 40-question
-  interleaved practice tests mixing every topic, exam-weighted. The last
-  stop before the exam.</p>
+  <h2 id="resources">Resources</h2>
+  <p><a href="resources.html">The resources page</a> - the outside sources
+  behind the lessons, grouped by topic: Khan Academy, algs4, the official
+  Python docs, and the rest.</p>
 </section>
 
 <footer class="lesson-footer">
@@ -102,5 +125,6 @@
 </footer>
 
 </article>
+<script src="assets/nav.js"></script>
 </body>
 </html>
