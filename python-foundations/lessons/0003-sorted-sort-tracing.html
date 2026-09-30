@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>sorted vs sort, Loop Tracing, Overloaded Methods - Python Foundations</title>
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<article class="lesson">
+
+<header>
+  <p class="course-mark">Python Foundations &middot; Lesson 3</p>
+  <h1>sorted vs sort, loop tracing, overloaded methods</h1>
+  <p class="lede">The last three rows of the exam&rsquo;s Python block: two
+  sorting calls with the same outcome and different returns, one loop whose
+  <code>break</code> decides the output, and the definition of an overloaded
+  method. The loop is traced iteration by iteration until
+  <code>Average: 5.0</code> falls out exactly.</p>
+</header>
+
+<section>
+  <h2 id="why">Why this lesson</h2>
+  <p><a href="0001-precedence-identifiers.html">Lesson 1</a> covered the
+  expression and the names; <a href="0002-lists-tuples-slicing.html">lesson
+  2</a> covered the containers. This lesson closes the topic with the
+  three remaining items. All three are exam-speed recognitions: know which
+  call returns a new list, trace one small loop, and state the overloaded
+  definition in one line.</p>
+</section>
+
+<section>
+  <h2 id="sorted">sorted() versus .sort(): same outcome, different return</h2>
+  <p>Both calls put the elements in order. The difference the exam tests is
+  what you get back and what happens to the original:</p>
+  <div class="rule">
+    <h3>The exam&rsquo;s sentences, verbatim</h3>
+    <p><code>sorted(my_list)</code> returns a <strong>new list</strong>
+    containing the elements in sorted order. It <strong>leaves the original
+    list unchanged</strong>.</p>
+    <p><code>my_list.sort()</code> <strong>sorts the existing list in place
+    and does not return the sorted list</strong>.</p>
+  </div>
+  <p>Side by side, with the same starting list:</p>
+  <pre><code>my_list = [3, 1, 2]
+
+new_list = sorted(my_list)   # new_list is [1, 2, 3]
+                             # my_list is still [3, 1, 2]
+
+result = my_list.sort()      # my_list becomes [1, 2, 3]
+                             # result is None - nothing came back</code></pre>
+  <p>The trap is the second call: it does the sorting and hands back
+  nothing, so <code>my_list.sort()</code> in an expression is worth
+  <code>None</code>. If the exam shows an assignment on the left of a sort
+  call, the answer is either a new sorted list (<code>sorted()</code>) or
+  nothing (<code>.sort()</code>) - the returned value is never the original
+  list.</p>
+</section>
+
+<section>
+  <h2 id="trace">Tracing the loop with break</h2>
+  <p>Here is the study guide&rsquo;s sample loop, verbatim:</p>
+  <pre><code>total = 0
+count = 0
+for i in range(1, 11):
+    if i % 5 == 0:
+        break
+    total += i * 2
+    count += 1
+average = total / count
+print("Average:", average)</code></pre>
+  <p><code>range(1, 11)</code> offers the values 1 through 10, but the
+  <code>break</code> cuts the loop short. The condition
+  <code>i % 5 == 0</code> fires at the first multiple of 5, and
+  <code>break</code> leaves the loop immediately - before the
+  <code>total += i * 2</code> line runs for that value. Walk it:</p>
+  <table class="prose-table">
+    <thead>
+      <tr><th>i</th><th>i % 5 == 0?</th><th>What happens</th><th>total</th><th>count</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>no</td><td><code>total += 1 * 2</code>; <code>count += 1</code></td><td>2</td><td>1</td></tr>
+      <tr><td>2</td><td>no</td><td><code>total += 2 * 2</code>; <code>count += 1</code></td><td>6</td><td>2</td></tr>
+      <tr><td>3</td><td>no</td><td><code>total += 3 * 2</code>; <code>count += 1</code></td><td>12</td><td>3</td></tr>
+      <tr><td>4</td><td>no</td><td><code>total += 4 * 2</code>; <code>count += 1</code></td><td>20</td><td>4</td></tr>
+      <tr><td>5</td><td>yes</td><td><code>break</code> - the loop ends here</td><td>20</td><td>4</td></tr>
+    </tbody>
+  </table>
+  <p>The loop processes 1, 2, 3, 4 and stops before processing 5. Then the
+  two lines after the loop run once:</p>
+  <pre><code>total = 2 + 4 + 6 + 8 = 20
+count = 4
+average = 20 / 4 = 5.0</code></pre>
+  <p><code>print("Average:", average)</code> prints its arguments separated
+  by a space, and <code>20 / 4</code> is true division, so the value keeps
+  its decimal point. The output is exactly:</p>
+  <pre><code>Average: 5.0</code></pre>
+  <p>That string is the exam&rsquo;s answer. Watch the two tempting wrong
+  traces: letting 5 contribute gives 30 over 5, which is 6.0, and letting
+  the loop run all the way to 10 gives 110 over 10, which is 11.0 - neither
+  is the exam&rsquo;s output.</p>
+</section>
+
+<section>
+  <h2 id="overloaded">Overloaded methods: same name, different parameters</h2>
+  <p>A method is <strong>overloaded</strong> when several definitions share
+  one name and differ in their parameter list. The exam asks for that
+  definition directly:</p>
+  <div class="rule">
+    <h3>The definition, verbatim</h3>
+    <p>Overloaded methods <strong>have the same name, different parameter
+    lists</strong>.</p>
+  </div>
+  <p>Same name plus a different list of parameters is the whole rule. A
+  different name is simply a different method; the same name with the same
+  parameter list is a redefinition, not an overload.</p>
+</section>
+
+<section>
+  <h2 id="map">The identification map</h2>
+  <table class="prose-table">
+    <thead>
+      <tr><th>Exam phrase</th><th>Defining property</th><th>Answer</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>sorted(my_list)</code> output</td><td>a fresh list, original untouched</td><td>A new sorted list</td></tr>
+      <tr><td><code>my_list.sort()</code> output</td><td>in-place work, no result handed back</td><td>Nothing - it sorts in place</td></tr>
+      <tr><td>which sort call leaves the original unchanged</td><td>the one that builds a new list</td><td><code>sorted(my_list)</code></td></tr>
+      <tr><td>values the sample loop processes</td><td>the break fires first</td><td>1, 2, 3, 4</td></tr>
+      <tr><td>sample loop output</td><td>total 20, count 4</td><td><code>Average: 5.0</code></td></tr>
+      <tr><td>overloaded methods</td><td>one name, several parameter lists</td><td>Have the same name, different parameter lists</td></tr>
+    </tbody>
+  </table>
+  <p>Six rows, and the exam&rsquo;s Python block is complete. The
+  <a href="../reference/python-card.html">Python card</a> is the printable
+  version.</p>
+</section>
+
+<section class="quiz" data-quiz-title="Lesson 3 quiz">
+  <h2 id="quiz">Practice: solve these from memory</h2>
+  <p>Answer from memory before clicking - say or write your answer first.
+  The struggle is what makes it stick.</p>
+
+  <div class="quiz-q" data-answer="A new sorted list" data-explanation="The exam's answer verbatim: sorted(my_list) returns a new list containing the elements in sorted order and leaves the original list unchanged.">
+    <p class="quiz-prompt">What does <code>sorted(my_list)</code> return?</p>
+    <div class="quiz-options">
+      <button data-choice="The original list, sorted in place">The original list, sorted in place</button>
+      <button data-choice="A new sorted list">A new sorted list</button>
+      <button data-choice="Nothing (None)">Nothing (<code>None</code>)</button>
+      <button data-choice="The largest element">The largest element</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Nothing - it sorts the list in place" data-explanation="The exam's sentence: my_list.sort() sorts the existing list in place and does not return the sorted list. Assigning its result gives None.">
+    <p class="quiz-prompt">What does the call <code>my_list.sort()</code> return?</p>
+    <div class="quiz-options">
+      <button data-choice="A new sorted list">A new sorted list</button>
+      <button data-choice="A copy of the original list">A copy of the original list</button>
+      <button data-choice="Nothing - it sorts the list in place">Nothing - it sorts the list in place</button>
+      <button data-choice="The last element of the sorted list">The last element of the sorted list</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="sorted(my_list)" data-explanation="sorted() builds a new list and leaves the original unchanged. sort() changes the original list in place, and pop() and append() also modify it.">
+    <p class="quiz-prompt">Which call leaves the original list unchanged?</p>
+    <div class="quiz-options">
+      <button data-choice="sorted(my_list)"><code>sorted(my_list)</code></button>
+      <button data-choice="my_list.sort()"><code>my_list.sort()</code></button>
+      <button data-choice="my_list.pop()"><code>my_list.pop()</code></button>
+      <button data-choice="my_list.append(3)"><code>my_list.append(3)</code></button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Average: 5.0" data-explanation="The break at i = 5 leaves total = 2 + 4 + 6 + 8 = 20 and count = 4, so average = 20 / 4 = 5.0. Print adds the space after the colon, and true division keeps the decimal point.">
+    <p class="quiz-prompt">What does the sample loop print?</p>
+    <pre><code>total = 0
+count = 0
+for i in range(1, 11):
+    if i % 5 == 0:
+        break
+    total += i * 2
+    count += 1
+average = total / count
+print("Average:", average)</code></pre>
+    <div class="quiz-options">
+      <button data-choice="Average: 6.0">Average: 6.0</button>
+      <button data-choice="Average: 11.0">Average: 11.0</button>
+      <button data-choice="Average: 20">Average: 20</button>
+      <button data-choice="Average: 5.0">Average: 5.0</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Four: 1, 2, 3, 4" data-explanation="The loop processes 1, 2, 3, 4 and stops before processing 5 - the break fires on i = 5 before that iteration adds anything. So count ends at 4.">
+    <p class="quiz-prompt">In the sample loop, how many values are added to <code>total</code> before the break?</p>
+    <div class="quiz-options">
+      <button data-choice="Two: 1 and 2">Two: 1 and 2</button>
+      <button data-choice="Ten: 1 through 10">Ten: 1 through 10</button>
+      <button data-choice="Four: 1, 2, 3, 4">Four: 1, 2, 3, 4</button>
+      <button data-choice="Five: 1 through 5">Five: 1 through 5</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Have the same name, different parameter lists" data-explanation="The exam's definition, verbatim. Overloading is one name with several parameter lists - not several names, and not the same list twice.">
+    <p class="quiz-prompt">Overloaded methods:</p>
+    <div class="quiz-options">
+      <button data-choice="Have different names and different parameters">Have different names and different parameters</button>
+      <button data-choice="Have the same name, different parameter lists">Have the same name, different parameter lists</button>
+      <button data-choice="Have the same name and the same parameter list">Have the same name and the same parameter list</button>
+      <button data-choice="Always return the same value">Always return the same value</button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 id="next">What&rsquo;s next</h2>
+  <ul>
+    <li>That completes the Python foundations topic. The next topic in the
+      menu is <a href="../../adts/index.html">ADTs and linear
+      structures</a> - what an ADT specifies, records with named fields, and
+      the arrays-versus-linked tradeoff.</li>
+    <li>The <a href="../reference/python-card.html">Python card</a> carries
+      all three lessons&rsquo; rows on one printable page.</li>
+    <li>Back to the <a href="../../index.html">Big O course</a> if the loop
+      rules need a refresh - the same tracing habit drives both.</li>
+  </ul>
+</section>
+
+<section>
+  <h2 id="source">Go deeper</h2>
+  <p>The canonical source is the official <a href="https://docs.python.org/3/howto/sorting.html">Python
+  Tutorial</a> at docs.python.org, whose sorting section states the
+  <code>sorted()</code> versus <code>.sort()</code> contrast in exactly the
+  exam&rsquo;s terms: one returns a new list, the other sorts in place and
+  returns <code>None</code>.</p>
+</section>
+
+<footer class="lesson-footer">
+  <p>Stuck on anything in this lesson? Ask your agent - it can walk the
+  loop trace again with a different break value, invent more
+  <code>sorted()</code> versus <code>.sort()</code> contrasts, or quiz you
+  one-on-one until all three rows are automatic.</p>
+</footer>
+
+</article>
+<script src="../../assets/quiz.js"></script>
+</body>
+</html>

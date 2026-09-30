@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Python Card</title>
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<article class="lesson">
+
+<header>
+  <p class="course-mark">Reference &middot; printable</p>
+  <h1>Python Card</h1>
+  <p class="lede">The compressed version of all three lessons. Every Python
+  row the exam tests, next to its answer. Keep this next to you while
+  drilling until recognition is automatic.</p>
+</header>
+
+<section>
+  <h2 id="map">Property &rarr; answer</h2>
+  <table class="prose-table">
+    <thead>
+      <tr><th>Exam phrase</th><th>Answer</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>first operation in <code>X / 2 + Y ** 2 == 10</code></td><td><code>Y ** 2</code></td></tr>
+      <tr><td>order of the relevant operators</td><td><code>**</code>; then <code>*</code>, <code>/</code>, <code>//</code>, <code>%</code>; then <code>+</code>, <code>-</code>; then comparisons such as <code>==</code></td></tr>
+      <tr><td>valid identifier</td><td><code>my_variable</code></td></tr>
+      <tr><td><code>class</code> as an identifier</td><td>invalid - reserved keyword</td></tr>
+      <tr><td><code>my-variable</code> as an identifier</td><td>invalid - the hyphen is interpreted as subtraction</td></tr>
+      <tr><td><code>2ndVariable</code> as an identifier</td><td>invalid - cannot start with a digit</td></tr>
+      <tr><td>list versus tuple</td><td>lists are mutable; tuples are immutable</td></tr>
+      <tr><td>creates a sub-list</td><td><code>my_list[start:end]</code></td></tr>
+      <tr><td>the start index in a slice</td><td>included</td></tr>
+      <tr><td>the end index in a slice</td><td>excluded</td></tr>
+      <tr><td><code>my_list[index]</code></td><td>returns one element, not a list</td></tr>
+      <tr><td><code>my_list.pop()</code></td><td>removes and returns an element</td></tr>
+      <tr><td><code>sorted()</code> output</td><td>a new sorted list</td></tr>
+      <tr><td><code>my_list.sort()</code></td><td>sorts in place and does not return the sorted list</td></tr>
+      <tr><td>sample loop output</td><td><code>Average: 5.0</code></td></tr>
+      <tr><td>overloaded methods</td><td>have the same name, different parameter lists</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2 id="precedence">Precedence</h2>
+  <p>The exam&rsquo;s expression is <code>X / 2 + Y ** 2 == 10</code>,
+  grouped by Python as <code>(X / 2 + (Y ** 2)) == 10</code>.</p>
+  <div class="rule">
+    <h3>The exam&rsquo;s sentences, verbatim</h3>
+    <p>The first operation is <strong><code>Y ** 2</code></strong>.
+    <strong>Python evaluates exponentiation before division, addition, and
+    equality comparison.</strong></p>
+    <p>Tiers, in order: <code>**</code> exponentiation; <code>*</code>,
+    <code>/</code>, <code>//</code>, <code>%</code>; <code>+</code>,
+    <code>-</code>; comparisons such as <code>==</code>.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="identifiers">Identifiers</h2>
+  <div class="rule">
+    <h3>The exam&rsquo;s rules, verbatim</h3>
+    <p>A Python identifier <strong>can use letters, digits, and
+    underscores</strong>, <strong>cannot begin with a digit</strong>,
+    <strong>cannot contain a hyphen</strong>, and <strong>cannot be a
+    reserved keyword</strong>.</p>
+    <p>Valid: <code>my_variable</code>. Invalid: <code>class</code>
+    (reserved keyword), <code>my-variable</code> (hyphen is interpreted as
+    subtraction), <code>2ndVariable</code> (cannot start with a
+    digit).</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="containers">Lists, tuples, and slicing</h2>
+  <div class="rule">
+    <h3>Mutability and the slice, verbatim</h3>
+    <p><strong>Lists are mutable; tuples are immutable.</strong> A list can
+    add, remove, or replace elements - <code>items[0] = 9</code> is valid;
+    a tuple cannot - <code>coordinates[0] = 9</code> is an error.</p>
+    <p><code>my_list[start:end]</code> <strong>creates a new list</strong>
+    containing some elements from another list. <strong>The starting index
+    is included. The ending index is excluded.</strong>
+    <code>my_list[index]</code> returns one element, not a list, and
+    <code>my_list.pop()</code> removes and returns an element.</p>
+  </div>
+  <pre><code>my_list = [10, 20, 30, 40]
+index        0   1   2   3
+my_list[1:3]  ->  [20, 30]</code></pre>
+</section>
+
+<section>
+  <h2 id="sorting">sorted() versus .sort()</h2>
+  <div class="rule">
+    <h3>The two calls, verbatim</h3>
+    <p><code>sorted(my_list)</code> returns a <strong>new list</strong>
+    containing the elements in sorted order and <strong>leaves the original
+    list unchanged</strong>. <code>my_list.sort()</code> <strong>sorts the
+    existing list in place and does not return the sorted list</strong>.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="loop">The sample loop</h2>
+  <pre><code>total = 0
+count = 0
+for i in range(1, 11):
+    if i % 5 == 0:
+        break
+    total += i * 2
+    count += 1
+average = total / count
+print("Average:", average)</code></pre>
+  <div class="rule">
+    <h3>The trace, verbatim</h3>
+    <p>The loop processes <strong>1, 2, 3, 4</strong> and stops before
+    processing 5. <strong>total = 2 + 4 + 6 + 8 = 20</strong>,
+    <strong>count = 4</strong>, <strong>average = 20 / 4 = 5.0</strong>.
+    Output: <strong><code>Average: 5.0</code></strong></p>
+  </div>
+</section>
+
+<section>
+  <h2 id="overloaded">Overloaded methods</h2>
+  <div class="rule">
+    <h3>The definition, verbatim</h3>
+    <p>Overloaded methods <strong>have the same name, different parameter
+    lists</strong>.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="tip">The exam tip</h2>
+  <p>From the study guide&rsquo;s strategy list: <strong>identify the
+  defining property in the question.</strong> &ldquo;First operation in the
+  expression&rdquo; - <code>Y ** 2</code>. &ldquo;Can it change after
+  creation?&rdquo; - mutable list, immutable tuple. &ldquo;Returns a new
+  list&rdquo; - <code>sorted()</code>; no return - <code>.sort()</code>.
+  &ldquo;Same name, different parameter lists&rdquo; - overloaded.</p>
+  <p>The same list adds, for code tracing: <strong>write down values after
+  each iteration and carefully note conditions such as
+  <code>break</code></strong>. That habit is what turns the sample loop
+  into <code>Average: 5.0</code> instead of a guess.</p>
+</section>
+
+<footer class="lesson-footer">
+  <p>Full explanations and practice:
+  <a href="../lessons/0001-precedence-identifiers.html">Lesson 1 - Precedence and identifiers</a>,
+  <a href="../lessons/0002-lists-tuples-slicing.html">Lesson 2 - Lists, tuples, and slicing</a>, and
+  <a href="../lessons/0003-sorted-sort-tracing.html">Lesson 3 - sorted vs sort, loop tracing, overloaded methods</a>.
+  Stuck? Ask your agent for extra recognition drills on any row above.</p>
+</footer>
+
+</article>
+</body>
+</html>

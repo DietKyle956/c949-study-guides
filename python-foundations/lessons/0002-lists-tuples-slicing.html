@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lists, Tuples, and Slicing - Python Foundations</title>
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<article class="lesson">
+
+<header>
+  <p class="course-mark">Python Foundations &middot; Lesson 2</p>
+  <h1>Lists, tuples, and slicing</h1>
+  <p class="lede">Two rows of the exam&rsquo;s Python block live here: the
+  list-versus-tuple contrast, where one word - mutability - decides every
+  question, and the slice <code>my_list[start:end]</code>, where the start
+  index is included and the end index is not. This lesson pins the index
+  arithmetic with a concrete list, then drills both.</p>
+</header>
+
+<section>
+  <h2 id="why">Why this lesson</h2>
+  <p><a href="0001-precedence-identifiers.html">Lesson 1</a> settled the
+  expression and the names. This lesson is about the two container
+  questions: which one can change after creation, and what a slice hands
+  back. Both are recognition rows - the exam gives a structure or a slice
+  and expects one word back - so the goal is an instant answer, not a full
+  tour of Python&rsquo;s data structures.</p>
+</section>
+
+<section>
+  <h2 id="mutability">Lists versus tuples: mutability decides</h2>
+  <p>A <strong>list</strong> is written with square brackets. A
+  <strong>tuple</strong> is written with parentheses. The syntax is only
+  the label; the defining property is <strong>mutability</strong> - whether
+  the container can change after it is created.</p>
+  <table class="prose-table">
+    <thead>
+      <tr><th>Feature</th><th>List</th><th>Tuple</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Mutable?</td><td>Yes</td><td>No</td></tr>
+      <tr><td>Can add, remove, or replace elements?</td><td>Yes</td><td>No</td></tr>
+      <tr><td>Typical syntax</td><td><code>[1, 2, 3]</code></td><td><code>(1, 2, 3)</code></td></tr>
+    </tbody>
+  </table>
+  <p>The study guide&rsquo;s example shows the property in code:</p>
+  <pre><code>items = [1, 2, 3]
+items[0] = 9          # Valid
+
+coordinates = (1, 2, 3)
+# coordinates[0] = 9  # Error</code></pre>
+  <p>Same index, same assignment, opposite outcomes. The list accepts the
+  replacement because it is mutable; the tuple rejects it because it is
+  immutable. Any exam question that contrasts the two is asking this one
+  property.</p>
+  <div class="rule">
+    <h3>The contrast, verbatim</h3>
+    <p><strong>Lists are mutable; tuples are immutable.</strong> A list can
+    add, remove, or replace elements; a tuple cannot.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="slicing">Slicing: start included, end excluded</h2>
+  <p>The operation that creates a <strong>new list</strong> containing some
+  elements from another list is a slice, written with a start and an end
+  separated by a colon:</p>
+  <pre><code>my_list[start:end]</code></pre>
+  <p>The two rules that decide every slice:</p>
+  <ul>
+    <li>The starting index is included.</li>
+    <li>The ending index is excluded.</li>
+  </ul>
+  <p>Work the exam&rsquo;s example with the indices written out:</p>
+  <pre><code>my_list = [10, 20, 30, 40]
+index        0   1   2   3
+
+portion = my_list[1:3]  # [20, 30]</code></pre>
+  <p>Start at index 1, which is <code>20</code>. Stop before index 3, which
+  holds <code>40</code>, so <code>40</code> never enters the slice. The
+  result is the two elements <code>[20, 30]</code> - a fresh list, not a
+  window into the original.</p>
+  <div class="rule">
+    <h3>The exam&rsquo;s sentences, verbatim</h3>
+    <p><code>my_list[start:end]</code> creates a new list containing some
+    elements from another list. <strong>The starting index is included. The
+    ending index is excluded.</strong></p>
+    <p>Related one-liners the same study-guide section lists:
+    <code>my_list[index]</code> returns <strong>one element, not a
+    list</strong>, and <code>my_list.pop()</code> <strong>removes and
+    returns an element</strong>.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="map">The identification map</h2>
+  <table class="prose-table">
+    <thead>
+      <tr><th>Exam phrase</th><th>Defining property</th><th>Answer</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>list versus tuple</td><td>mutability</td><td>Lists are mutable; tuples are immutable</td></tr>
+      <tr><td>can replace an element after creation</td><td>the mutable container</td><td>A list</td></tr>
+      <tr><td>can never add, remove, or replace elements</td><td>the immutable container</td><td>A tuple</td></tr>
+      <tr><td>typical syntax</td><td>brackets or parentheses</td><td><code>[1, 2, 3]</code> is a list; <code>(1, 2, 3)</code> is a tuple</td></tr>
+      <tr><td>creates a new sub-list</td><td>a slice</td><td><code>my_list[start:end]</code></td></tr>
+      <tr><td>the start index in a slice</td><td>where copying begins</td><td>Included</td></tr>
+      <tr><td>the end index in a slice</td><td>where copying stops</td><td>Excluded</td></tr>
+      <tr><td><code>my_list[index]</code></td><td>single-element access</td><td>Returns one element, not a list</td></tr>
+      <tr><td><code>my_list.pop()</code></td><td>removal with a result</td><td>Removes and returns an element</td></tr>
+    </tbody>
+  </table>
+  <p>Nine rows, and the container half of the exam&rsquo;s Python block is
+  answered. The <a href="../reference/python-card.html">Python card</a> is
+  the printable version.</p>
+</section>
+
+<section class="quiz" data-quiz-title="Lesson 2 quiz">
+  <h2 id="quiz">Practice: solve these from memory</h2>
+  <p>Answer from memory before clicking - say or write your answer first.
+  The struggle is what makes it stick.</p>
+
+  <div class="quiz-q" data-answer="Lists are mutable; tuples are immutable" data-explanation="The exam's contrast, verbatim. Mutability is the defining property - it decides whether elements can be added, removed, or replaced.">
+    <p class="quiz-prompt">What is the difference between a list and a tuple?</p>
+    <div class="quiz-options">
+      <button data-choice="Lists hold numbers; tuples hold text">Lists hold numbers; tuples hold text</button>
+      <button data-choice="Lists keep order; tuples do not">Lists keep order; tuples do not</button>
+      <button data-choice="Lists are mutable; tuples are immutable">Lists are mutable; tuples are immutable</button>
+      <button data-choice="Lists can be sliced; tuples cannot">Lists can be sliced; tuples cannot</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="(1, 2, 3)" data-explanation="Parentheses make a tuple, and a tuple is immutable - it cannot add, remove, or replace elements. The three bracket examples are lists, which are mutable.">
+    <p class="quiz-prompt">Which of these values is immutable?</p>
+    <div class="quiz-options">
+      <button data-choice="[1, 2, 3]"><code>[1, 2, 3]</code></button>
+      <button data-choice="(1, 2, 3)"><code>(1, 2, 3)</code></button>
+      <button data-choice="[10, 20, 30]"><code>[10, 20, 30]</code></button>
+      <button data-choice="[1, 2, 3, 4, 5]"><code>[1, 2, 3, 4, 5]</code></button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="[20, 30]" data-explanation="The slice starts at index 1, which is 20, and stops before index 3, which is 40. Start included, end excluded, so the result is the new list [20, 30].">
+    <p class="quiz-prompt">With <code>my_list = [10, 20, 30, 40]</code>, what is <code>my_list[1:3]</code>?</p>
+    <div class="quiz-options">
+      <button data-choice="[10, 20]"><code>[10, 20]</code></button>
+      <button data-choice="[30, 40]"><code>[30, 40]</code></button>
+      <button data-choice="[20, 30, 40]"><code>[20, 30, 40]</code></button>
+      <button data-choice="[20, 30]"><code>[20, 30]</code></button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Excluded" data-explanation="The exam's rule verbatim: the starting index is included and the ending index is excluded. That is why the slice stops before the end index instead of including it.">
+    <p class="quiz-prompt">In <code>my_list[start:end]</code>, the element at the end index is:</p>
+    <div class="quiz-options">
+      <button data-choice="Included">Included</button>
+      <button data-choice="Excluded">Excluded</button>
+      <button data-choice="Replaced">Replaced</button>
+      <button data-choice="Reversed">Reversed</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="my_list[start:end]" data-explanation="The exam's wording: the operation that creates a new list containing some elements from another list is my_list[start:end]. Single-index access returns one element, and pop and sort are not slicing at all.">
+    <p class="quiz-prompt">Which operation creates a new list containing some elements from another list?</p>
+    <div class="quiz-options">
+      <button data-choice="my_list[start:end]"><code>my_list[start:end]</code></button>
+      <button data-choice="my_list[index]"><code>my_list[index]</code></button>
+      <button data-choice="my_list.pop()"><code>my_list.pop()</code></button>
+      <button data-choice="my_list.sort()"><code>my_list.sort()</code></button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="An error, because a tuple is immutable" data-explanation="The study guide's example marks coordinates[0] = 9 as an error: a tuple cannot add, remove, or replace elements. The same assignment on a list would be valid.">
+    <p class="quiz-prompt">After <code>coordinates = (1, 2, 3)</code>, the line <code>coordinates[0] = 9</code> causes:</p>
+    <div class="quiz-options">
+      <button data-choice="The tuple becomes (9, 2, 3)">The tuple becomes <code>(9, 2, 3)</code></button>
+      <button data-choice="An error, because a tuple is immutable">An error, because a tuple is immutable</button>
+      <button data-choice="A new tuple being created">A new tuple being created</button>
+      <button data-choice="Only the first element being replaced">Only the first element being replaced</button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 id="next">What&rsquo;s next</h2>
+  <ul>
+    <li><a href="0003-sorted-sort-tracing.html">Lesson 3</a>:
+      <code>sorted(my_list)</code> versus <code>my_list.sort()</code>, the
+      sample loop that prints <code>Average: 5.0</code>, and overloaded
+      methods.</li>
+    <li>The <a href="../reference/python-card.html">Python card</a>
+      carries this lesson&rsquo;s mutability and slicing rows on one
+      printable page.</li>
+  </ul>
+</section>
+
+<section>
+  <h2 id="source">Go deeper</h2>
+  <p>The canonical source is the official <a href="https://docs.python.org/3/tutorial/datastructures.html">Python
+  Tutorial</a> at docs.python.org: section 5, <em>Data Structures</em>,
+  covers lists and tuples side by side, and its slicing paragraphs state
+  the included-start, excluded-end rule in the same words the exam
+  uses.</p>
+</section>
+
+<footer class="lesson-footer">
+  <p>Stuck on anything in this lesson? Ask your agent - it can generate
+  slice drills for any list, explain mutability with more examples, or quiz
+  you one-on-one until the list-versus-tuple row is automatic.</p>
+</footer>
+
+</article>
+<script src="../../assets/quiz.js"></script>
+</body>
+</html>

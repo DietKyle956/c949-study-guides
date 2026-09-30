@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Precedence and Identifiers - Python Foundations</title>
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<article class="lesson">
+
+<header>
+  <p class="course-mark">Python Foundations &middot; Lesson 1</p>
+  <h1>Precedence and identifiers</h1>
+  <p class="lede">The exam&rsquo;s Python block opens with two small
+  questions: which operation runs first inside one expression, and which
+  names are legal Python. This lesson pins the precedence ladder, walks the
+  exam&rsquo;s exact expression step by step, and drills the four identifier
+  rules with their three invalid examples.</p>
+</header>
+
+<section>
+  <h2 id="why">Why this lesson</h2>
+  <p>This is topic 2 of the C949 menu, and it was deferred: you reported
+  confidence with Python, so the ADTs, stacks-and-queues, linked-lists,
+  hash-tables, and sorting courses came first. The exam still asks a small,
+  fixed Python set, and these are the first two rows - one expression to
+  evaluate and one list of names to judge. Nothing here is a full Python
+  course; it is exactly the handful of items the practice exam
+  contains.</p>
+</section>
+
+<section>
+  <h2 id="ladder">The precedence ladder</h2>
+  <p>Precedence means which operator goes first when several sit in one
+  expression. The exam only tests four tiers, always in this order:</p>
+  <ol>
+    <li><code>**</code> exponentiation</li>
+    <li><code>*</code>, <code>/</code>, <code>//</code>, <code>%</code></li>
+    <li><code>+</code>, <code>-</code></li>
+    <li>Comparisons such as <code>==</code></li>
+  </ol>
+  <p>Read the ladder as a race the tiers run in order: every
+  <code>**</code> finishes before any multiplication or division, those
+  finish before any addition or subtraction, and only then does the
+  comparison run. Nothing in this exam needs parentheses, but parentheses
+  are how you prove you know the order.</p>
+  <div class="rule">
+    <h3>The exam&rsquo;s sentences, verbatim</h3>
+    <p>In <code>X / 2 + Y ** 2 == 10</code>, the first operation is
+    <strong><code>Y ** 2</code></strong>. <strong>Python evaluates
+    exponentiation before division, addition, and equality
+    comparison.</strong></p>
+    <p>Order of the relevant operators: <code>**</code> exponentiation;
+    then <code>*</code>, <code>/</code>, <code>//</code>, <code>%</code>;
+    then <code>+</code>, <code>-</code>; then comparisons such as
+    <code>==</code>.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="worked">The exam&rsquo;s expression, worked</h2>
+  <p>Here is the expression exactly as the exam writes it:</p>
+  <pre><code>X / 2 + Y ** 2 == 10</code></pre>
+  <p>Python&rsquo;s own grouping of it - the same expression with the
+  precedence made visible:</p>
+  <pre><code>(X / 2 + (Y ** 2)) == 10</code></pre>
+  <p>The four steps, in the order they happen:</p>
+  <ol>
+    <li><code>Y ** 2</code> - the exponentiation tier runs first, before
+      anything else touches it.</li>
+    <li><code>X / 2</code> - the <code>*</code> <code>/</code>
+      <code>//</code> <code>%</code> tier runs second.</li>
+    <li><code>X / 2 + (Y ** 2)</code> - the <code>+</code>
+      <code>-</code> tier runs third, adding the two results.</li>
+    <li><code>... == 10</code> - the comparison runs last and produces
+      <code>True</code> or <code>False</code>.</li>
+  </ol>
+  <p>The exam asks only the first step. Read the expression, find the
+  <code>**</code>, and answer <code>Y ** 2</code> - not
+  <code>X / 2</code>, which runs second, and not the comparison, which runs
+  last.</p>
+</section>
+
+<section>
+  <h2 id="identifiers">Identifiers: the four rules</h2>
+  <p>An identifier is a name you give a variable, function, or class. The
+  exam asks which names are legal. Four rules decide every case:</p>
+  <ul>
+    <li>Can use letters, digits, and underscores.</li>
+    <li>Cannot begin with a digit.</li>
+    <li>Cannot contain a hyphen.</li>
+    <li>Cannot be a reserved keyword.</li>
+  </ul>
+  <p>The study guide&rsquo;s examples, verbatim:</p>
+  <pre><code>my_variable
+
+class          # Reserved keyword
+my-variable    # Hyphen is interpreted as subtraction
+2ndVariable    # Cannot start with a digit</code></pre>
+  <p>One valid, three invalid, and each invalid one breaks a different
+  rule. <code>my-variable</code> is the trap: Python does not see one name,
+  it sees the subtraction <code>my - variable</code>. The hyphen is an
+  operator, never part of a name.</p>
+  <div class="rule">
+    <h3>The exam&rsquo;s rule, verbatim</h3>
+    <p>A Python identifier <strong>can use letters, digits, and
+    underscores</strong>, <strong>cannot begin with a digit</strong>,
+    <strong>cannot contain a hyphen</strong>, and <strong>cannot be a
+    reserved keyword</strong>. The exam&rsquo;s valid example is
+    <code>my_variable</code>; the invalid examples are <code>class</code>,
+    <code>my-variable</code>, and <code>2ndVariable</code>.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="map">The identification map</h2>
+  <table class="prose-table">
+    <thead>
+      <tr><th>Exam phrase</th><th>Defining property</th><th>Answer</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>first operation in <code>X / 2 + Y ** 2 == 10</code></td><td>exponentiation binds tightest</td><td><code>Y ** 2</code></td></tr>
+      <tr><td>tier that beats <code>*</code> <code>/</code> <code>//</code> <code>%</code></td><td>the exponent tier</td><td><code>**</code> exponentiation</td></tr>
+      <tr><td>tier that runs after <code>*</code> <code>/</code> <code>//</code> <code>%</code></td><td>the additive tier</td><td><code>+</code>, <code>-</code></td></tr>
+      <tr><td>last operation in the exam expression</td><td>the comparison</td><td><code>== 10</code>, producing <code>True</code> or <code>False</code></td></tr>
+      <tr><td>the exam&rsquo;s valid identifier</td><td>letters, digits, underscores</td><td><code>my_variable</code></td></tr>
+      <tr><td><code>class</code> as a name</td><td>reserved keyword</td><td>Invalid</td></tr>
+      <tr><td><code>my-variable</code> as a name</td><td>hyphen is interpreted as subtraction</td><td>Invalid</td></tr>
+      <tr><td><code>2ndVariable</code> as a name</td><td>begins with a digit</td><td>Invalid</td></tr>
+    </tbody>
+  </table>
+  <p>Eight rows, and the first two items of the exam&rsquo;s Python block
+  are answered. The <a href="../reference/python-card.html">Python card</a>
+  is the printable version.</p>
+</section>
+
+<section class="quiz" data-quiz-title="Lesson 1 quiz">
+  <h2 id="quiz">Practice: solve these from memory</h2>
+  <p>Answer from memory before clicking - say or write your answer first.
+  The struggle is what makes it stick.</p>
+
+  <div class="quiz-q" data-answer="Y ** 2" data-explanation="Exponentiation is the tightest tier, so Y ** 2 runs first - the exam's answer verbatim. The division runs second, the addition third, and the comparison last.">
+    <p class="quiz-prompt">In <code>X / 2 + Y ** 2 == 10</code>, which operation is performed first?</p>
+    <div class="quiz-options">
+      <button data-choice="Y ** 2"><code>Y ** 2</code></button>
+      <button data-choice="X / 2"><code>X / 2</code></button>
+      <button data-choice="The addition X / 2 + Y ** 2">The addition <code>X / 2 + Y ** 2</code></button>
+      <button data-choice="The comparison == 10">The comparison <code>== 10</code></button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="** exponentiation" data-explanation="The ladder starts with ** exponentiation, then *, /, //, %, then +, -, then comparisons such as ==. Exponentiation beats every other tier.">
+    <p class="quiz-prompt">Which tier of operators is evaluated before the others?</p>
+    <div class="quiz-options">
+      <button data-choice="Comparisons such as ==">Comparisons such as <code>==</code></button>
+      <button data-choice="+, -"><code>+</code>, <code>-</code></button>
+      <button data-choice="*, /, //, %"><code>*</code>, <code>/</code>, <code>//</code>, <code>%</code></button>
+      <button data-choice="** exponentiation"><code>**</code> exponentiation</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="+, -" data-explanation="After the multiply tier (*, /, //, %) comes the additive tier: + and -. The comparison runs later still, and ** already ran at the start.">
+    <p class="quiz-prompt">After <code>*</code>, <code>/</code>, <code>//</code>, <code>%</code>, which tier is evaluated next?</p>
+    <div class="quiz-options">
+      <button data-choice="Comparisons such as ==">Comparisons such as <code>==</code></button>
+      <button data-choice="** exponentiation"><code>**</code> exponentiation</button>
+      <button data-choice="+, -"><code>+</code>, <code>-</code></button>
+      <button data-choice="The reserved keywords">The reserved keywords</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="my_variable" data-explanation="my_variable uses letters and underscores only, so it follows every identifier rule. The exam's valid example verbatim.">
+    <p class="quiz-prompt">Which of these is a valid Python identifier?</p>
+    <div class="quiz-options">
+      <button data-choice="2ndVariable"><code>2ndVariable</code></button>
+      <button data-choice="my_variable"><code>my_variable</code></button>
+      <button data-choice="my-variable"><code>my-variable</code></button>
+      <button data-choice="class"><code>class</code></button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="The hyphen is interpreted as subtraction" data-explanation="A hyphen is an operator, never part of a name, so my-variable reads as my - variable. The exam's own reason, verbatim.">
+    <p class="quiz-prompt">Why is <code>my-variable</code> not a valid identifier?</p>
+    <div class="quiz-options">
+      <button data-choice="It begins with a digit">It begins with a digit</button>
+      <button data-choice="It is a reserved keyword">It is a reserved keyword</button>
+      <button data-choice="It uses an underscore">It uses an underscore</button>
+      <button data-choice="The hyphen is interpreted as subtraction">The hyphen is interpreted as subtraction</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="class" data-explanation="class is a reserved keyword, so it can never name a variable. my_variable and total_count follow every rule, and a name that starts with a letter never breaks the digit rule.">
+    <p class="quiz-prompt">Which of these is invalid because it is a reserved keyword?</p>
+    <div class="quiz-options">
+      <button data-choice="my_variable"><code>my_variable</code></button>
+      <button data-choice="total_count"><code>total_count</code></button>
+      <button data-choice="class"><code>class</code></button>
+      <button data-choice="average_score"><code>average_score</code></button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 id="next">What&rsquo;s next</h2>
+  <ul>
+    <li><a href="0002-lists-tuples-slicing.html">Lesson 2</a>: lists
+      versus tuples - mutability as the defining property - and the
+      <code>my_list[start:end]</code> slice with its included start and
+      excluded end.</li>
+    <li>The <a href="../reference/python-card.html">Python card</a>
+      carries both halves of this lesson on one printable page.</li>
+  </ul>
+</section>
+
+<section>
+  <h2 id="source">Go deeper</h2>
+  <p>The canonical source is the official <a href="https://docs.python.org/3/tutorial/introduction.html#using-python-as-a-calculator">Python Tutorial</a>
+  at docs.python.org: section 3, <em>An Informal Introduction to
+  Python</em>, is where the operator ladder is introduced with worked
+  expressions. For the identifier rules in their exact wording, the
+  <a href="https://docs.python.org/3/reference/lexical_analysis.html#identifiers">Language
+  Reference, section 2.3</a> lists the grammar and the reserved
+  keywords.</p>
+</section>
+
+<footer class="lesson-footer">
+  <p>Stuck on anything in this lesson? Ask your agent - it can invent more
+  precedence expressions to evaluate, judge any name against the four
+  identifier rules, or quiz you one-on-one until both rows are
+  automatic.</p>
+</footer>
+
+</article>
+<script src="../../assets/quiz.js"></script>
+</body>
+</html>
