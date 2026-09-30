@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Final Practice Test 1 - Final Review</title>
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<article class="lesson">
+
+<header>
+  <p class="course-mark">Final Review &middot; Test 1</p>
+  <h1>Practice test 1</h1>
+  <p class="lede">Forty questions, every topic mixed, no topic labels - just
+  like the real exam. None of these repeats a lesson question or a
+  practice-exam item; every one is a fresh variant. A strong score here means
+  you can answer similar-but-different questions, not just recognize the
+  examples you drilled.</p>
+</header>
+
+<section>
+  <h2 id="why">Why this test</h2>
+  <p>The lessons drilled one rule at a time; the exam hands you a mixed list
+  with no labels and no hint about which rule to reach for. This test makes
+  that its format: recognizing the topic is part of the question. And because
+  every question here is new - new numbers, new snippets, new scenarios - a
+  good score shows the rules have transferred, not that the drilled examples
+  were memorized.</p>
+  <p>The blueprint mirrors the practice exam&rsquo;s emphasis: complexity and
+  Python questions make up the majority, with the structures and algorithms
+  split across the rest.</p>
+</section>
+
+<section>
+  <h2 id="how">How to take it</h2>
+  <ul>
+    <li>One pass, no notes, no scrolling back.</li>
+    <li>Say or write each answer before clicking - the struggle is what makes
+    it stick.</li>
+    <li>The first click counts. The score line tracks your running total.</li>
+    <li>The page does not save progress - a reload starts fresh. To work
+    offline, print the page and mark answers on paper; printed pages show
+    every explanation, so they double as an answer key.</li>
+  </ul>
+</section>
+
+<section class="quiz" data-quiz-title="Practice test 1">
+  <h2 id="quiz">The test</h2>
+  <p>Work straight through. There are no topic headers on purpose - naming
+  the topic is part of each question.</p>
+
+  <div class="quiz-q" data-answer="O(&radic;n)" data-explanation="The loop stops once i squared reaches n, so i only grows to about the square root of n: &radic;n passes.">
+    <p class="quiz-prompt">What is the time complexity?</p>
+    <pre><code>i = 1
+while i * i &lt; n:
+    process(i)
+    i += 1</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(n&sup2;)">O(n&sup2;)</button>
+      <button data-choice="O(&radic;n)">O(&radic;n)</button>
+      <button data-choice="O(log n)">O(log n)</button>
+      <button data-choice="O(n)">O(n)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="3 ** 2" data-explanation="Exponentiation sits at the top tier, above * and +, so 3 ** 2 is evaluated before the multiplication or the addition.">
+    <p class="quiz-prompt">In <code>8 + 2 * 3 ** 2</code>, which operation happens first?</p>
+    <div class="quiz-options">
+      <button data-choice="2 * 3">2 * 3</button>
+      <button data-choice="8 + 2">8 + 2</button>
+      <button data-choice="2 + 3">2 + 3</button>
+      <button data-choice="3 ** 2">3 ** 2</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="1" data-explanation="A queue adds at the back. Counting from the front - 8, 4, 9, 6, 1 - the last item, 1, is the back.">
+    <p class="quiz-prompt">A queue holds <code>[8, 4, 9, 6, 1]</code> with front 8. Which value is the back?</p>
+    <div class="quiz-options">
+      <button data-choice="4">4</button>
+      <button data-choice="6">6</button>
+      <button data-choice="1">1</button>
+      <button data-choice="8">8</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Only the head reference changes - nothing shifts" data-explanation="head = head.next is one reference update, no matter how long the list is. One step, so O(1).">
+    <p class="quiz-prompt">Why is removing the first node of a singly linked list O(1)?</p>
+    <div class="quiz-options">
+      <button data-choice="Only the head reference changes - nothing shifts">Only the head reference changes - nothing shifts</button>
+      <button data-choice="The whole list is copied first">The whole list is copied first</button>
+      <button data-choice="Every node is visited once">Every node is visited once</button>
+      <button data-choice="The nodes are stored side by side in memory">The nodes are stored side by side in memory</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="A named subitem of the record" data-explanation="A record groups related subitems, and each subitem has a name. Those named subitems are the record&rsquo;s fields.">
+    <p class="quiz-prompt">A Student record has fields name, id_number, and gpa. What is id_number?</p>
+    <div class="quiz-options">
+      <button data-choice="The record&rsquo;s index">The record&rsquo;s index</button>
+      <button data-choice="A named subitem of the record">A named subitem of the record</button>
+      <button data-choice="The record&rsquo;s type">The record&rsquo;s type</button>
+      <button data-choice="A separate record">A separate record</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="It scans the input once and walks the value range once" data-explanation="One pass counts the N input items, and one pass walks the K slots of the counts array to write the output. The two passes add up: O(N + K).">
+    <p class="quiz-prompt">Why does counting sort&rsquo;s O(N + K) add two terms?</p>
+    <div class="quiz-options">
+      <button data-choice="It scans the input once and walks the value range once">It scans the input once and walks the value range once</button>
+      <button data-choice="It compares every pair of items">It compares every pair of items</button>
+      <button data-choice="It divides the list in half each pass">It divides the list in half each pass</button>
+      <button data-choice="It sorts in place with no extra memory">It sorts in place with no extra memory</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="0.4" data-explanation="Load factor = entries divided by buckets: 4 / 10 = 0.4.">
+    <p class="quiz-prompt">A hash table has 10 buckets and 4 entries. Its load factor is:</p>
+    <div class="quiz-options">
+      <button data-choice="0.25">0.25</button>
+      <button data-choice="4">4</button>
+      <button data-choice="0.4">0.4</button>
+      <button data-choice="2.5">2.5</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="1.7" data-explanation="Weight each code length by its frequency: 0.5 &times; 1 + 0.3 &times; 2 + 0.2 &times; 2 = 0.5 + 0.6 + 0.4 = 1.7 bits per character.">
+    <p class="quiz-prompt">Characters A, B, C appear 50%, 30%, and 20% of the time with codes 0, 10, 11. What is the average number of bits per character?</p>
+    <div class="quiz-options">
+      <button data-choice="1.5">1.5</button>
+      <button data-choice="2.0">2.0</button>
+      <button data-choice="1.9">1.9</button>
+      <button data-choice="1.7">1.7</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(n + m)" data-explanation="Two separate loops: the first costs n, the second costs m. Sequential work adds, and neither input can be dropped: O(n + m).">
+    <p class="quiz-prompt">What is the time complexity?</p>
+    <pre><code>for x in a:        # a has n elements
+    scan(x)
+for y in b:        # b has m elements
+    scan(y)</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(n + m)">O(n + m)</button>
+      <button data-choice="O(n &times; m)">O(n &times; m)</button>
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(m)">O(m)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="price_2" data-explanation="Identifiers use letters, digits, and underscores - no leading digit, no hyphen, and no reserved words. price_2 starts with a letter and only uses allowed characters.">
+    <p class="quiz-prompt">Which of these is a valid identifier?</p>
+    <div class="quiz-options">
+      <button data-choice="price_2">price_2</button>
+      <button data-choice="2price">2price</button>
+      <button data-choice="def">def</button>
+      <button data-choice="my-price">my-price</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="A deque" data-explanation="A deque works at both ends: add_first is a front operation and remove_last is a back operation. Stacks and queues each use only one end for insertion.">
+    <p class="quiz-prompt">Which structure supports both add_first and remove_last?</p>
+    <div class="quiz-options">
+      <button data-choice="A priority queue">A priority queue</button>
+      <button data-choice="A deque">A deque</button>
+      <button data-choice="A stack">A stack</button>
+      <button data-choice="A queue">A queue</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="4" data-explanation="A.next points to new, new.prev points to A, new.next points to B, and B.prev points to new. Four updates in total.">
+    <p class="quiz-prompt">Inserting a node new between A and B in a doubly linked list requires how many reference updates?</p>
+    <div class="quiz-options">
+      <button data-choice="4">4</button>
+      <button data-choice="2">2</button>
+      <button data-choice="3">3</button>
+      <button data-choice="6">6</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Whether the storage is an array or linked nodes" data-explanation="The ADT fixes the contract - what the operations do - not how they are built. Array or linked storage is an implementation detail hidden behind the contract.">
+    <p class="quiz-prompt">A stack ADT promises push, pop, and top. Which detail does the ADT leave unspecified?</p>
+    <div class="quiz-options">
+      <button data-choice="That push adds an item">That push adds an item</button>
+      <button data-choice="That pop removes the most recent item">That pop removes the most recent item</button>
+      <button data-choice="That top reads without removing">That top reads without removing</button>
+      <button data-choice="Whether the storage is an array or linked nodes">Whether the storage is an array or linked nodes</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="[0, 1, 2, 2]" data-explanation="The counts say the input held one 0, one 1, and two 2s. Writing those out in value order gives [0, 1, 2, 2].">
+    <p class="quiz-prompt">The counts array <code>[1, 1, 2]</code> holds counts for the values 0, 1, and 2. What sorted output does counting sort produce?</p>
+    <div class="quiz-options">
+      <button data-choice="[0, 1, 1, 2]">[0, 1, 1, 2]</button>
+      <button data-choice="[0, 2, 2, 1]">[0, 2, 2, 1]</button>
+      <button data-choice="[0, 1, 2, 2]">[0, 1, 2, 2]</button>
+      <button data-choice="[2, 2, 1, 0]">[2, 2, 1, 0]</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(n)" data-explanation="n // 2 is still n passes with a constant factor of one half. Constants drop: O(n).">
+    <p class="quiz-prompt">What is the time complexity?</p>
+    <pre><code>for i in range(n // 2):
+    work(i)</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(n / 2)">O(n / 2)</button>
+      <button data-choice="O(log n)">O(log n)</button>
+      <button data-choice="O(n&sup2;)">O(n&sup2;)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="[20, 30, 40]" data-explanation="Slicing includes the start index and excludes the end: indexes 1, 2, and 3.">
+    <p class="quiz-prompt">What does <code>nums[1:4]</code> produce?</p>
+    <pre><code>nums = [10, 20, 30, 40, 50]</code></pre>
+    <div class="quiz-options">
+      <button data-choice="[10, 20, 30]">[10, 20, 30]</button>
+      <button data-choice="[30, 40, 50]">[30, 40, 50]</button>
+      <button data-choice="[20, 30, 40]">[20, 30, 40]</button>
+      <button data-choice="[20, 30, 40, 50]">[20, 30, 40, 50]</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(log n)" data-explanation="i goes 1, 3, 9, 27 - tripling each pass - so it reaches n in about log base 3 of n passes. Any constant base is just O(log n).">
+    <p class="quiz-prompt">What is the time complexity?</p>
+    <pre><code>i = 1
+while i &lt; n:
+    process(i)
+    i = i * 3</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(&radic;n)">O(&radic;n)</button>
+      <button data-choice="O(n log n)">O(n log n)</button>
+      <button data-choice="O(log n)">O(log n)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="The item&rsquo;s priority" data-explanation="The priority orders removal: dequeue() takes the highest-priority item first. The second argument tells the queue what comes out next.">
+    <p class="quiz-prompt">In <code>pq.enqueue(item, priority)</code>, what is the second argument?</p>
+    <div class="quiz-options">
+      <button data-choice="The number of items">The number of items</button>
+      <button data-choice="A pointer to the next item">A pointer to the next item</button>
+      <button data-choice="The item&rsquo;s priority">The item&rsquo;s priority</button>
+      <button data-choice="The item&rsquo;s position in line">The item&rsquo;s position in line</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="At the first node" data-explanation="In a circular list the last node&rsquo;s next reference points back to the first node, so traversal loops forever unless you stop it yourself.">
+    <p class="quiz-prompt">After visiting the last node of a circular linked list, where does traversal continue?</p>
+    <div class="quiz-options">
+      <button data-choice="At the node before last">At the node before last</button>
+      <button data-choice="At the first node">At the first node</button>
+      <button data-choice="It stops - the last node has no next">It stops - the last node has no next</button>
+      <button data-choice="At a random node">At a random node</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Many keys landing in the same bucket" data-explanation="When many keys collide into one bucket, lookups degrade toward searching a list. Even spreading and a low load factor are what keep operations near O(1).">
+    <p class="quiz-prompt">Which of these threatens a hash table&rsquo;s average-case O(1)?</p>
+    <div class="quiz-options">
+      <button data-choice="A low load factor">A low load factor</button>
+      <button data-choice="A fast hash function">A fast hash function</button>
+      <button data-choice="Many keys landing in the same bucket">Many keys landing in the same bucket</button>
+      <button data-choice="Keys spreading evenly across buckets">Keys spreading evenly across buckets</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="The original data is recovered exactly" data-explanation="Lossless means the decode is a perfect round trip - every bit of the original comes back. Nothing is dropped along the way.">
+    <p class="quiz-prompt">Lossless compression guarantees that:</p>
+    <div class="quiz-options">
+      <button data-choice="The original data is recovered exactly">The original data is recovered exactly</button>
+      <button data-choice="The file is always as small as possible">The file is always as small as possible</button>
+      <button data-choice="No code is ever reused">No code is ever reused</button>
+      <button data-choice="Recovery is approximate but close">Recovery is approximate but close</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="It keeps working unchanged" data-explanation="Client code only calls the ADT&rsquo;s operations - enqueue, dequeue, front - and those behave the same no matter how the queue is built inside. That is the point of the ADT.">
+    <p class="quiz-prompt">A program uses a queue ADT. The implementation is swapped from a linked list to an array. What happens to the client code?</p>
+    <div class="quiz-options">
+      <button data-choice="It must be rewritten">It must be rewritten</button>
+      <button data-choice="It runs but returns different results">It runs but returns different results</button>
+      <button data-choice="It cannot compile">It cannot compile</button>
+      <button data-choice="It keeps working unchanged">It keeps working unchanged</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="In the partition before position 6" data-explanation="The 3rd smallest item must sit at a position before 6, so quickselect pursues only the partition before the pivot. The other partition is abandoned.">
+    <p class="quiz-prompt">Quickselect searches for the 3rd smallest item. The pivot lands at position 6. Where does the search continue?</p>
+    <div class="quiz-options">
+      <button data-choice="It stops - the pivot is the answer">It stops - the pivot is the answer</button>
+      <button data-choice="In the partition before position 6">In the partition before position 6</button>
+      <button data-choice="In the partition after position 6">In the partition after position 6</button>
+      <button data-choice="In both partitions">In both partitions</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="None" data-explanation=".sort() sorts the list in place and returns nothing - Python returns None. names itself is now ['al', 'bob'], but result captured the None.">
+    <p class="quiz-prompt">What is the value of result?</p>
+    <pre><code>names = ['bob', 'al']
+result = names.sort()</code></pre>
+    <div class="quiz-options">
+      <button data-choice="['bob', 'al']">['bob', 'al']</button>
+      <button data-choice="None">None</button>
+      <button data-choice="['al', 'bob']">['al', 'bob']</button>
+      <button data-choice="'bob'">'bob'</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Reads the top item without removing it" data-explanation="top() peeks: it reports the top item but leaves the stack unchanged. pop() is the one that removes.">
+    <p class="quiz-prompt">Calling top() on a stack:</p>
+    <div class="quiz-options">
+      <button data-choice="Removes and returns the top item">Removes and returns the top item</button>
+      <button data-choice="Adds an item to the top">Adds an item to the top</button>
+      <button data-choice="Clears the stack">Clears the stack</button>
+      <button data-choice="Reads the top item without removing it">Reads the top item without removing it</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(n&sup3;)" data-explanation="Three nested loops over the same input multiply: n &times; n &times; n = n&sup3;.">
+    <p class="quiz-prompt">What is the time complexity?</p>
+    <pre><code>for i in range(n):
+    for j in range(n):
+        for k in range(n):
+            count(i, j, k)</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(n&sup3;)">O(n&sup3;)</button>
+      <button data-choice="O(n&sup2;)">O(n&sup2;)</button>
+      <button data-choice="O(n log n)">O(n log n)</button>
+      <button data-choice="O(3n)">O(3n)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="6" data-explanation="i takes 1, 2, and 3 - each is added, so total reaches 6. At i = 4 the break fires before the addition, and the loop ends.">
+    <p class="quiz-prompt">What does this print?</p>
+    <pre><code>total = 0
+for i in range(1, 9):
+    if i % 4 == 0:
+        break
+    total += i
+print(total)</code></pre>
+    <div class="quiz-options">
+      <button data-choice="10">10</button>
+      <button data-choice="36">36</button>
+      <button data-choice="7">7</button>
+      <button data-choice="6">6</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(N&sup2;)" data-explanation="Drop the constants and the lower-order terms; the dominant term is N&sup2;. The 4, the 9N, and the 300 all disappear.">
+    <p class="quiz-prompt">What does <code>O(4N&sup2; + 9N + 300)</code> simplify to?</p>
+    <div class="quiz-options">
+      <button data-choice="O(N&sup3;)">O(N&sup3;)</button>
+      <button data-choice="O(N&sup2;)">O(N&sup2;)</button>
+      <button data-choice="O(N)">O(N)</button>
+      <button data-choice="O(4N&sup2;)">O(4N&sup2;)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Usually O(1) - resizing happens rarely" data-explanation="Doubling makes each resize twice as far away, so resizes grow exponentially rarer. Almost every push just writes into an empty slot: O(1) on average.">
+    <p class="quiz-prompt">When an unbounded stack&rsquo;s backing array fills up and its capacity doubles, pushes are:</p>
+    <div class="quiz-options">
+      <button data-choice="Not allowed">Not allowed</button>
+      <button data-choice="The same as a queue&rsquo;s dequeue">The same as a queue&rsquo;s dequeue</button>
+      <button data-choice="Usually O(1) - resizing happens rarely">Usually O(1) - resizing happens rarely</button>
+      <button data-choice="O(n) every single time">O(n) every single time</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(N)" data-explanation="Each level shrinks N by 1, so there are N levels, and each level does O(1) work. N &times; O(1) = O(N).">
+    <p class="quiz-prompt">What is the time complexity of <code>T(N) = T(N - 1) + O(1)</code>?</p>
+    <div class="quiz-options">
+      <button data-choice="O(N)">O(N)</button>
+      <button data-choice="O(log N)">O(log N)</button>
+      <button data-choice="O(1)">O(1)</button>
+      <button data-choice="O(N&sup2;)">O(N&sup2;)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="A reference to its previous node" data-explanation="A doubly linked node carries two references - previous and next - while a singly linked node carries only next. The extra reference is what allows walking backward.">
+    <p class="quiz-prompt">What does a doubly linked node store that a singly linked node does not?</p>
+    <div class="quiz-options">
+      <button data-choice="A reference to the next node">A reference to the next node</button>
+      <button data-choice="An index">An index</button>
+      <button data-choice="A reference to its previous node">A reference to its previous node</button>
+      <button data-choice="Its value">Its value</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(N log N)" data-explanation="Halving gives log N levels, and each level does O(N) of combined work. log N &times; O(N) = O(N log N) - the merge sort shape.">
+    <p class="quiz-prompt">What is the time complexity of <code>T(N) = 2T(N / 2) + O(N)</code>?</p>
+    <div class="quiz-options">
+      <button data-choice="O(N)">O(N)</button>
+      <button data-choice="O(N&sup2;)">O(N&sup2;)</button>
+      <button data-choice="O(log N)">O(log N)</button>
+      <button data-choice="O(N log N)">O(N log N)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="12" data-explanation="continue skips the odd values of i, so only 2, 4, and 6 are added: total = 12.">
+    <p class="quiz-prompt">What does this print?</p>
+    <pre><code>total = 0
+for i in range(1, 7):
+    if i % 2 == 1:
+        continue
+    total += i
+print(total)</code></pre>
+    <div class="quiz-options">
+      <button data-choice="9">9</button>
+      <button data-choice="12">12</button>
+      <button data-choice="21">21</button>
+      <button data-choice="6">6</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="N / 4" data-explanation="Each step divides the range in half: N, then N / 2, then N / 4. Two halvings leave one quarter of the original range.">
+    <p class="quiz-prompt">Binary search halves its range each step. After two steps, the remaining range is about:</p>
+    <div class="quiz-options">
+      <button data-choice="N / 8">N / 8</button>
+      <button data-choice="log N">log N</button>
+      <button data-choice="N / 4">N / 4</button>
+      <button data-choice="N / 2">N / 2</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="A tuple" data-explanation="A tuple is immutable, which suits a fixed collection: nothing can accidentally add or remove a day. A list would allow changes that should never happen.">
+    <p class="quiz-prompt">Which is the better choice for the days of the week, which never change?</p>
+    <div class="quiz-options">
+      <button data-choice="A tuple">A tuple</button>
+      <button data-choice="A list">A list</button>
+      <button data-choice="A dictionary">A dictionary</button>
+      <button data-choice="Either - there is no difference">Either - there is no difference</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(1)" data-explanation="The function uses one variable, x, no matter how long items is. No growing container, no recursion stack: constant space.">
+    <p class="quiz-prompt">What is the worst-case auxiliary space?</p>
+    <pre><code>def first_positive(items):
+    for x in items:
+        if x &gt; 0:
+            return x</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(log n)">O(log n)</button>
+      <button data-choice="O(n&sup2;)">O(n&sup2;)</button>
+      <button data-choice="O(1)">O(1)</button>
+      <button data-choice="O(n)">O(n)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="An error - tuples have no append" data-explanation="append is a list method. Tuples are immutable and do not support it, so the line raises an error.">
+    <p class="quiz-prompt">After <code>weekdays = ('mon', 'tue')</code>, the line <code>weekdays.append('wed')</code> causes:</p>
+    <div class="quiz-options">
+      <button data-choice="The tuple becomes ('mon', 'tue', 'wed')">The tuple becomes ('mon', 'tue', 'wed')</button>
+      <button data-choice="Nothing - the line is silently ignored">Nothing - the line is silently ignored</button>
+      <button data-choice="A new tuple to be created">A new tuple to be created</button>
+      <button data-choice="An error - tuples have no append">An error - tuples have no append</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(n)" data-explanation="In the worst case every item is a 2 and the twos list grows to n entries. The container grows with the input: O(n).">
+    <p class="quiz-prompt">What is the worst-case auxiliary space?</p>
+    <pre><code>def collect_twos(items):
+    twos = []
+    for x in items:
+        if x == 2:
+            twos.append(x)
+    return twos</code></pre>
+    <div class="quiz-options">
+      <button data-choice="O(n&sup2;)">O(n&sup2;)</button>
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(1)">O(1)</button>
+      <button data-choice="O(log n)">O(log n)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="By their parameter lists" data-explanation="Overloaded methods share a name but differ in their parameter lists. The arguments at the call site determine which one runs.">
+    <p class="quiz-prompt">A class defines area(width, height) and area(radius). How does Python tell the two calls apart?</p>
+    <div class="quiz-options">
+      <button data-choice="It cannot - the second definition overwrites the first">It cannot - the second definition overwrites the first</button>
+      <button data-choice="By their parameter lists">By their parameter lists</button>
+      <button data-choice="By their return values">By their return values</button>
+      <button data-choice="By the order they were defined">By the order they were defined</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(N&sup2;)" data-explanation="Multiply first: 3N &times; 2N = 6N&sup2;. Then drop the constant: O(N&sup2;).">
+    <p class="quiz-prompt">What does <code>O(3N &times; 2N)</code> simplify to?</p>
+    <div class="quiz-options">
+      <button data-choice="O(N)">O(N)</button>
+      <button data-choice="O(6N&sup2;)">O(6N&sup2;)</button>
+      <button data-choice="O(N&sup3;)">O(N&sup3;)</button>
+      <button data-choice="O(N&sup2;)">O(N&sup2;)</button>
+    </div>
+  </div>
+
+</section>
+
+<section>
+  <h2 id="next">What&rsquo;s next</h2>
+  <p>Take <a href="0002-practice-test-2.html">practice test 2</a> in a later
+  session - same blueprint, entirely different questions. Between tests,
+  revisit any topic that cost you points:</p>
+  <ul>
+    <li><a href="../../index.html">Big O for exams</a></li>
+    <li><a href="../../python-foundations/index.html">Python foundations</a></li>
+    <li><a href="../../adts/index.html">ADTs and linear structures</a></li>
+    <li><a href="../../stacks-queues/index.html">Stacks, queues, deques, and priority queues</a></li>
+    <li><a href="../../linked-lists/index.html">Linked lists</a></li>
+    <li><a href="../../hash-tables/index.html">Hash tables</a></li>
+    <li><a href="../../sorting/index.html">Sorting and selection</a></li>
+    <li><a href="../../huffman/index.html">Huffman coding</a></li>
+  </ul>
+</section>
+
+<footer class="lesson-footer">
+  <p>Stuck on anything here? Ask your agent - it can re-explain any topic,
+  generate extra practice problems, or walk through a question step by
+  step.</p>
+</footer>
+
+</article>
+<script src="../../assets/quiz.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exam-Day Card - Final Review</title>
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<article class="lesson">
+
+<header>
+  <p class="course-mark">Final Review &middot; Reference</p>
+  <h1>The exam-day card</h1>
+  <p class="lede">The five moves from the course&rsquo;s exam-approach
+  playbook plus the Big O names, on one printable page.</p>
+</header>
+
+<section>
+  <h2 id="moves">The five moves</h2>
+  <ol>
+    <li>Identify the defining property - FIFO or LIFO? mutability? named
+    fields? recurrence? partitioning? Name it before computing
+    anything.</li>
+    <li>Rule out choices describing a different ADT or algorithm.</li>
+    <li>For Big O: drop constants and lower-order terms, keep the dominant
+    term.</li>
+    <li>For code tracing: write the values after each iteration; watch
+    break, return, and the loop bounds.</li>
+    <li>For linked lists think reference updates; for arrays think indices
+    and shifting.</li>
+  </ol>
+</section>
+
+<section>
+  <h2 id="names">The Big O names</h2>
+  <table class="prose-table">
+    <thead>
+      <tr><th>Big O</th><th>Name</th><th>Typical interpretation</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>O(1)</td><td>Constant</td><td>work does not grow with input size</td></tr>
+      <tr><td>O(log N)</td><td>Logarithmic</td><td>problem repeatedly reduced, often by half</td></tr>
+      <tr><td>O(N)</td><td>Linear</td><td>each input item may be processed once</td></tr>
+      <tr><td>O(N log N)</td><td>Linearithmic</td><td>efficient divide-and-conquer sorting</td></tr>
+      <tr><td>O(N&sup2;)</td><td>Quadratic</td><td>nested loops over the same input</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2 id="blueprint">The test blueprint</h2>
+  <table class="prose-table">
+    <thead>
+      <tr><th>Topic</th><th>Questions per test</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Big O and algorithm analysis</td><td>12</td></tr>
+      <tr><td>Python foundations</td><td>9</td></tr>
+      <tr><td>Stacks, queues, deques, priority queues</td><td>5</td></tr>
+      <tr><td>Linked lists</td><td>4</td></tr>
+      <tr><td>ADTs and linear structures</td><td>3</td></tr>
+      <tr><td>Sorting and selection</td><td>3</td></tr>
+      <tr><td>Hash tables</td><td>2</td></tr>
+      <tr><td>Huffman coding</td><td>2</td></tr>
+      <tr><td>Total</td><td>40</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<footer class="lesson-footer">
+  <p>Practice the rules:
+  <a href="../lessons/0001-practice-test-1.html">practice test 1</a> and
+  <a href="../lessons/0002-practice-test-2.html">practice test 2</a>.
+  Full explanations live in the topic lessons -
+  <a href="../index.html">final review home</a>.</p>
+</footer>
+
+</article>
+</body>
+</html>
