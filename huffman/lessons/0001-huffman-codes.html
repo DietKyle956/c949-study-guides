@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Huffman Coding: Shorter Codes for Frequent Characters - Huffman</title>
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<article class="lesson">
+
+<header>
+  <p class="course-mark">Huffman &middot; Lesson 1</p>
+  <h1>Huffman coding: shorter codes for frequent characters</h1>
+  <p class="lede">Topic 8 is one exam sentence: Huffman coding is a
+  lossless compression technique that uses variable-length binary codes,
+  with the shortest codes handed to the most frequent characters. This
+  lesson pins it, then drills the recognition.</p>
+</header>
+
+<section>
+  <h2 id="why">Why this lesson</h2>
+  <p>This is the last content topic before the review. It follows
+  <a href="../../sorting/lessons/0002-partition-idea.html">sorting lesson
+  2</a>: topic 7 rearranged data inside a list, topic 8 instead
+  <em>encodes</em> it so the file itself gets smaller, with nothing lost.
+  There is no tree-building to memorize here, just recognition - the
+  <a href="../../sorting/index.html">sorting course</a> is the topic that
+  came before.</p>
+</section>
+
+<section>
+  <h2 id="what">What Huffman coding is: lossless, variable-length</h2>
+  <p>Two words do all the work. <strong>Lossless</strong> means the
+  original comes back exactly - every character, in order, with nothing
+  missing, unlike lossy compression, which throws detail away for good.
+  <strong>Variable-length binary codes</strong> means each
+  character&rsquo;s code is a run of 0s and 1s, and the runs differ in
+  length.</p>
+  <div class="rule">
+    <h3>The definition, verbatim</h3>
+    <p><strong>Huffman coding is a lossless compression technique that
+    uses variable-length binary codes.</strong> A question asking what kind
+    of compression Huffman coding is, or what kind of codes it uses, is
+    answered from this one sentence.</p>
+  </div>
+  <p>Fixed-length codes are the contrast: every character costs the same
+  number of bits, however often it appears.</p>
+</section>
+
+<section>
+  <h2 id="idea">The core idea: frequent gets short, rare gets long</h2>
+  <p>Give the characters that appear most often the shortest codes, and
+  the ones that barely appear the longest. The frequent character&rsquo;s
+  code is paid once per occurrence, so shortening it saves the most. The
+  exam gives the shape of it with three characters:</p>
+  <pre><code>Frequent character:  0       1 bit
+Less frequent:      101      3 bits
+Rare character:     11101    5 bits</code></pre>
+  <div class="rule">
+    <h3>The exam&rsquo;s explanation, verbatim</h3>
+    <p><strong>Huffman coding assigns shorter codes to more frequent
+    characters to reduce file size.</strong> The effect is a lower average
+    number of bits per character.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="trace">The arithmetic: average bits per character</h2>
+  <p>Compression happens on average, not per character. A 100-character
+  text with five distinct characters costs 300 bits at a fixed 3 bits
+  each; Huffman coding orders the code lengths by the counts instead:</p>
+  <pre><code>character   count   code    bits contributed
+e              60   0       60 x 1 = 60
+a              25   10      25 x 2 = 50
+t               9   110      9 x 3 = 27
+h               4   1110     4 x 4 = 16
+r               2   1111     2 x 4 =  8
+total: 161 bits / 100 characters = 1.61 bits per character</code></pre>
+  <p>Same text, same five characters, recovered exactly - but the average
+  has fallen from 3 bits per character to 1.61. That drop is the point:
+  <strong>short codes for the frequent characters lower the average bits
+  per character, so the file gets smaller.</strong></p>
+</section>
+
+<section>
+  <h2 id="map">The identification map</h2>
+  <table class="prose-table">
+    <thead>
+      <tr><th>Exam phrase</th><th>Defining property</th><th>Answer</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Huffman coding is what kind of compression</td><td>the original is recovered exactly</td><td>Lossless compression</td></tr>
+      <tr><td>it uses variable-length binary codes</td><td>code length follows the character&rsquo;s frequency</td><td>Codes of different lengths, each a run of 0s and 1s</td></tr>
+      <tr><td>which characters get the shorter codes</td><td>the ones seen most often</td><td>The more frequent characters</td></tr>
+      <tr><td>the purpose of Huffman coding</td><td>fewer bits paid overall</td><td>Reduce file size</td></tr>
+      <tr><td>the effect on the file</td><td>frequent characters cost less each time</td><td>A lower average number of bits per character</td></tr>
+      <tr><td>Huffman compression</td><td>the study guide&rsquo;s Quick Answer Review row</td><td>Shorter codes for frequent characters</td></tr>
+      <tr><td>a frequent character versus a rare one</td><td>the exam&rsquo;s example pair</td><td>Frequent gets 0; rare gets 11101</td></tr>
+    </tbody>
+  </table>
+  <p>Seven rows, and topic 8 is answered. The <a href="../reference/huffman-card.html">Huffman
+  card</a> is the printable version.</p>
+</section>
+
+<section class="quiz" data-quiz-title="Lesson 1 quiz">
+  <h2 id="quiz">Practice: solve these from memory</h2>
+  <p>Answer from memory before clicking - say or write your answer first.
+  The struggle is what makes it stick.</p>
+
+  <div class="quiz-q" data-answer="More frequent characters" data-explanation="The exam's sentence: Huffman coding assigns shorter codes to more frequent characters to reduce file size. The rare characters get the long codes like 11101, and they are paid only rarely.">
+    <p class="quiz-prompt">Huffman coding assigns the shorter codes to which characters?</p>
+    <div class="quiz-options">
+      <button data-choice="Less frequent characters">Less frequent characters</button>
+      <button data-choice="Characters that appear last in the text">Characters that appear last in the text</button>
+      <button data-choice="More frequent characters">More frequent characters</button>
+      <button data-choice="Characters with the longest names">Characters with the longest names</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Lossless" data-explanation="The exam's first word for Huffman coding: it is a lossless compression technique. Lossless means the original is recovered exactly; lossy compression would throw detail away and never get it back.">
+    <p class="quiz-prompt">Huffman coding is what kind of compression?</p>
+    <div class="quiz-options">
+      <button data-choice="Lossy">Lossy</button>
+      <button data-choice="Lossless">Lossless</button>
+      <button data-choice="Fixed-rate">Fixed-rate</button>
+      <button data-choice="Encrypted">Encrypted</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="More frequent characters use fewer bits, so the average number of bits per character drops" data-explanation="Compression happens on average: the frequent characters pay the short codes every time they occur, pulling the average bits per character below the fixed-length floor. The file is smaller because the average is lower, not because characters were dropped.">
+    <p class="quiz-prompt">Why does a Huffman-compressed file end up smaller?</p>
+    <div class="quiz-options">
+      <button data-choice="Repeated characters are deleted from the file to save space">Repeated characters are deleted from the file to save space</button>
+      <button data-choice="Every character is stored in exactly eight bits">Every character is stored in exactly eight bits</button>
+      <button data-choice="The characters are stored in alphabetical order for faster lookup">The characters are stored in alphabetical order for faster lookup</button>
+      <button data-choice="More frequent characters use fewer bits, so the average number of bits per character drops">More frequent characters use fewer bits, so the average number of bits per character drops</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Variable-length binary codes" data-explanation="The exam's definition, verbatim: a lossless compression technique that uses variable-length binary codes. Different characters get codes of different lengths, so the length can follow the frequency.">
+    <p class="quiz-prompt">Huffman coding uses codes of what form?</p>
+    <div class="quiz-options">
+      <button data-choice="Fixed-length binary codes">Fixed-length binary codes</button>
+      <button data-choice="One code per word">One code per word</button>
+      <button data-choice="Variable-length binary codes">Variable-length binary codes</button>
+      <button data-choice="Decimal codes">Decimal codes</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="The frequent character gets the shortest code and the rare one gets a long code" data-explanation="In the exam's example the frequent character is 0 - one bit - and the rare character is 11101 - five bits. The short code goes to the character seen most often, because that code is paid once per occurrence.">
+    <p class="quiz-prompt">In the exam&rsquo;s example, a frequent character is coded as 0 and a rare character as 11101. What does that show?</p>
+    <div class="quiz-options">
+      <button data-choice="The rare character is more important, so it gets more bits">The rare character is more important, so it gets more bits</button>
+      <button data-choice="The frequent character gets the shortest code and the rare one gets a long code">The frequent character gets the shortest code and the rare one gets a long code</button>
+      <button data-choice="Both characters cost the same number of bits on average">Both characters cost the same number of bits on average</button>
+      <button data-choice="Codes are handed out in alphabetical order">Codes are handed out in alphabetical order</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Huffman coding" data-explanation="Lossless compression with variable-length codes, where shorter codes go to more frequent characters to reduce file size - that is the exam's description of Huffman coding. The other choices are the sorting topic's tools.">
+    <p class="quiz-prompt">Which technique is this: lossless compression in which shorter codes go to more frequent characters?</p>
+    <div class="quiz-options">
+      <button data-choice="Counting sort">Counting sort</button>
+      <button data-choice="Quickselect">Quickselect</button>
+      <button data-choice="Binary search">Binary search</button>
+      <button data-choice="Huffman coding">Huffman coding</button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 id="next">What&rsquo;s next</h2>
+  <ul>
+    <li>That completes topic 8. The only topic left in the menu is the
+      final interleaved review (topic 9), which mixes every earlier topic -
+      Big O, ADTs, stacks and queues, linked lists, hash tables, sorting,
+      and this one.</li>
+    <li>The topic that came before this one was
+      <a href="../../sorting/index.html">sorting and selection</a> (topic
+      7): the value range, the O(N + K), and the partition idea.</li>
+    <li>The <a href="../reference/huffman-card.html">Huffman card</a>
+      carries every row above on one printable page for the review.</li>
+  </ul>
+</section>
+
+<section>
+  <h2 id="source">Go deeper</h2>
+  <p>The canonical treatment is CLRS Chapter 16.3, <em>Huffman Codes</em>,
+  in <em>Introduction to Algorithms</em> (Cormen, Leiserson, Rivest,
+  Stein), which proves the greedy choice behind the sentence this lesson
+  drills. The exam asks only the concept: lossless, variable-length codes,
+  shorter codes for more frequent characters.</p>
+</section>
+
+<footer class="lesson-footer">
+  <p>Stuck on anything in this lesson? Ask your agent - it can re-explain
+  variable-length codes with a fresh example, or build extra recognition
+  drills from the map above until the sentence comes out whole.</p>
+</footer>
+
+</article>
+<script src="../../assets/quiz.js"></script>
+</body>
+</html>

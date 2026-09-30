@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Huffman Card</title>
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<article class="lesson">
+
+<header>
+  <p class="course-mark">Reference &middot; printable</p>
+  <h1>Huffman Card</h1>
+  <p class="lede">The compressed version of the lesson. Every Huffman row
+  the exam tests, next to its answer, plus the two sentences the topic
+  lives on. Keep this next to you while drilling until recognition is
+  automatic.</p>
+</header>
+
+<section>
+  <h2 id="map">Property &rarr; answer</h2>
+  <table class="prose-table">
+    <thead>
+      <tr><th>Exam phrase</th><th>Answer</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Huffman coding is what kind of compression</td><td>lossless</td></tr>
+      <tr><td>lossless means</td><td>the original is recovered exactly</td></tr>
+      <tr><td>it uses codes of what form</td><td>variable-length binary codes</td></tr>
+      <tr><td>which characters get the shorter codes</td><td>the more frequent characters</td></tr>
+      <tr><td>the purpose of Huffman coding</td><td>reduce file size</td></tr>
+      <tr><td>the effect on the file</td><td>a lower average number of bits per character</td></tr>
+      <tr><td>Huffman compression</td><td>shorter codes for frequent characters</td></tr>
+      <tr><td>a frequent character versus a rare one</td><td>frequent gets 0; rare gets 11101</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2 id="sentence">The two sentences</h2>
+  <div class="rule">
+    <h3>What it is, verbatim</h3>
+    <p><strong>Huffman coding is a lossless compression technique that
+    uses variable-length binary codes.</strong> Lossless - the original
+    comes back exactly. Variable-length - each character&rsquo;s code is a
+    run of 0s and 1s, and the lengths differ.</p>
+  </div>
+  <div class="rule">
+    <h3>What it does, verbatim</h3>
+    <p><strong>Huffman coding assigns shorter codes to more frequent
+    characters to reduce file size.</strong> The effect is a lower average
+    number of bits per character. Frequent symbols use fewer bits; rare
+    symbols use more bits.</p>
+  </div>
+  <pre><code>Frequent character:  0       1 bit
+Less frequent:      101      3 bits
+Rare character:     11101    5 bits</code></pre>
+  <p>The frequent character&rsquo;s code is paid once per occurrence, so
+  shortening it saves the most bits; the rare character&rsquo;s long code
+  is paid only often enough to keep it recoverable. Shorter codes for the
+  frequent characters pull the average down, and a lower average is a
+  smaller file.</p>
+</section>
+
+<section>
+  <h2 id="tip">The exam tip</h2>
+  <p>From the study guide&rsquo;s strategy list: <strong>identify the
+  defining property in the question.</strong> &ldquo;Lossless, and the
+  codes have different lengths&rdquo; - Huffman coding. &ldquo;Shorter
+  codes for frequent characters&rdquo; - Huffman compression, the Quick
+  Answer Review row. &ldquo;A lower average number of bits per
+  character&rdquo; - the reason the file shrinks.</p>
+  <p>Then rule out choices that describe a different technique. Counting
+  sort and quickselect belong to the sorting topic; fixed-length codes
+  and lossy compression are the two contrasts this topic is built on.</p>
+</section>
+
+<footer class="lesson-footer">
+  <p>Full explanation and practice:
+  <a href="../lessons/0001-huffman-codes.html">Lesson 1 - Huffman coding:
+  shorter codes for frequent characters</a>.
+  Stuck? Ask your agent for extra recognition drills on any row above.</p>
+</footer>
+
+</article>
+</body>
+</html>
