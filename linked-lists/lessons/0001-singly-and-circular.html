@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Singly and Circular Lists: the Reference Update - Linked Lists</title>
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<article class="lesson">
+
+<header>
+  <p class="course-mark">Linked lists &middot; Lesson 1</p>
+  <h1>Singly and circular lists: the reference update</h1>
+  <p class="lede">The exam gives you a linked-list moment - removing the
+  first node, or a list that never ends - and asks what update does it.
+  This lesson maps each moment to its one-line answer, then drills the
+  recognition until it is instant.</p>
+</header>
+
+<section>
+  <h2 id="why">Why this lesson</h2>
+  <p>You already know the big idea from the ADTs course&rsquo;s
+  <a href="../../adts/lessons/0002-arrays-vs-linked.html">arrays vs linked
+  structures</a> lesson: arrays shift, linked structures update references.
+  This lesson makes the update concrete. Two of the exam&rsquo;s rows live
+  here: removing the first node of a singly linked list
+  (<code>head = head.next</code>) and the circular list that cycles without
+  an end. Both become free points once the update is automatic.</p>
+</section>
+
+<section>
+  <h2 id="node">The node and the head</h2>
+  <p>A singly linked list is a chain of <strong>nodes</strong>. Each node
+  stores two things: a <strong>value</strong> and a <strong>next
+  reference</strong> pointing to the following node. The last node&rsquo;s
+  next reference is <code>None</code> - the end of the chain.</p>
+  <pre><code>head -> [ 10 | * ] -> [ 20 | * ] -> [ 30 | * ] -> None</code></pre>
+  <div class="rule">
+    <h3>The only way in: the head</h3>
+    <p>The list keeps one reference to the first node, called
+    <strong>head</strong>. Every other node is reached by following next
+    references from it. There is no indexing - node 30 is not &ldquo;at
+    position 2&rdquo;, it is <em>two hops from head</em>.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="remove">Removing the first node</h2>
+  <p>The exam&rsquo;s singly linked list question is exactly this: to
+  remove the first node, update the head reference:</p>
+  <pre><code>head = head.next</code></pre>
+  <pre><code>Before: head -> [ 10 | * ] -> [ 20 | * ] -> [ 30 | * ] -> None
+After:  head -> [ 20 | * ] -> [ 30 | * ] -> None</code></pre>
+  <div class="rule">
+    <h3>What the update does, in the exam&rsquo;s words</h3>
+    <p><strong>It updates the reference to point to the next node in
+    sequence.</strong> The first node is simply skipped over - nothing
+    moves, nothing shifts.</p>
+  </div>
+  <p>The contrast to keep in your head: removing the first item of an
+  <em>array</em> shifts every later element one position left. Removing the
+  first node of a linked list changes <em>one reference</em>. The exam even
+  says it: <strong>no nodes need to be shifted, because linked-list nodes
+  are connected by references.</strong></p>
+</section>
+
+<section>
+  <h2 id="circular">The circular list: no end to reach</h2>
+  <p>In a circular linked list, the final node&rsquo;s next reference
+  points back to the first node instead of <code>None</code>. There is no
+  end of the chain:</p>
+  <pre><code>head -> [ A | * ] -> [ B | * ] -> [ C | * ] -+
+        ^                                    |
+        +------------------------------------+</code></pre>
+  <div class="rule">
+    <h3>The exam&rsquo;s two circular answers</h3>
+    <p>Definition: the final node <strong>points back to the first
+    node</strong> rather than to null or None.</p>
+    <p>Use for a repeating process: <strong>by continuously cycling
+    through nodes without reaching an end.</strong> The exam&rsquo;s
+    example is <strong>round-robin scheduling</strong> - give each process
+    a turn, then start the cycle again.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="map">The identification map</h2>
+  <table class="prose-table">
+    <thead>
+      <tr><th>Exam phrase</th><th>Defining property</th><th>Answer</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>remove the first node of a singly linked list</td><td>move the head reference</td><td>head = head.next</td></tr>
+      <tr><td>what head = head.next does</td><td>a reference update, nothing shifts</td><td>points the reference at the next node in sequence</td></tr>
+      <tr><td>why no nodes are shifted</td><td>nodes are connected by references</td><td>the exam&rsquo;s phrase itself</td></tr>
+      <tr><td>final node of a circular list</td><td>its next reference points back to the first node</td><td>Circular linked list</td></tr>
+      <tr><td>circular list for a repeating process</td><td>cycles without reaching an end</td><td>continuously cycling through nodes</td></tr>
+      <tr><td>round-robin scheduling</td><td>turn-taking with no end</td><td>Circular linked list</td></tr>
+    </tbody>
+  </table>
+  <p>Six rows, and every singly and circular question in the practice exam
+  is answered. The
+  <a href="../reference/reference-updates-card.html">reference-updates
+  card</a> is the printable version.</p>
+</section>
+
+<section class="quiz" data-quiz-title="Lesson 1 quiz">
+  <h2 id="quiz">Practice: solve these from memory</h2>
+  <p>Answer from memory before clicking - say or write your answer first.
+  The struggle is what makes it stick.</p>
+
+  <div class="quiz-q" data-answer="Set head to head.next" data-explanation="The head reference is the only way into a singly linked list. Pointing it at the next node skips the first node: head = head.next, exactly as the exam writes it.">
+    <p class="quiz-prompt">To remove the first node of a singly linked list:</p>
+    <div class="quiz-options">
+      <button data-choice="Set head to head.next">Set head to head.next</button>
+      <button data-choice="Set head to head.prev">Set head to head.prev</button>
+      <button data-choice="Set head to head.data">Set head to head.data</button>
+      <button data-choice="Set head to head.last">Set head to head.last</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Updates the reference to the next node in sequence" data-explanation="The exam's own words: it updates the reference to point to the next node in sequence. One reference changes; no node moves.">
+    <p class="quiz-prompt">What does head = head.next accomplish?</p>
+    <div class="quiz-options">
+      <button data-choice="Updates the reference to the next node in sequence">Updates the reference to the next node in sequence</button>
+      <button data-choice="Shifts every later node one position to the left">Shifts every later node one position to the left</button>
+      <button data-choice="Copies the next node over the first node's data">Copies the next node over the first node's data</button>
+      <button data-choice="Deletes the next node and everything after it">Deletes the next node and everything after it</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Nodes are connected by references" data-explanation="The exam's reason verbatim: no nodes need to be shifted, because linked-list nodes are connected by references. Shifting is an array cost, not a linked-list cost.">
+    <p class="quiz-prompt">Removing the first node needs no shifting because:</p>
+    <div class="quiz-options">
+      <button data-choice="Nodes are connected by references">Nodes are connected by references</button>
+      <button data-choice="Nodes are stored in one array">Nodes are stored in one array</button>
+      <button data-choice="Nodes are copied on each step">Nodes are copied on each step</button>
+      <button data-choice="Nodes are indexed by position">Nodes are indexed by position</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="The first node" data-explanation="The final node's next reference points back to the first node rather than to null or None. That back-link is what makes the list circular.">
+    <p class="quiz-prompt">In a circular linked list, the final node points to:</p>
+    <div class="quiz-options">
+      <button data-choice="The first node">The first node</button>
+      <button data-choice="The second node">The second node</button>
+      <button data-choice="The null pointer">The null pointer</button>
+      <button data-choice="The middle node">The middle node</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Cycles through nodes without reaching an end" data-explanation="The exam's words: by continuously cycling through nodes without reaching an end. With no None terminator, traversal never stops - perfect for round-robin scheduling.">
+    <p class="quiz-prompt">A circular list suits a repeating process because it:</p>
+    <div class="quiz-options">
+      <button data-choice="Cycles through nodes without reaching an end">Cycles through nodes without reaching an end</button>
+      <button data-choice="Stops at the last node and then restarts">Stops at the last node and then restarts</button>
+      <button data-choice="Skips the first node on every pass">Skips the first node on every pass</button>
+      <button data-choice="Reverses direction at the final node">Reverses direction at the final node</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Round-robin scheduling" data-explanation="Round-robin scheduling gives each process a turn and then cycles back to the first - the classic use of a circular linked list.">
+    <p class="quiz-prompt">Which idea does the exam pair with circular lists?</p>
+    <div class="quiz-options">
+      <button data-choice="Round-robin scheduling">Round-robin scheduling</button>
+      <button data-choice="First-come scheduling">First-come scheduling</button>
+      <button data-choice="Priority scheduling">Priority scheduling</button>
+      <button data-choice="Random scheduling">Random scheduling</button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 id="next">What&rsquo;s next</h2>
+  <ul>
+    <li><a href="0002-doubly-positional.html">Lesson 2</a>: doubly linked
+      lists and positional insertion - the four pointer updates between A
+      and B.</li>
+    <li>The <a href="../reference/reference-updates-card.html">reference-updates
+      card</a> carries this lesson&rsquo;s map on one printable page.</li>
+    <li>Back to the <a href="../../adts/index.html">ADTs course</a> if the
+      arrays-shift versus references-update contrast needs a refresh.</li>
+  </ul>
+</section>
+
+<section>
+  <h2 id="source">Go deeper</h2>
+  <p>The canonical source for linked structures is Sedgewick and
+  Wayne&rsquo;s
+  <a href="https://algs4.cs.princeton.edu/13stacks/">algs4 Section 1.3, Bags, Queues, and Stacks</a>
+  - the same treatment the ADTs course used. Its linked-list sections show
+  exactly why insertion and removal are reference updates. The exam
+  questions are restatements of that section&rsquo;s mechanics.</p>
+</section>
+
+<footer class="lesson-footer">
+  <p>Stuck on anything in this lesson? Ask your agent - it can rephrase any
+  definition, walk a node-by-node trace, or quiz you one-on-one until the
+  updates are automatic.</p>
+</footer>
+
+</article>
+<script src="../../assets/quiz.js"></script>
+</body>
+</html>

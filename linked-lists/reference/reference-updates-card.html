@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Linked Lists Reference-Updates Card</title>
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<article class="lesson">
+
+<header>
+  <p class="course-mark">Reference &middot; printable</p>
+  <h1>Linked Lists Reference-Updates Card</h1>
+  <p class="lede">The compressed version of both lessons. Every
+  reference-update the exam tests, next to its answer. Keep this next to
+  you while drilling until recognition is automatic.</p>
+</header>
+
+<section>
+  <h2 id="map">Property &rarr; answer</h2>
+  <table class="prose-table">
+    <thead>
+      <tr><th>Exam phrase</th><th>Answer</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>remove the first node of a singly linked list</td><td>head = head.next</td></tr>
+      <tr><td>what head = head.next does</td><td>updates the reference to point to the next node in sequence</td></tr>
+      <tr><td>why no nodes are shifted</td><td>linked-list nodes are connected by references</td></tr>
+      <tr><td>positional list, implementation</td><td>doubly linked list</td></tr>
+      <tr><td>insertion at a known position</td><td>only pointer updates</td></tr>
+      <tr><td>each node stores links to</td><td>its previous and next neighbors</td></tr>
+      <tr><td>circular list, final node</td><td>points back to the first node</td></tr>
+      <tr><td>circular list for a repeating process</td><td>cycles through nodes without reaching an end</td></tr>
+      <tr><td>round-robin scheduling</td><td>circular linked list</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2 id="singly">The singly linked list</h2>
+  <p>Nodes hold a value and a next reference. The only way in is
+  <strong>head</strong>; the last node&rsquo;s next reference is
+  <code>None</code>.</p>
+  <div class="rule">
+    <h3>Removing the first node</h3>
+    <p><code>head = head.next</code> - <strong>it updates the reference to
+    point to the next node in sequence.</strong> One reference changes; no
+    node shifts. Contrast: removing the first item of an array shifts every
+    later element left.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="circular">The circular list</h2>
+  <p>The final node&rsquo;s next reference points back to the
+  <strong>first node</strong> rather than to null or None. Use for a
+  repeating process: <strong>by continuously cycling through nodes without
+  reaching an end</strong> - the exam&rsquo;s example is round-robin
+  scheduling.</p>
+</section>
+
+<section>
+  <h2 id="doubly">The doubly linked list</h2>
+  <p>Each node stores a value and two references: <code>next</code> and
+  <code>prev</code>. A positional list is commonly implemented as a doubly
+  linked list.</p>
+  <div class="rule">
+    <h3>The four-link insertion</h3>
+    <p>Inserting a new node between A and B:</p>
+    <pre><code>A.next     -> new
+new.prev   -> A
+new.next   -> B
+B.prev     -> new</code></pre>
+    <p><strong>Each node stores links to its previous and next neighbors
+    and needs only pointer updates.</strong> Nothing shifts.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="tip">The exam tip</h2>
+  <p>From the study guide&rsquo;s strategy list: <strong>for linked lists,
+  think in terms of reference updates; for arrays, think in terms of
+  indices and potential shifting.</strong> Whichever structure the question
+  names, that one line picks the right mental model.</p>
+</section>
+
+<footer class="lesson-footer">
+  <p>Full explanations and practice:
+  <a href="../lessons/0001-singly-and-circular.html">Lesson 1 - Singly and circular lists</a> and
+  <a href="../lessons/0002-doubly-positional.html">Lesson 2 - Doubly linked lists and positional insertion</a>.
+  Stuck? Ask your agent for extra recognition drills on any property above.</p>
+</footer>
+
+</article>
+</body>
+</html>

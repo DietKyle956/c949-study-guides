@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doubly Linked Lists: Positional Insertion - Linked Lists</title>
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<article class="lesson">
+
+<header>
+  <p class="course-mark">Linked lists &middot; Lesson 2</p>
+  <h1>Doubly linked lists: positional insertion</h1>
+  <p class="lede">The exam&rsquo;s remaining linked-list rows are about the
+  doubly linked list: what a positional list is made of, and the four links
+  that change when a new node slides between two neighbors. This lesson
+  drills the four-link insertion until you can write it from memory.</p>
+</header>
+
+<section>
+  <h2 id="why">Why this lesson</h2>
+  <p>Lesson 1 covered singly linked lists - one direction, one reference
+  per node. A doubly linked list adds a second reference per node, and that
+  second reference is what the exam&rsquo;s positional-list question is
+  built on. The matching table says it in four words: <strong>update doubly
+  linked neighbor pointers</strong>.</p>
+</section>
+
+<section>
+  <h2 id="doubly">The doubly linked node</h2>
+  <p>Each node of a doubly linked list stores a <strong>value</strong> and
+  <strong>two references</strong>: <code>next</code> to the following node
+  and <code>prev</code> to the preceding one. You can walk the chain in
+  either direction.</p>
+  <pre><code>head -> [ | * | A | * | ] <-> [ | * | B | * | ] -> None</code></pre>
+  <div class="rule">
+    <h3>The exam&rsquo;s phrasing, verbatim</h3>
+    <p><strong>Each node stores links to its previous and next neighbors
+    and needs only pointer updates.</strong> &ldquo;Pointer updates&rdquo;
+    means changing references - no shifting, ever.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="insert">Inserting between A and B</h2>
+  <p>The exam&rsquo;s insertion: a new node goes between nodes A and B.
+  Four links change - two on the new node, one on A, one on B:</p>
+  <pre><code>A.next     -> new
+new.prev   -> A
+new.next   -> B
+B.prev     -> new</code></pre>
+  <pre><code>Before:  A <-> B
+After:   A <-> new <-> B</code></pre>
+  <div class="rule">
+    <h3>How to read the four links</h3>
+    <p>The new node takes A and B as its neighbors (<code>new.prev ->
+    A</code>, <code>new.next -> B</code>), then the neighbors point back at
+    it (<code>A.next -> new</code>, <code>B.prev -> new</code>). Only
+    references change - A and B stay exactly where they are.</p>
+  </div>
+  <p>Contrast with an array again: inserting in the middle of an array
+  shifts every later element right. Inserting in the middle of a doubly
+  linked list changes four references and moves nothing. That contrast is
+  the whole exam point.</p>
+</section>
+
+<section>
+  <h2 id="positional">The positional list</h2>
+  <p>A <strong>positional list</strong> is a list where you insert and
+  remove at positions you keep explicit references to. The exam&rsquo;s
+  definitional row:</p>
+  <div class="rule">
+    <h3>Implementation, verbatim</h3>
+    <p>A positional list is <strong>commonly implemented as a doubly linked
+    list</strong> - because insertion between two known positions is
+    exactly the four-reference update above.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="map">The identification map</h2>
+  <table class="prose-table">
+    <thead>
+      <tr><th>Exam phrase</th><th>Defining property</th><th>Answer</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>positional list, implementation</td><td>insert and remove at known positions</td><td>Doubly linked list</td></tr>
+      <tr><td>insertion at a known position</td><td>no shifting</td><td>only pointer updates</td></tr>
+      <tr><td>each node stores links to</td><td>both neighbors</td><td>its previous and next neighbors</td></tr>
+      <tr><td>insert new between A and B</td><td>four links change</td><td>A.next -> new, new.prev -> A, new.next -> B, B.prev -> new</td></tr>
+    </tbody>
+  </table>
+  <p>Four rows, and every doubly linked and positional question in the
+  practice exam is answered. The
+  <a href="../reference/reference-updates-card.html">reference-updates
+  card</a> is the printable version.</p>
+</section>
+
+<section class="quiz" data-quiz-title="Lesson 2 quiz">
+  <h2 id="quiz">Practice: solve these from memory</h2>
+  <p>Answer from memory before clicking - say or write your answer first.
+  The struggle is what makes it stick.</p>
+
+  <div class="quiz-q" data-answer="Doubly linked list" data-explanation="The exam's definition: a positional list is commonly implemented as a doubly linked list. The prev and next references make insert-at-a-position a four-link update.">
+    <p class="quiz-prompt">A positional list is commonly implemented as a:</p>
+    <div class="quiz-options">
+      <button data-choice="Doubly linked list">Doubly linked list</button>
+      <button data-choice="Singly linked list">Singly linked list</button>
+      <button data-choice="Sorted array list">Sorted array list</button>
+      <button data-choice="Hash table list">Hash table list</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Its previous and next neighbors" data-explanation="The exam's words: each node stores links to its previous and next neighbors. prev points back, next points forward - that is what makes it doubly linked.">
+    <p class="quiz-prompt">Each node of a doubly linked list stores links to:</p>
+    <div class="quiz-options">
+      <button data-choice="Its previous and next neighbors">Its previous and next neighbors</button>
+      <button data-choice="The first and last elements">The first and last elements</button>
+      <button data-choice="Its parent and child nodes">Its parent and child nodes</button>
+      <button data-choice="The left and right subtrees">The left and right subtrees</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Only pointer updates" data-explanation="The exam's phrase: insertion at a known position needs only pointer updates. Once the position is known, insertion changes references - it does not shift or copy elements.">
+    <p class="quiz-prompt">Inserting at a known position in a doubly linked list needs:</p>
+    <div class="quiz-options">
+      <button data-choice="Only pointer updates">Only pointer updates</button>
+      <button data-choice="Only array indexing">Only array indexing</button>
+      <button data-choice="A full array shift">A full array shift</button>
+      <button data-choice="A list-wide copy">A list-wide copy</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="new" data-explanation="A.next -> new: A's forward link now points at the new node instead of at B. B.prev -> new does the same from the other side.">
+    <p class="quiz-prompt">Inserting new between A and B sets A.next to:</p>
+    <div class="quiz-options">
+      <button data-choice="new">new</button>
+      <button data-choice="A">A</button>
+      <button data-choice="B">B</button>
+      <button data-choice="None">None</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="new" data-explanation="B.prev -> new: B's backward link now points at the new node instead of at A. Two links attach the new node to its neighbors, two links attach the neighbors to it.">
+    <p class="quiz-prompt">The same insertion sets B.prev to:</p>
+    <div class="quiz-options">
+      <button data-choice="new">new</button>
+      <button data-choice="A">A</button>
+      <button data-choice="B">B</button>
+      <button data-choice="None">None</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="A and B" data-explanation="new.prev -> A and new.next -> B: the new node's two links point at its two neighbors. Then A.next and B.prev point back at new.">
+    <p class="quiz-prompt">After inserting new between A and B, new.prev and new.next are:</p>
+    <div class="quiz-options">
+      <button data-choice="A and B">A and B</button>
+      <button data-choice="B and A">B and A</button>
+      <button data-choice="A and A">A and A</button>
+      <button data-choice="B and B">B and B</button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 id="next">What&rsquo;s next</h2>
+  <ul>
+    <li>The <a href="../reference/reference-updates-card.html">reference-updates
+      card</a> carries both lessons&rsquo; maps on one printable page.</li>
+    <li>The next topic is <strong>hash tables</strong> (topic 6) - one
+      complexity row and one concept.</li>
+    <li>Linked lists return in the final interleaved review (topic 9),
+      mixed with every earlier topic.</li>
+  </ul>
+</section>
+
+<section>
+  <h2 id="source">Go deeper</h2>
+  <p>The canonical treatment of doubly linked lists is CLRS Chapter 10.2,
+  <em>Introduction to Algorithms</em> (Cormen, Leiserson, Rivest, Stein) -
+  prev pointers, insertion, and deletion covered side by side. The exam
+  rows are the four-link insertion restated.</p>
+</section>
+
+<footer class="lesson-footer">
+  <p>Stuck on anything in this lesson? Ask your agent - it can trace the
+  four links node by node, generate fresh insertion drills, or quiz you
+  one-on-one until the update is automatic.</p>
+</footer>
+
+</article>
+<script src="../../assets/quiz.js"></script>
+</body>
+</html>
