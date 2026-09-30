@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Partition Idea: Quicksort and Quickselect - Sorting</title>
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<article class="lesson">
+
+<header>
+  <p class="course-mark">Sorting &middot; Lesson 2</p>
+  <h1>The partition idea: quicksort and quickselect</h1>
+  <p class="lede">The exam&rsquo;s other sorting item is one technique
+  question: which quicksort idea does quickselect use? This lesson pins the
+  pivot-and-partition loop, the exam&rsquo;s verbatim explanation, and the
+  one difference between the two algorithms, then drills the sentence until
+  it comes out whole.</p>
+</header>
+
+<section>
+  <h2 id="why">Why this lesson</h2>
+  <p><a href="0001-counting-sort.html">Lesson 1</a> settled the
+  identification half: counting sort counts, it never compares. This lesson
+  is the technique half: quicksort and quickselect <strong>compare
+  everything to a pivot</strong>. The exam asks what quickselect borrows
+  from quicksort and expects one explanation - this lesson attaches that
+  explanation to the four steps.</p>
+</section>
+
+<section>
+  <h2 id="quicksort">Quicksort: pick a pivot, partition</h2>
+  <p>Quicksort&rsquo;s core idea is two moves. <strong>Pick a
+  pivot</strong> - one element of the list. <strong>Partition</strong> -
+  rearrange so everything below the pivot sits on one side and everything
+  above sits on the other. Then sort each side the same way:</p>
+  <pre><code>list:     [7, 2, 9, 4, 6]   pivot 6
+partition: [2, 4]  6  [7, 9]
+then:      sort [2, 4] and sort [7, 9]</code></pre>
+  <div class="rule">
+    <h3>The core idea, one line</h3>
+    <p><strong>Quicksort picks a pivot and partitions the list into
+    elements below and above the pivot.</strong> The partition step is the
+    idea quickselect borrows.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="quickselect">Quickselect: find a rank, sort nothing</h2>
+  <p>Quickselect answers a different question: what is the
+  <strong>kth smallest or kth largest element</strong> - without sorting
+  the entire list. It reuses the partition step and then follows only one
+  side. The exam&rsquo;s four steps, in order:</p>
+  <ol>
+    <li><strong>Choose a pivot.</strong></li>
+    <li><strong>Partition</strong> elements into those below and above the
+      pivot.</li>
+    <li><strong>Determine</strong> which partition could contain the
+      desired rank.</li>
+    <li><strong>Continue only</strong> in that relevant partition.</li>
+  </ol>
+  <p>Step 3 is the trick: the partition&rsquo;s size tells you where the
+  rank lives. If you want the 2nd smallest and the below-pivot partition
+  holds four elements, the answer is inside it - the other side is
+  discarded.</p>
+  <div class="rule">
+    <h3>The exam&rsquo;s explanation, verbatim</h3>
+    <p>Quickselect uses partitioning <strong>to partition the list and
+    focus on the relevant section</strong>.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="difference">The one difference: one side, not both</h2>
+  <p>Quicksort sorts, so it must finish <strong>both</strong> partitions -
+  the full list has to end up ordered. Quickselect wants one rank, so it
+  needs only the partition holding it. The exam asks the difference
+  directly:</p>
+  <div class="rule">
+    <h3>The exam&rsquo;s contrast, verbatim</h3>
+    <p><strong>Unlike quicksort, quickselect does not recursively sort both
+    partitions.</strong> One side is followed; the other is dropped. That
+    is what &ldquo;without sorting the entire list&rdquo; means.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="map">The identification map</h2>
+  <table class="prose-table">
+    <thead>
+      <tr><th>Exam phrase</th><th>Defining property</th><th>Answer</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>quicksort&rsquo;s core idea</td><td>pivot splits the list</td><td>Pick a pivot, partition below/above</td></tr>
+      <tr><td>quickselect finds</td><td>a rank, not a full sort</td><td>The kth smallest or kth largest element without sorting the entire list</td></tr>
+      <tr><td>quickselect&rsquo;s quicksort technique</td><td>the exam&rsquo;s explanation</td><td>To partition the list and focus on the relevant section</td></tr>
+      <tr><td>unlike quicksort, quickselect</td><td>one side or two</td><td>Does not recursively sort both partitions</td></tr>
+      <tr><td>after partitioning, quickselect continues</td><td>pursue the rank</td><td>Only in the partition that could contain the desired rank</td></tr>
+    </tbody>
+  </table>
+  <p>Five rows, and the technique half of the exam&rsquo;s sorting block is
+  answered. The <a href="../reference/sorting-card.html">sorting card</a>
+  is the printable version.</p>
+</section>
+
+<section class="quiz" data-quiz-title="Lesson 2 quiz">
+  <h2 id="quiz">Practice: solve these from memory</h2>
+  <p>Answer from memory before clicking - say or write your answer first.
+  The struggle is what makes it stick.</p>
+
+  <div class="quiz-q" data-answer="Pick a pivot and partition" data-explanation="Quicksort picks one element as the pivot, then partitions the list into elements below and above it. Counting is lesson 1's sort; merging is merge sort; swapping neighbors is bubble sort.">
+    <p class="quiz-prompt">Quicksort&rsquo;s core idea is:</p>
+    <div class="quiz-options">
+      <button data-choice="Pick a pivot and partition">Pick a pivot and partition</button>
+      <button data-choice="Count each value by range">Count each value by range</button>
+      <button data-choice="Merge sorted halves">Merge sorted halves</button>
+      <button data-choice="Swap neighboring pairs">Swap neighboring pairs</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="The kth smallest or kth largest element" data-explanation="The exam's words: quickselect finds a target rank, such as the kth smallest or kth largest element, without sorting the entire list.">
+    <p class="quiz-prompt">Quickselect finds:</p>
+    <div class="quiz-options">
+      <button data-choice="The kth smallest or kth largest element">The kth smallest or kth largest element</button>
+      <button data-choice="The full sorted list">The full sorted list</button>
+      <button data-choice="The smallest and largest pair">The smallest and largest pair</button>
+      <button data-choice="The most frequent element">The most frequent element</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="To partition the list and focus on the relevant section" data-explanation="The exam's own explanation, verbatim. Partition, find which side holds the rank, and continue only there - not in both.">
+    <p class="quiz-prompt">Quickselect&rsquo;s technique, borrowed from quicksort, is:</p>
+    <div class="quiz-options">
+      <button data-choice="To partition the list and focus on the relevant section">To partition the list and focus on the relevant section</button>
+      <button data-choice="To sort both partitions completely">To sort both partitions completely</button>
+      <button data-choice="To count the values by range">To count the values by range</button>
+      <button data-choice="To merge adjacent runs">To merge adjacent runs</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Does not recursively sort both partitions" data-explanation="The exam's contrast: quickselect does not recursively sort both partitions. Quicksort must finish both sides to sort; quickselect follows only the side holding the rank.">
+    <p class="quiz-prompt">Unlike quicksort, quickselect:</p>
+    <div class="quiz-options">
+      <button data-choice="Does not recursively sort both partitions">Does not recursively sort both partitions</button>
+      <button data-choice="Never chooses a pivot">Never chooses a pivot</button>
+      <button data-choice="Sorts the entire list first">Sorts the entire list first</button>
+      <button data-choice="Compares every pair of elements">Compares every pair of elements</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Only in the partition that could contain the desired rank" data-explanation="Step 4 of the exam's list: determine which partition could contain the desired rank, then continue only in that relevant partition.">
+    <p class="quiz-prompt">After partitioning, quickselect continues:</p>
+    <div class="quiz-options">
+      <button data-choice="Only in the partition that could contain the desired rank">Only in the partition that could contain the desired rank</button>
+      <button data-choice="In both partitions at once">In both partitions at once</button>
+      <button data-choice="In the smaller partition">In the smaller partition</button>
+      <button data-choice="Until every partition is sorted">Until every partition is sorted</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Continue only in that relevant partition" data-explanation="The fourth step verbatim: continue only in that relevant partition. The other choices describe quicksort, merging, or counting - different algorithms.">
+    <p class="quiz-prompt">Which completes the exam&rsquo;s steps: choose a pivot, partition, determine the relevant partition, ...</p>
+    <div class="quiz-options">
+      <button data-choice="Continue only in that relevant partition">Continue only in that relevant partition</button>
+      <button data-choice="Sort both partitions fully">Sort both partitions fully</button>
+      <button data-choice="Merge the partitions back">Merge the partitions back</button>
+      <button data-choice="Count the elements in each partition">Count the elements in each partition</button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 id="next">What&rsquo;s next</h2>
+  <ul>
+    <li>The <a href="../reference/sorting-card.html">sorting card</a>
+      carries both lessons&rsquo; rows on one printable page.</li>
+    <li>That completes topic 7. The next topic in the menu is Huffman
+      coding (topic 8) - lossless compression with shorter codes for
+      frequent characters.</li>
+    <li>Sorting returns in the final interleaved review (topic 9), mixed
+      with every earlier topic.</li>
+  </ul>
+</section>
+
+<section>
+  <h2 id="source">Go deeper</h2>
+  <p>The canonical treatments are CLRS Chapter 7, <em>Quicksort</em> (the
+  partition step), and Chapter 9, <em>Medians and Order Statistics</em>
+  (quickselect), in <em>Introduction to Algorithms</em> (Cormen, Leiserson,
+  Rivest, Stein). The exam&rsquo;s explanation is the one-sentence summary
+  of Chapter 9&rsquo;s selection procedure.</p>
+</section>
+
+<footer class="lesson-footer">
+  <p>Stuck on anything in this lesson? Ask your agent - it can walk a
+  pivot-and-partition trace for any list, or quiz you one-on-one until the
+  &ldquo;relevant section&rdquo; sentence is automatic.</p>
+</footer>
+
+</article>
+<script src="../../assets/quiz.js"></script>
+</body>
+</html>

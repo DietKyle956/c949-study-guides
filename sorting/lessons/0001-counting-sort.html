@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Counting Sort and the O(N + K) - Sorting</title>
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<article class="lesson">
+
+<header>
+  <p class="course-mark">Sorting &middot; Lesson 1</p>
+  <h1>Counting sort: the value-range sort</h1>
+  <p class="lede">The exam&rsquo;s sorting block opens with one
+  identification question: which sort requires knowing the range of input
+  values? This lesson pins the recognition, the O(N + K) complexity with its
+  two letters, and the practicality condition, then drills them until they
+  are instant.</p>
+</header>
+
+<section>
+  <h2 id="why">Why this lesson</h2>
+  <p>Topic 7 of the C949 menu has two pieces: counting sort (this lesson)
+  and the partition idea (lesson 2). The O(N + K) rule reuses the Big O
+  course&rsquo;s add rule - sequential loops add, nested loops multiply (see
+  <a href="../../lessons/0001-loop-rules.html">Lesson 1, the loop
+  rules</a>). If the array-versus-counts contrast feels rusty, the
+  <a href="../../adts/lessons/0002-arrays-vs-linked.html">arrays vs linked
+  structures</a> lesson sets it up.</p>
+</section>
+
+<section>
+  <h2 id="property">The defining property: the value range</h2>
+  <p>Counting sort is the only sort in the exam that asks for the
+  <strong>range of input values</strong>. It needs the range so it can
+  create an <strong>array of counts</strong>: one slot for every possible
+  value, from the smallest to the largest. The exam&rsquo;s identification
+  phrase is that whole sentence.</p>
+  <div class="rule">
+    <h3>The defining property, verbatim</h3>
+    <p><strong>Counting sort requires knowing or determining the range of
+    input values so it can create an array of counts.</strong> Any question
+    asking which sort needs the value range is answered
+    <strong>counting sort</strong>.</p>
+  </div>
+  <p>Notice what is missing: <strong>no comparisons</strong>. Counting sort
+  never asks which element is bigger. It counts. Lesson 2&rsquo;s quicksort
+  is the opposite - it partitions by comparing everything to a pivot. The
+  exam separates the two by this contrast.</p>
+</section>
+
+<section>
+  <h2 id="trace">How it works: count, then write out</h2>
+  <p>Range first: the input holds values from 0 to 2, so the counts array
+  has three slots. Pass once over the input, counting each value:</p>
+  <pre><code>input:        [2, 0, 2, 1]
+range 0..2 -> counts array of 3 slots
+counts:       [1, 1, 2]   one 0, one 1, two 2s</code></pre>
+  <p>Then write the output from the counts: 0 once, 1 once, 2 twice:</p>
+  <pre><code>output:       [0, 1, 2, 2]</code></pre>
+  <p>Two passes, no comparisons. The counts array is the whole idea - the
+  exam&rsquo;s question about it is just checking you know it exists.</p>
+</section>
+
+<section>
+  <h2 id="complexity">The complexity: O(N + K)</h2>
+  <p>The exam&rsquo;s complexity row names two letters. <strong>N</strong>
+  is the number of elements in the input. <strong>K</strong> is the range of
+  possible values - how many slots the counts array needs. The two passes
+  become two loops, one after the other:</p>
+  <pre><code>pass 1: count every input value     -> N steps
+pass 2: write output from counts    -> K steps
+total:  N + K                        -> O(N + K)</code></pre>
+  <p>Loops in sequence <strong>add</strong> - the Big O course&rsquo;s add
+  rule. No nesting, no log, no square. The exam asks the complexity, the N,
+  and the K; answer all three with the same sentence.</p>
+  <div class="rule">
+    <h3>The exam&rsquo;s complexity row, verbatim</h3>
+    <p>Counting sort&rsquo;s typical complexity is <strong>O(N + K)</strong>,
+    where <strong>N is the number of elements</strong> and <strong>K is the
+    range of possible values</strong>.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="practical">When it is practical: the K-versus-N check</h2>
+  <p>The counts array has one slot per possible value. If K explodes - say
+  ten elements whose values run from 0 to a billion - the array is a
+  billion slots for ten items. The exam&rsquo;s practicality row captures
+  exactly this:</p>
+  <div class="rule">
+    <h3>The exam&rsquo;s condition, verbatim</h3>
+    <p><strong>Counting sort is most practical when K is not dramatically
+    larger than N.</strong> Small range, small counts array, quick two
+    passes. Huge range, huge counts array, wasted slots.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="map">The identification map</h2>
+  <table class="prose-table">
+    <thead>
+      <tr><th>Exam phrase</th><th>Defining property</th><th>Answer</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>which sort requires knowing the range of input values</td><td>value-to-counts design</td><td>Counting sort</td></tr>
+      <tr><td>what counting sort creates</td><td>one slot per value</td><td>An array of counts</td></tr>
+      <tr><td>counting sort&rsquo;s typical complexity</td><td>two sequential loops</td><td>O(N + K)</td></tr>
+      <tr><td>the N in O(N + K)</td><td>the input size</td><td>The number of elements</td></tr>
+      <tr><td>the K in O(N + K)</td><td>the span of values</td><td>The range of possible values</td></tr>
+      <tr><td>most practical when</td><td>counts array stays small</td><td>K is not dramatically larger than N</td></tr>
+    </tbody>
+  </table>
+  <p>Six rows, and the counting-sort half of the exam&rsquo;s sorting block
+  is answered. The <a href="../reference/sorting-card.html">sorting
+  card</a> is the printable version.</p>
+</section>
+
+<section class="quiz" data-quiz-title="Lesson 1 quiz">
+  <h2 id="quiz">Practice: solve these from memory</h2>
+  <p>Answer from memory before clicking - say or write your answer first.
+  The struggle is what makes it stick.</p>
+
+  <div class="quiz-q" data-answer="Counting sort" data-explanation="The exam's phrase points at counting sort: it needs the value range so it can create an array of counts. The other sorts compare elements and never ask for the range.">
+    <p class="quiz-prompt">Which sort requires knowing or determining the range of input values?</p>
+    <div class="quiz-options">
+      <button data-choice="Counting sort">Counting sort</button>
+      <button data-choice="Quicksort">Quicksort</button>
+      <button data-choice="Selection sort">Selection sort</button>
+      <button data-choice="Merge sort">Merge sort</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="O(N + K)" data-explanation="Two sequential passes: N steps to count the input, K steps to write the output. Loops in sequence add - the Big O course's add rule.">
+    <p class="quiz-prompt">Counting sort&rsquo;s typical complexity is:</p>
+    <div class="quiz-options">
+      <button data-choice="O(N + K)">O(N + K)</button>
+      <button data-choice="O(N log N)">O(N log N)</button>
+      <button data-choice="O(N&sup2;)">O(N&sup2;)</button>
+      <button data-choice="O(log N)">O(log N)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="The range of possible values" data-explanation="N is the number of elements; K is the range of possible values - how many slots the counts array needs. The exam asks both letters.">
+    <p class="quiz-prompt">In O(N + K), the K stands for:</p>
+    <div class="quiz-options">
+      <button data-choice="The range of possible values">The range of possible values</button>
+      <button data-choice="The number of comparisons">The number of comparisons</button>
+      <button data-choice="The number of swaps">The number of swaps</button>
+      <button data-choice="The number of elements">The number of elements</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="K is not dramatically larger than N" data-explanation="The exam's own words: counting sort is most practical when K is not dramatically larger than N. A huge range means a huge counts array for a small input.">
+    <p class="quiz-prompt">Counting sort is most practical when:</p>
+    <div class="quiz-options">
+      <button data-choice="K is not dramatically larger than N">K is not dramatically larger than N</button>
+      <button data-choice="K is much larger than N">K is much larger than N</button>
+      <button data-choice="The list is nearly sorted">The list is nearly sorted</button>
+      <button data-choice="The list contains duplicates">The list contains duplicates</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="An array of counts" data-explanation="The exam's sentence: counting sort needs the range so it can create an array of counts - one slot per possible value. No comparisons, just counting.">
+    <p class="quiz-prompt">What does counting sort create to do its work?</p>
+    <div class="quiz-options">
+      <button data-choice="An array of counts">An array of counts</button>
+      <button data-choice="A hash table">A hash table</button>
+      <button data-choice="A linked list">A linked list</button>
+      <button data-choice="A binary tree">A binary tree</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Comparing elements" data-explanation="Counting sort counts; it never asks which element is bigger. Lesson 2's quicksort is the opposite - everything is compared to a pivot. That contrast is the exam's point.">
+    <p class="quiz-prompt">Which operation does counting sort never use?</p>
+    <div class="quiz-options">
+      <button data-choice="Comparing elements">Comparing elements</button>
+      <button data-choice="Looping over values">Looping over values</button>
+      <button data-choice="Writing to an array">Writing to an array</button>
+      <button data-choice="Incrementing a count">Incrementing a count</button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 id="next">What&rsquo;s next</h2>
+  <ul>
+    <li><a href="0002-partition-idea.html">Lesson 2</a>: the partition
+      idea - quicksort&rsquo;s pivot and quickselect&rsquo;s pursuit of one
+      section.</li>
+    <li>The <a href="../reference/sorting-card.html">sorting card</a>
+      carries both lessons&rsquo; rows on one printable page.</li>
+    <li>Back to the <a href="../../index.html">Big O course</a> if the
+      add rule needs a refresh before lesson 2.</li>
+  </ul>
+</section>
+
+<section>
+  <h2 id="source">Go deeper</h2>
+  <p>The canonical treatment of counting sort is CLRS Chapter 8,
+  <em>Sorting in Linear Time</em> (Cormen, Leiserson, Rivest, Stein). The
+  exam&rsquo;s rows - the value range, the counts array, O(N + K) - are that
+  chapter&rsquo;s summary sentences.</p>
+</section>
+
+<footer class="lesson-footer">
+  <p>Stuck on anything in this lesson? Ask your agent - it can walk a
+  counts-array trace, re-explain why the two loops add, or quiz you
+  one-on-one until the O(N + K) row is automatic.</p>
+</footer>
+
+</article>
+<script src="../../assets/quiz.js"></script>
+</body>
+</html>

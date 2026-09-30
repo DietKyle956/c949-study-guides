@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sorting Card</title>
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<article class="lesson">
+
+<header>
+  <p class="course-mark">Reference &middot; printable</p>
+  <h1>Sorting Card</h1>
+  <p class="lede">The compressed version of both lessons. Every sorting
+  row the exam tests, next to its answer. Keep this next to you while
+  drilling until recognition is automatic.</p>
+</header>
+
+<section>
+  <h2 id="map">Property &rarr; answer</h2>
+  <table class="prose-table">
+    <thead>
+      <tr><th>Exam phrase</th><th>Answer</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>which sort requires knowing the range of input values</td><td>counting sort</td></tr>
+      <tr><td>what counting sort creates</td><td>an array of counts</td></tr>
+      <tr><td>counting sort&rsquo;s typical complexity</td><td>O(N + K)</td></tr>
+      <tr><td>the N in O(N + K)</td><td>the number of elements</td></tr>
+      <tr><td>the K in O(N + K)</td><td>the range of possible values</td></tr>
+      <tr><td>most practical when</td><td>K is not dramatically larger than N</td></tr>
+      <tr><td>quicksort&rsquo;s core idea</td><td>pick a pivot, partition below/above</td></tr>
+      <tr><td>quickselect finds</td><td>kth smallest or kth largest without sorting the entire list</td></tr>
+      <tr><td>quickselect&rsquo;s quicksort technique</td><td>partition the list and focus on the relevant section</td></tr>
+      <tr><td>unlike quicksort, quickselect</td><td>does not recursively sort both partitions</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2 id="counting">Counting sort</h2>
+  <p>Counting sort requires knowing the <strong>range of input
+  values</strong> so it can create an <strong>array of counts</strong> -
+  one slot per possible value. It never compares elements.</p>
+  <pre><code>input:        [2, 0, 2, 1]
+counts:       [1, 1, 2]
+output:       [0, 1, 2, 2]</code></pre>
+  <div class="rule">
+    <h3>The complexity and the condition</h3>
+    <p>Typical complexity: <strong>O(N + K)</strong> - N is the number of
+    elements, K is the range of possible values. Two sequential passes, so
+    the loops add.</p>
+    <p><strong>Most practical when K is not dramatically larger than
+    N.</strong> A huge range means a huge counts array for a small
+    input.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="partition">The partition idea</h2>
+  <p>Quicksort: <strong>pick a pivot</strong>, then
+  <strong>partition</strong> elements below and above it.</p>
+  <div class="rule">
+    <h3>Quickselect, the exam&rsquo;s sentence</h3>
+    <p><strong>Quickselect finds a target rank - the kth smallest or kth
+    largest element - without sorting the entire list.</strong> It uses
+    partitioning <strong>to partition the list and focus on the relevant
+    section</strong>: choose a pivot, partition, determine which partition
+    could contain the desired rank, and continue only there.</p>
+    <p><strong>Unlike quicksort, quickselect does not recursively sort both
+    partitions.</strong></p>
+  </div>
+</section>
+
+<section>
+  <h2 id="tip">The exam tip</h2>
+  <p>From the study guide&rsquo;s strategy list: <strong>identify the
+  defining property.</strong> &ldquo;Needs the range of input values&rdquo;
+  - counting sort. &ldquo;Partition and pursue one section&rdquo; -
+  quickselect. &ldquo;O(N + K)&rdquo; - counting sort&rsquo;s complexity.
+  Three phrases, three instant answers.</p>
+  <p>The add rule behind O(N + K) comes from the
+  <a href="../../reference/big-o-cheat-card.html">Big O cheat card</a>:
+  sequential loops add.</p>
+</section>
+
+<footer class="lesson-footer">
+  <p>Full explanations and practice:
+  <a href="../lessons/0001-counting-sort.html">Lesson 1 - Counting sort and the O(N + K)</a> and
+  <a href="../lessons/0002-partition-idea.html">Lesson 2 - The partition idea: quicksort and quickselect</a>.
+  Stuck? Ask your agent for extra recognition drills on any row above.</p>
+</footer>
+
+</article>
+</body>
+</html>
