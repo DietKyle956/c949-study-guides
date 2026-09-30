@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Key-Value Idea and Operations - Hash Tables</title>
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<article class="lesson">
+
+<header>
+  <p class="course-mark">Hash tables &middot; Lesson 1</p>
+  <h1>The key-value idea: maps and operations</h1>
+  <p class="lede">The exam&rsquo;s hash-table block opens with one
+  definition: a hash table maps keys to values. This lesson pins the
+  definition, the store line, and the retrieve line, then drills the
+  recognition until it is instant.</p>
+</header>
+
+<section>
+  <h2 id="why">Why this lesson</h2>
+  <p>Topic 6 of the C949 menu is small: one definition, one code line, and
+  one complexity row. The definition comes first, because the O(1) row in
+  lesson 2 only makes sense once &ldquo;maps keys to values&rdquo; is
+  automatic. If the position-versus-reference contrast feels rusty, the
+  <a href="../../adts/lessons/0002-arrays-vs-linked.html">arrays vs linked
+  structures</a> lesson sets it up.</p>
+</section>
+
+<section>
+  <h2 id="definition">The definition: keys to values</h2>
+  <p>A <strong>hash table</strong> maps <strong>keys</strong> to
+  <strong>values</strong>. You hand it a key, it hands back the value
+  stored under that key. The exam&rsquo;s own example, in Python:</p>
+  <pre><code>hash_table = {}
+hash_table["apple"] = 5
+hash_table["banana"] = 3
+hash_table["cherry"] = 8</code></pre>
+  <div class="rule">
+    <h3>The defining property</h3>
+    <p><strong>A hash table maps keys to values.</strong> That one line is
+    the identification answer: any question asking which structure maps
+    keys to values is answered <strong>hash table</strong>.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="operations">The two operations: store and retrieve</h2>
+  <p>The exam shows both lines, so read them as a pair. Storing:</p>
+  <pre><code>hash_table["apple"] = 5</code></pre>
+  <p>puts the value <strong>5</strong> under the key
+  <strong>"apple"</strong>. Retrieving:</p>
+  <pre><code>hash_table["apple"]</code></pre>
+  <p>gives <strong>5</strong> back. The same key that stored the value is
+  the key that fetches it.</p>
+  <div class="rule">
+    <h3>How to read the line</h3>
+    <p><code>hash_table["apple"] = 5</code> - the key goes in the brackets
+    on the left, the value goes on the right of the equals. Retrieval is
+    the same brackets with no equals: the key in, the value out.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="contrast">Position vs key</h2>
+  <p>The exam likes one contrast here. A list or array is reached by
+  <strong>position</strong>: <code>items[2]</code> means the third item. A
+  hash table is reached by <strong>key</strong>:
+  <code>hash_table["apple"]</code> means &ldquo;whatever value is stored
+  under the key apple&rdquo; - the key replaces the index.</p>
+  <div class="rule">
+    <h3>The exam&rsquo;s contrast, one line</h3>
+    <p>Lists look up by <strong>numeric index</strong>; hash tables look up
+    by <strong>key</strong>.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="map">The identification map</h2>
+  <table class="prose-table">
+    <thead>
+      <tr><th>Exam phrase</th><th>Defining property</th><th>Answer</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>a hash table maps</td><td>keys in, values out</td><td>keys to values</td></tr>
+      <tr><td>structure that maps keys to values</td><td>the defining property</td><td>Hash table</td></tr>
+      <tr><td>hash_table["apple"] = 5</td><td>key in brackets, value after =</td><td>stores 5 under the key "apple"</td></tr>
+      <tr><td>hash_table["apple"]</td><td>same key, no equals</td><td>retrieves the value 5</td></tr>
+      <tr><td>list vs hash table lookup</td><td>index vs key</td><td>list: position, hash table: key</td></tr>
+    </tbody>
+  </table>
+  <p>Five rows, and the definitional half of the exam&rsquo;s hash-table
+  block is answered. The
+  <a href="../reference/hash-tables-card.html">hash-tables card</a> is the
+  printable version.</p>
+</section>
+
+<section class="quiz" data-quiz-title="Lesson 1 quiz">
+  <h2 id="quiz">Practice: solve these from memory</h2>
+  <p>Answer from memory before clicking - say or write your answer first.
+  The struggle is what makes it stick.</p>
+
+  <div class="quiz-q" data-answer="Keys to values" data-explanation="The exam's definition: a hash table maps keys to values - the key &quot;apple&quot; paired with the value 5. Any question asking which structure maps keys to values is answered hash table.">
+    <p class="quiz-prompt">A hash table maps:</p>
+    <div class="quiz-options">
+      <button data-choice="Keys to values">Keys to values</button>
+      <button data-choice="Values to keys">Values to keys</button>
+      <button data-choice="Keys to indices">Keys to indices</button>
+      <button data-choice="Values to indices">Values to indices</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Stores 5 under the key apple" data-explanation="The assignment stores the value 5 under the key &quot;apple&quot;. Key in the brackets on the left, value on the right of the equals.">
+    <p class="quiz-prompt">The line <code>hash_table[&quot;apple&quot;] = 5</code>:</p>
+    <div class="quiz-options">
+      <button data-choice="Stores 5 under the key apple">Stores 5 under the key apple</button>
+      <button data-choice="Stores apple under the key 5">Stores apple under the key 5</button>
+      <button data-choice="Reads 5 under the key apple">Reads 5 under the key apple</button>
+      <button data-choice="Copies 5 under the key apple">Copies 5 under the key apple</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="hash_table[&quot;apple&quot;]" data-explanation="The same key retrieves the value: hash_table[&quot;apple&quot;] gives 5. A bare apple would be a variable name, and 5 is a value, not a key.">
+    <p class="quiz-prompt">After storing 5 under &ldquo;apple&rdquo;, which expression retrieves it?</p>
+    <div class="quiz-options">
+      <button data-choice="hash_table[&quot;apple&quot;]">hash_table["apple"]</button>
+      <button data-choice="hash_table[&quot;banana&quot;]">hash_table["banana"]</button>
+      <button data-choice="hash_table[apple]">hash_table[apple]</button>
+      <button data-choice="hash_table[5]">hash_table[5]</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="The key" data-explanation="Lists and arrays look items up by position - index 0, 1, 2. A hash table looks items up by key - &quot;apple&quot;, not 0. That contrast is the exam's point.">
+    <p class="quiz-prompt">A list is reached by numeric index. A hash table is reached by:</p>
+    <div class="quiz-options">
+      <button data-choice="The key">The key</button>
+      <button data-choice="The index">The index</button>
+      <button data-choice="The order">The order</button>
+      <button data-choice="The size">The size</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Hash table" data-explanation="Mapping keys to values is the defining property of a hash table. The others are ordered structures, not key-value maps.">
+    <p class="quiz-prompt">Which structure is defined by mapping keys to values?</p>
+    <div class="quiz-options">
+      <button data-choice="Hash table">Hash table</button>
+      <button data-choice="Linked list">Linked list</button>
+      <button data-choice="Priority queue">Priority queue</button>
+      <button data-choice="Binary tree">Binary tree</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="An empty hash table" data-explanation="The braces create an empty hash table - a Python dict. The store lines that follow add key-value pairs to it.">
+    <p class="quiz-prompt"><code>hash_table = {}</code> creates:</p>
+    <div class="quiz-options">
+      <button data-choice="An empty hash table">An empty hash table</button>
+      <button data-choice="A frozen hash table">A frozen hash table</button>
+      <button data-choice="A sorted hash table">A sorted hash table</button>
+      <button data-choice="A nested hash table">A nested hash table</button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 id="next">What&rsquo;s next</h2>
+  <ul>
+    <li><a href="0002-hashing-collisions.html">Lesson 2</a>: the hash
+      function, collisions, the load factor, and why average insertion is
+      O(1).</li>
+    <li>The <a href="../reference/hash-tables-card.html">hash-tables card</a>
+      carries both lessons&rsquo; rows on one printable page.</li>
+    <li>Back to the <a href="../../index.html">Big O course</a> if the
+      complexity rules need a refresh before lesson 2.</li>
+  </ul>
+</section>
+
+<section>
+  <h2 id="source">Go deeper</h2>
+  <p>The canonical source for hash tables is Sedgewick and Wayne&rsquo;s
+  <a href="https://algs4.cs.princeton.edu/34hash/">algs4 Section 3.4, Hash Tables</a>.
+  Its opening pages show exactly why the structure is called a map: a key
+  goes in, its value comes out. The exam questions are restatements of that
+  section&rsquo;s mechanics.</p>
+</section>
+
+<footer class="lesson-footer">
+  <p>Stuck on anything in this lesson? Ask your agent - it can rephrase any
+  definition, walk a store-then-retrieve trace, or quiz you one-on-one
+  until the lines are automatic.</p>
+</footer>
+
+</article>
+<script src="../../assets/quiz.js"></script>
+</body>
+</html>

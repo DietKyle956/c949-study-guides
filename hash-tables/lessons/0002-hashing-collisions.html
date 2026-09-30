@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hashing, Collisions, and the Average O(1) - Hash Tables</title>
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<article class="lesson">
+
+<header>
+  <p class="course-mark">Hash tables &middot; Lesson 2</p>
+  <h1>Hashing, collisions, and the average O(1)</h1>
+  <p class="lede">The exam&rsquo;s remaining hash-table row is the
+  complexity one: average-case insertion is O(1), with two named conditions
+  and one named threat. This lesson explains what each piece means, then
+  drills the row until the whole sentence comes out in one piece.</p>
+</header>
+
+<section>
+  <h2 id="why">Why this lesson</h2>
+  <p><a href="0001-key-value-idea.html">Lesson 1</a> settled what a hash
+  table is. Now comes the O(1) row, and the O(1) rule itself is from the
+  Big O course - any constant-time operation is O(1) (see
+  <a href="../../lessons/0001-loop-rules.html">Lesson 1, the loop
+  rules</a>). This lesson attaches the two conditions and the threat to the
+  row, so the exam&rsquo;s sentence arrives whole.</p>
+</section>
+
+<section>
+  <h2 id="hashfn">The hash function: key to bucket</h2>
+  <p>Behind the scenes the table is an array of <strong>buckets</strong>.
+  The <strong>hash function</strong> turns the key into a number - the
+  bucket position where that key&rsquo;s pair will live:</p>
+  <pre><code>hash("apple")   -> bucket 3
+hash("banana")  -> bucket 7
+hash("cherry")  -> bucket 7   (a collision, next section)</code></pre>
+  <div class="rule">
+    <h3>Two facts the exam assumes</h3>
+    <p>The same key always maps to the same bucket. An
+    <strong>effective</strong> hash function spreads keys evenly across
+    buckets, so no bucket collects too many keys.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="collisions">Collisions: two keys, one bucket</h2>
+  <p>A <strong>collision</strong> happens when two different keys land in
+  the same bucket - banana and cherry above. Both pairs are still stored;
+  the table just has to resolve which is which, and that resolution costs
+  extra work.</p>
+  <div class="rule">
+    <h3>The exam&rsquo;s threat, verbatim</h3>
+    <p><strong>Collisions can cause slower behavior in the worst
+    case.</strong> A few collisions are normal and harmless. A table where
+    everything collides loses the O(1) - which is exactly why the average
+    case carries conditions.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="loadfactor">The load factor: items to buckets</h2>
+  <p>The <strong>load factor</strong> is the number of items divided by
+  the number of buckets. A table with 100 buckets holding 50 items has a
+  load factor of 50 / 100 = 0.5. As the factor climbs, buckets fill up and
+  collisions multiply. A <strong>reasonably controlled load factor</strong>
+  means the table grows - more buckets - before that happens.</p>
+  <div class="rule">
+    <h3>The exam&rsquo;s second condition, verbatim</h3>
+    <p>The average case assumes <strong>an effective hash function and a
+    reasonably controlled load factor</strong>. Effective hashing spreads
+    keys; the controlled load factor keeps the spreading from being crowded
+    out.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="why-o1">Why the average case is O(1)</h2>
+  <p>Put the two conditions together. An effective hash function sends a
+  new key to a bucket holding only a few keys, and the controlled load
+  factor keeps it that way as the table grows. Storing the pair is then a
+  fixed amount of work - compute the hash, drop the pair in its bucket -
+  no matter how many items the table holds. Fixed work regardless of N is
+  the Big O course&rsquo;s definition of <strong>O(1)</strong>.</p>
+  <p>The word &ldquo;average&rdquo; matters: on average, with those
+  conditions, it is O(1). In a bad case - collisions piling up - it can be
+  slower. The exam sentence says both halves; answer with both halves.</p>
+</section>
+
+<section>
+  <h2 id="map">The identification map</h2>
+  <table class="prose-table">
+    <thead>
+      <tr><th>Exam phrase</th><th>Defining property</th><th>Answer</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>hash-table insertion, average case</td><td>fixed work per insert</td><td>O(1)</td></tr>
+      <tr><td>the average case assumes</td><td>two named conditions</td><td>an effective hash function and a reasonably controlled load factor</td></tr>
+      <tr><td>what can hurt the worst case</td><td>keys sharing a bucket</td><td>collisions</td></tr>
+      <tr><td>the hash function&rsquo;s job</td><td>key to position</td><td>turns the key into a bucket</td></tr>
+      <tr><td>the load factor</td><td>how full the table is</td><td>items divided by buckets</td></tr>
+    </tbody>
+  </table>
+  <p>Five rows, and the complexity half of the exam&rsquo;s hash-table
+  block is answered. The
+  <a href="../reference/hash-tables-card.html">hash-tables card</a> is the
+  printable version.</p>
+</section>
+
+<section class="quiz" data-quiz-title="Lesson 2 quiz">
+  <h2 id="quiz">Practice: solve these from memory</h2>
+  <p>Answer from memory before clicking - say or write your answer first.
+  The struggle is what makes it stick.</p>
+
+  <div class="quiz-q" data-answer="O(1)" data-explanation="The exam's answer: average-case insertion is O(1). With an effective hash function and a controlled load factor, storing a pair touches a constant number of slots.">
+    <p class="quiz-prompt">Average-case runtime for inserting a new key-value pair:</p>
+    <div class="quiz-options">
+      <button data-choice="O(1)">O(1)</button>
+      <button data-choice="O(log n)">O(log n)</button>
+      <button data-choice="O(n)">O(n)</button>
+      <button data-choice="O(n&sup2;)">O(n&sup2;)</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Effective hash function and controlled load factor" data-explanation="The exam's own words: the average case assumes an effective hash function and a reasonably controlled load factor. Both conditions keep buckets lightly filled.">
+    <p class="quiz-prompt">The average-case O(1) assumes:</p>
+    <div class="quiz-options">
+      <button data-choice="Effective hash function and controlled load factor">Effective hash function and controlled load factor</button>
+      <button data-choice="Sorted keys and a large table size">Sorted keys and a large table size</button>
+      <button data-choice="A hash function that never produces collisions">A hash function that never produces collisions</button>
+      <button data-choice="Frequent resizing and a fixed table size">Frequent resizing and a fixed table size</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Collisions" data-explanation="The exam's words: collisions can cause slower behavior in the worst case. Two keys landing in the same bucket costs extra work to resolve.">
+    <p class="quiz-prompt">In the worst case, which event makes hash-table operations slower?</p>
+    <div class="quiz-options">
+      <button data-choice="Collisions">Collisions</button>
+      <button data-choice="Insertions">Insertions</button>
+      <button data-choice="Lookups">Lookups</button>
+      <button data-choice="Deletions">Deletions</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="A bucket position" data-explanation="The hash function converts the key into the position where the pair will live. The same key always produces the same position.">
+    <p class="quiz-prompt">The hash function turns a key into:</p>
+    <div class="quiz-options">
+      <button data-choice="A bucket position">A bucket position</button>
+      <button data-choice="A sorted order">A sorted order</button>
+      <button data-choice="A linked node">A linked node</button>
+      <button data-choice="An array copy">An array copy</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="Items to buckets" data-explanation="Load factor = number of items divided by number of buckets. Keeping it controlled - growing the table when it climbs - keeps average insertion at O(1).">
+    <p class="quiz-prompt">The load factor compares:</p>
+    <div class="quiz-options">
+      <button data-choice="Items to buckets">Items to buckets</button>
+      <button data-choice="Keys to values">Keys to values</button>
+      <button data-choice="Nodes to links">Nodes to links</button>
+      <button data-choice="Inputs to outputs">Inputs to outputs</button>
+    </div>
+  </div>
+
+  <div class="quiz-q" data-answer="hash_table[&quot;banana&quot;] = 3" data-explanation="Same shape as the apple line: the key in brackets, then =, then the value. == would compare, + would error, and a numeric key would be a different pair.">
+    <p class="quiz-prompt">Which line stores 3 under the key banana?</p>
+    <div class="quiz-options">
+      <button data-choice="hash_table[&quot;banana&quot;] = 3">hash_table["banana"] = 3</button>
+      <button data-choice="hash_table[&quot;banana&quot;] == 3">hash_table["banana"] == 3</button>
+      <button data-choice="hash_table[3] = &quot;banana&quot;">hash_table[3] = "banana"</button>
+      <button data-choice="hash_table[&quot;banana&quot;] + 3">hash_table["banana"] + 3</button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 id="next">What&rsquo;s next</h2>
+  <ul>
+    <li>The <a href="../reference/hash-tables-card.html">hash-tables card</a>
+      carries both lessons&rsquo; rows on one printable page.</li>
+    <li>That completes topic 6. The next topic in the menu is sorting and
+      selection - counting sort&rsquo;s O(N + K) and the partition idea.</li>
+    <li>Hash tables return in the final interleaved review (topic 9),
+      mixed with every earlier topic.</li>
+  </ul>
+</section>
+
+<section>
+  <h2 id="source">Go deeper</h2>
+  <p>The canonical treatment of hash-table analysis is CLRS Chapter 11,
+  <em>Introduction to Algorithms</em> (Cormen, Leiserson, Rivest, Stein) -
+  hash functions, collisions, and the average-case argument behind O(1).
+  The exam row is that chapter&rsquo;s summary sentence.</p>
+</section>
+
+<footer class="lesson-footer">
+  <p>Stuck on anything in this lesson? Ask your agent - it can walk a
+  hash-to-bucket trace, generate fresh collision drills, or quiz you
+  one-on-one until the O(1) row is automatic.</p>
+</footer>
+
+</article>
+<script src="../../assets/quiz.js"></script>
+</body>
+</html>

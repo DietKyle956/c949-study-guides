@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hash Tables Card</title>
+<link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body>
+<article class="lesson">
+
+<header>
+  <p class="course-mark">Reference &middot; printable</p>
+  <h1>Hash Tables Card</h1>
+  <p class="lede">The compressed version of both lessons. Every
+  hash-table row the exam tests, next to its answer. Keep this next to you
+  while drilling until recognition is automatic.</p>
+</header>
+
+<section>
+  <h2 id="map">Property &rarr; answer</h2>
+  <table class="prose-table">
+    <thead>
+      <tr><th>Exam phrase</th><th>Answer</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>a hash table maps</td><td>keys to values</td></tr>
+      <tr><td>structure that maps keys to values</td><td>hash table</td></tr>
+      <tr><td>store a value</td><td>hash_table["apple"] = 5</td></tr>
+      <tr><td>retrieve a value</td><td>hash_table["apple"]</td></tr>
+      <tr><td>list vs hash table lookup</td><td>list: numeric index, hash table: key</td></tr>
+      <tr><td>average-case insertion</td><td>O(1)</td></tr>
+      <tr><td>the average case assumes</td><td>an effective hash function and a reasonably controlled load factor</td></tr>
+      <tr><td>worst case hurt by</td><td>collisions</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2 id="keyvalue">The key-value idea</h2>
+  <p>A hash table maps <strong>keys to values</strong>. The exam&rsquo;s
+  code:</p>
+  <pre><code>hash_table = {}
+hash_table["apple"] = 5
+hash_table["banana"] = 3
+hash_table["cherry"] = 8</code></pre>
+  <div class="rule">
+    <h3>Store and retrieve</h3>
+    <p><code>hash_table["apple"] = 5</code> stores 5 under the key
+    &ldquo;apple&rdquo;. <code>hash_table["apple"]</code> retrieves the 5.
+    The same key that stored the value is the key that fetches it.</p>
+    <p>Contrast: a list is reached by <strong>numeric index</strong>; a
+    hash table is reached by <strong>key</strong>.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="complexity">The complexity row</h2>
+  <div class="rule">
+    <h3>Average-case insertion: O(1)</h3>
+    <p><strong>This average-case behavior assumes an effective hash
+    function and a reasonably controlled load factor. Collisions can cause
+    slower behavior in the worst case.</strong> The exam&rsquo;s sentence,
+    verbatim.</p>
+  </div>
+  <p>The pieces, in one line each:</p>
+  <ul>
+    <li><strong>Hash function</strong> - turns a key into a bucket
+      position; effective means keys spread evenly.</li>
+    <li><strong>Collision</strong> - two keys land in the same bucket;
+      resolving them costs extra, which is the worst-case slowdown.</li>
+    <li><strong>Load factor</strong> - items divided by buckets; controlled
+      means the table grows before buckets fill up.</li>
+  </ul>
+</section>
+
+<section>
+  <h2 id="tip">The exam tip</h2>
+  <p>From the study guide&rsquo;s strategy list: <strong>identify the
+  defining property.</strong> &ldquo;Maps keys to values&rdquo; - hash
+  table. &ldquo;Average case&rdquo; - O(1). &ldquo;Worst case,
+  collisions&rdquo; - slower. Three phrases, three instant answers.</p>
+  <p>The O(1) rule itself comes from the
+  <a href="../../reference/big-o-cheat-card.html">Big O cheat card</a>: any
+  constant-time operation is O(1).</p>
+</section>
+
+<footer class="lesson-footer">
+  <p>Full explanations and practice:
+  <a href="../lessons/0001-key-value-idea.html">Lesson 1 - The key-value idea and operations</a> and
+  <a href="../lessons/0002-hashing-collisions.html">Lesson 2 - Hashing, collisions, and the average O(1)</a>.
+  Stuck? Ask your agent for extra recognition drills on any row above.</p>
+</footer>
+
+</article>
+</body>
+</html>
